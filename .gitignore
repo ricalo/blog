@@ -12,3 +12,8 @@ example/_site
 Gemfile.lock
 node_modules
 npm-debug.log*
+
+_test
+public
+!public/.well-known
+setenv.sh
