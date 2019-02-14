@@ -187,6 +187,9 @@ exclude:
   - /_test
   - /test
   - /public
+  - minimal-mistakes-jekyll.gemspec
+  - screenshot-layouts.png
+  - screenshot.png
 keep_files:
   - .git
   - .svn
