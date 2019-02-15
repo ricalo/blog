@@ -1,7 +1,7 @@
 # main links
 main:
-  - title: "Collections"
-    url: /collections
+  # - title: "Collections"
+  #   url: /collections
   # - title: "About"
   #   url: https://about.me
   # - title: "Sample Posts"
