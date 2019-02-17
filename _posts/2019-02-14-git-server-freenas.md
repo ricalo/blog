@@ -1,169 +1,195 @@
 ---
 title: Hosting a lightweight Git server on FreeNAS
 excerpt: >
-    Learn how to host a lightweight Git server on your FreeNAS machine that you
-    can use for personal repositories.
+    Learn how to host a lightweight Git server in an iocage jail on your
+    FreeNAS appliance. Access the Git server from clients using that have an
+    authorized certificate to establish an SSH connection.
 date: 2019-02-14
 tags:
   - git
   - freenas
 ---
 
-Adding a simple git server to your FreeNAS
+Hosting Git repositories (repos) on a server allows you to keep track of and
+store files used in your projects, even those files that contain sensitive data.
+You can use a hosting service like GitHub to manage your repos. However, you
+should not use such services for repos that contain sensitive information. For
+repos that store sensitive data, use a Git server hosted by a trusted party.
+This post shows how to set up a lightweight Git server on your FreeNAS
+appliance.
 
+## Creating an iocage jail
 
-# Procedure:
+FreeNAS uses the iocage manager to create independent environments isolated from
+the operating system. Such environments are called jails. This post uses a jail
+to host the Git server.
 
-# Creating iocage jail
+The following steps show how to create an iocage jail and configure an user for
+git operations. Run the commands in a shell on the FreeNAS server:
 
-1. Fetch the release used in this tutorial
+1. This post uses FreeBSD version `11.2-RELEASE` to create the jail. Run the
+   following command to fetch or update the version of FreeBSD for jail usage:
    ```
    iocage fetch --release 11.2-RELEASE
    ```
-
-   OUTPUT:
+1. Run the following command to create a `gitserver` jail using the version of
+   FreeBSD fetched in the previous step:
    ```
-   Fetching: 11.2-RELEASE
-
-   Extracting: base.txz...
-   Extracting: lib32.txz...
-   Extracting: doc.txz...
-   Extracting: src.txz...
-
-   * Updating 11.2-RELEASE to the latest patch level...
-   src component not installed, skipped
-   Looking up update.FreeBSD.org mirrors... 3 mirrors found.
-   Fetching metadata signature for 11.2-RELEASE from update2.freebsd.org... done.
-   Fetching metadata index... done.
-   Fetching 2 metadata patches.. done.
-   Applying metadata patches... done.
-   Inspecting system... done.
-   Preparing to download files... done.
-   Fetching 1 patches. done.
-   Applying patches... done.
-   The following files will be updated as part of updating to
-   11.2-RELEASE-p9:
-   ...
-
-   src component not installed, skipped
-   Installing updates... done.
-   ```
-1. List availables releases
-   ```
-   iocage list --release
-   ```
-1. Create jail
-   ```
-   iocage create --name gitserver --release 11.2-RELEASE dhcp="on" vnet="on" bpf="yes"
+   iocage create --name gitserver --release 11.2-RELEASE \
+       dhcp="on" vnet="on" bpf="yes"
    ```
 
-   OUTPUT
+   The previous command creates a jail that uses DHCP to configure the IP
+   settings on a virtual network.
+1. The following commands create a new user, configure the folder to store the
+   repos, and prompts for a new password:
    ```
-   gitserver successfully created!
-   ```
-1. Create user for git operations
-   ```
-   iocage exec --host_user root gitserver mkdir -p /git/repos
-   iocage exec --host_user root gitserver pw useradd -n git -d /git
-   iocage exec --host_user root gitserver passwd git
-   Changing local password for git
-   New Password:
-   Retype New Password:
-   iocage exec --host_user root gitserver chown -R git /git
+   iocage exec --host_user root gitserver \
+       mkdir -p /git/repos
+   iocage exec --host_user root gitserver \
+       pw useradd -n git -d /git
+   iocage exec --host_user root gitserver \
+       chown -R git /git
+   iocage exec --host_user root gitserver \
+       passwd git
    ```
 
-1. (Optional) Store the repos in a ZFS dataset
-   1. Create a dataset
+   The last command changes the password for the user. Type and make a note of
+   the new password.
+
+## (Optional) Storing the repos in a ZFS dataset
+
+One of the advantages of hosting your Git server is that you can decide the
+location where to store the repos. The following procedure shows how to
+configure a ZFS dataset to store the repos.
+
+To store the repos in a dataset, run the following commands in a shell on the
+FreeNAS server:
+
+1. Create a dataset named `repos` in the `scraps` pool:
    ```
    zfs create scraps/repos
    ```
-   1. Stop the jail
+1. Use the following command to stop the jail:
    ```
    iocage stop gitserver
-   * Stopping gitserver
-     + Running prestop OK
-     + Stopping services OK
-     + Tearing down VNET OK
-     + Removing devfs_ruleset: 11 OK
-     + Removing jail process OK
-     + Running poststop OK
    ```
-   1. Mount the dataset
+1. Mount the `repos` dataset on the `repos` folder created in the previous
+   section:
    ```
-   iocage fstab gitserver --add /mnt/scraps/repos /git/repos nullfs rw 0 0
-   Successfully added mount to gitserver's fstab
+   iocage fstab gitserver --add \
+       /mnt/scraps/repos /git/repos nullfs rw 0 0
    ```
 
-# Install Git
+## Installing Git on the server
+
+The server requires the Git binaries to manage the repos. The following
+procedure shows how to install Git on the server.
+
+Run the following commands in a shell on the FreeNAS server:
 
 1. Log to the console on the jail.
    ```
    iocage console gitserver
    ```
-1. Update the pkg repository
+1. Update the `pkg` repo.
    ```
    pkg update
    ```
-1. Install Git package
+1. Install the `git` package.
    ```
    pkg install -y git
    ```
-# Configure SSH service
 
-1. Configure service to start on boot
+## Configuring the SSH service
+
+Git clients use an SSH connection to communicate with the server. This section
+shows how to configure the SSH service to accept connections from clients.
+
+On your client machine, verify that you have a certificate that you can use to
+communicate with the server, or create a new one:
+
+1. Check your existing SSH keys.
    ```
-   iocage exec --host_user root gitserver sysrc sshd_enable="yes"
+   ls -la ~/.ssh
    ```
-1. Test the ssh connection
+   Usually, you can use the key stored in the `id_rsa.pub` file. If the previous
+   command lists the `id_rsa.pub` file go to step three. Otherwise continue to
+   step two.
+1. Generate an SSH key. Replace *email@example.com* with your email address.
+   ```
+   ssh-keygen -t rsa -b 4096 -C "email@example.com"
+   ```
+   The previous command prompts for the location to which to save the key.
+   Accept the default value of `id_rsa`.
+1. Copy the SSH public key as an authorized key.
+   ```
+   ssh-copy-id -i ~/.ssh/id_rsa.pub git@gitserver
+   ```
+
+On the FreeNAS server, configure the SSH service:
+
+1. Configure the SSH service to start on boot.
+   ```
+   iocage exec --host_user root gitserver \
+       sysrc sshd_enable="yes"
+   ```
+1. Start (or restart) the SSH service.
+   ```
+   service sshd onerestart
+   ```
+
+To validate the configuration, connect to the Git server by running the
+following ssh command from your client machine:
+
+```
+ssh git@gitserver
+```
+Verify that you can connect to the server without using a password.
+
+## Testing the Git server with a new repo
+
+To test the Git server, create an empty repo that clients can use to push
+commits.
+
+1. Open an SSH session to the server (or reuse the connection created in the
+   previous section):
    ```
    ssh git@gitserver
-   The authenticity of host 'gitserver (192.168.10.101)' can't be established.
-   ECDSA key fingerprint is SHA256:EUwWPX8wdW1boiVxnmkcjw/Yf11uivGG87qiI/zlo8s.
-   Are you sure you want to continue connecting (yes/no)? yes
-   Warning: Permanently added 'gitserver,192.168.10.101' (ECDSA) to the list of known hosts.
-   Password for git@gitserver:
    ```
-
-# Create repository on server
-
-1. Open an SSH session to the server.
+1. Create a new `my-repo.git` folder in the `repos` location created previously.
    ```
-   ssh git@gitserver
-   Password for git@gitserver:
+   mkdir repos/my-repo.git
+   cd repos/my-repo.git
    ```
-1. Create folder to host repo
-   ```
-   mkdir repos/my-repo
-   cd repos/my-repo
-   ```
-1. Initialize repo
+1. Initialize the repo to accept commits from clients.
    ```
    git init --bare
    ```
 
-# Add remote and push to server
+On the client machine, create a repo and push a commit to the server.
 
-1. Commit a test file in a repo in your local machine.
+1. Create and initialize a repo.
    ```
    mkdir my-repo
    cd my-repo
    git init
+   ```
+1. Add a test file and commit the changes to the repo.
+   ```
    echo "A test file" >> test-file
    git add test-file
    git commit -m "A test commit"
    ```
-1. Register the server as a remote in your repo
+1. Register the repo on the server as a tracked repo.
    ```
-   git remote add origin git@gitserver:repos/my-repo
+   git remote add origin git@gitserver:repos/my-repo.git
    ```
-1. Push to git server
+1. Push the new commit to the Git server
    ```
    git push origin master
-   Password for git@gitserver:
-   Counting objects: 3, done.
-   Writing objects: 100% (3/3), 881 bytes | 881.00 KiB/s, done.
-   Total 3 (delta 0), reused 0 (delta 0)
-   To gitserver:repos/my-repo
-    * [new branch]      master -> master
    ```
+   The previous command pushes the commit to the server. You can clone, pull,
+   and push additional commits from clients that have access to the server.
 
+This post showed how to host a Git server in an iocage jail on FreeNAS. 
