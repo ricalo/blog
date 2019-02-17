@@ -1,8 +1,8 @@
-stages:
-  - test
-  - deploy
-
 image: ruby:2.4.1
+
+variables:
+  JEKYLL_ENV: production
+  LC_ALL: C.UTF-8
 
 before_script:
   - ruby --version
@@ -19,7 +19,7 @@ sanitize:
     - "! git log | grep -e $NO_BUNNY_ALLOWED || exit 1"
     - "! git log | grep -e $NO_CHINO_ALLOWED || exit 1"
 
-deploy:
+pages:
   stage: deploy
   script:
     - bundle exec jekyll build -d public
@@ -27,5 +27,4 @@ deploy:
     paths:
       - public
   only:
-    refs:
-      - production
+    - production
