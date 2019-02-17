@@ -2,7 +2,7 @@
 title: Hosting a lightweight Git server on FreeNAS
 excerpt: >
     Learn how to host a lightweight Git server in an iocage jail on your
-    FreeNAS appliance. Access the Git server from clients using that have an
+    FreeNAS appliance. Access the Git server from clients that have an
     authorized certificate to establish an SSH connection.
 date: 2019-02-14
 categories:
