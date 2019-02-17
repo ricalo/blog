@@ -24,6 +24,9 @@ deploy:
   stage: deploy
   script:
     - bundle exec jekyll build -d public
+  artifacts:
+    paths:
+      - public
   only:
     refs:
       - production
