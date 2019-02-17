@@ -18,6 +18,8 @@ sanitize:
     - "! grep -rnw ./_test -e $NO_CHINO_ALLOWED || exit 1"
     - "! git log | grep -e $NO_BUNNY_ALLOWED || exit 1"
     - "! git log | grep -e $NO_CHINO_ALLOWED || exit 1"
+  except:
+    - /^post-.*$/
 
 pages:
   stage: deploy
