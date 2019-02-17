@@ -5,9 +5,14 @@ excerpt: >
     FreeNAS appliance. Access the Git server from clients using that have an
     authorized certificate to establish an SSH connection.
 date: 2019-02-14
+categories:
+  - tools
 tags:
   - git
   - freenas
+  - iocage
+  - jails
+  - ssh
 ---
 
 Hosting Git repositories (repos) on a server allows you to keep track of and
