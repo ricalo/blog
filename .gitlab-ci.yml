@@ -17,6 +17,8 @@ jekyll_build:
   artifacts:
     paths:
       - _test
+  except:
+    - /^post-.*$/
 
 sanitize:
   stage: test
@@ -27,8 +29,6 @@ sanitize:
     - "! git log | grep -e $NO_CHINO_ALLOWED || exit 1"
   dependencies:
     - jekyll_build
-  except:
-    - /^post-.*$/
 
 rename:
   stage: deploy
