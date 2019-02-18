@@ -30,7 +30,7 @@ sanitize:
   except:
     - /^post-.*$/
 
-pages:
+rename:
   stage: deploy
   script:
     - mv _test public
