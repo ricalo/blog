@@ -8,23 +8,32 @@ before_script:
   - ruby --version
   - gem --version
   - bundle --version
-  - bundle install
+
+jekyll_build:
+  stage: build
+  script:
+    - bundle install
+    - bundle exec jekyll build -d _test
+  artifacts:
+    paths:
+      - _test
 
 sanitize:
   stage: test
   script:
-    - bundle exec jekyll build -d _test
     - "! grep -rnw ./_test -e $NO_BUNNY_ALLOWED || exit 1"
     - "! grep -rnw ./_test -e $NO_CHINO_ALLOWED || exit 1"
     - "! git log | grep -e $NO_BUNNY_ALLOWED || exit 1"
     - "! git log | grep -e $NO_CHINO_ALLOWED || exit 1"
+  dependencies:
+    - jekyll_build
   except:
     - /^post-.*$/
 
 pages:
   stage: deploy
   script:
-    - bundle exec jekyll build -d public
+    - mv _test public
   artifacts:
     paths:
       - public
