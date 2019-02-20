@@ -30,7 +30,7 @@ sanitize:
   dependencies:
     - jekyll_build
 
-rename:
+pages:
   stage: deploy
   script:
     - mv _test public
