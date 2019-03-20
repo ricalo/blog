@@ -11,11 +11,16 @@ tags:
   - vim
   - bash
   - tmux
-  - bash
 ---
 
 Learn how to install the Powerline status plugin for vim, bash, tmux, and
 others.
+
+Powerline is a text-based tool that provides useful information in a variety of
+contexts. The following screenshot shows Powerline displaying information about
+a Git repository:
+
+![Powerline demo][demo]
 
 ## Install and configure Powerline fonts
 
@@ -97,11 +102,21 @@ specific segments. The summarized instructions to customize your Powerline
 installation is the following:
 
 1. Copy the `~/.local/lib/python2.7/site-packages/powerline/config_files/`
-   folder to `~/.config/powerline`.
+   folder to `~/.config/powerline`:
+   ```sh
+   mkdir -p ~/.config/powerline
+   cp -R ~/.local/lib/python2.7/site-packages/powerline/config_files/* \
+         ~/.config/powerline/
+   ```
 1. Edit the files there according to your needs. A good starting point is the
    `~/.config/powerline/config.json` file.
+1. Reload the Powerline daemon:
+   ```sh
+   powerline-daemon --kill
+   ```
 
 For more information about how to customize your Powerline installation, see the
 [Quick setup guide][0] in the Powerline documentation.
 
 [0]:https://powerline.readthedocs.io/en/master/configuration.html#quick-guide
+[demo]:/assets/images/powerline-demo.gif
