@@ -94,17 +94,15 @@ procedure shows how to install Git on the server.
 
 Run the following commands in a shell on the FreeNAS server:
 
-1. Log to the console on the jail.
-   ```shell
-   $ iocage console gitserver
-   ```
 1. Update the `pkg` repo.
    ```shell
-   $ pkg update
+   $ iocage exec --host_user root gitserver \
+       pkg update
    ```
 1. Install the `git` package.
    ```shell
-   $ pkg install -y git
+   $ iocage exec --host_user root gitserver \
+       pkg install -y git
    ```
 
 ## Configuring the SSH service
@@ -142,7 +140,8 @@ On the FreeNAS server, configure the SSH service:
    ```
 1. Start (or restart) the SSH service.
    ```shell
-   $ service sshd onerestart
+   $ iocage exec --host_user root gitserver \
+       service sshd onerestart
    ```
 
 To validate the configuration, connect to the Git server by running the
