@@ -1,26 +1,29 @@
 ---
 title: Installing OpenLDAP in a jail on FreeNAS
 excerpt: >
-    Learn how to install the Powerline status plugin for vim, bash, tmux, and
-    others.
-date: 2019-03-16
+    Learn how to install an OpenLDAP server in an iocage jail on your FreeNAS
+    appliance.
+date: 2019-06-20
 categories:
   - tools
 tags:
-  - Powerline
-  - vim
-  - bash
-  - tmux
+  - OpenLDAP
+  - iocage
+  - jails
+  - Certificates
 ---
 
-Learn how to install the Powerline status plugin for vim, bash, tmux, and
-others.
+An LDAP directory provides a central location to store information about the
+users and computers in your organization. Business applications can use this
+information to support services such as file sharing, collaboration and chat.
+
+In this tutorial, learn how to install OpenLDAP—an open source LDAP server—in a
+jail on your FreeNAS appliance.
+
 
 Powerline is a text-based tool that provides useful information in a variety of
 contexts. The following screenshot shows Powerline displaying information about
 a Git repository:
-
-![Powerline demo][demo]
 
 ## Install and configure Powerline fonts
 
