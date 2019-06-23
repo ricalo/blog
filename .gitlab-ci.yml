@@ -36,7 +36,7 @@ pages:
     - mv _test public
     - >
       curl --request POST "https://api.cloudflare.com/client/v4/zones/dd773f0b754477c96d16281ca2c46397/purge_cache"
-      --header "X-Auth-Email: ricalox@gmail.com"
+      --header "X-Auth-Email: me@ricalo.com"
       --header "X-Auth-Key: 100e9e8eca54b9c176de8e327ac1c5fe1597d"
       --header "Content-Type: application/json"
       --data '{"purge_everything":true}'
