@@ -10,3 +10,17 @@ main:
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
+
+left:
+  - title: FreeNAS
+    children:
+      - title: OpenLDAP in a jail
+        url: /openldap-freenas-jail/
+      - title: Lightweight git server
+        url: /git-server-freenas/
+  - title: Misc
+    children:
+      - title: Cert error on GitLab
+        url: /fix-cert-intermediates-gitlab/
+      - title: Powerline on Ubuntu
+        url: /install-powerline-ubuntu/

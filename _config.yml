@@ -301,6 +301,8 @@ defaults:
       read_time: false
       comments: false
       share: false
+      sidebar:
+        nav: left
       related: false
       adsense: false
   # _pages
