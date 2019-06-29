@@ -5,7 +5,6 @@ excerpt: >
     register a Let's Encrypt certificate for your site hosted on GitLab Pages.
 date: 2019-02-19
 categories:
-  - tips
 tags:
   - gitlab
   - letsencrypt

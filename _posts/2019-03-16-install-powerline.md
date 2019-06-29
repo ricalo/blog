@@ -5,7 +5,6 @@ excerpt: >
     others.
 date: 2019-03-16
 categories:
-  - tools
 tags:
   - Powerline
   - vim

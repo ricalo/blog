@@ -6,7 +6,6 @@ excerpt: >
     authorized certificate to establish an SSH connection.
 date: 2019-02-14
 categories:
-  - tools
 tags:
   - git
   - freenas
