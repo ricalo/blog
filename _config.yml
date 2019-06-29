@@ -179,6 +179,7 @@ exclude:
   - log
   - node_modules
   - package.json
+  - package-lock.json
   - Rakefile
   - README
   - setenv.sh
@@ -190,6 +191,9 @@ exclude:
   - minimal-mistakes-jekyll.gemspec
   - screenshot-layouts.png
   - screenshot.png
+  - start-server
+  - start-server.sh
+  - staticman.yml
 keep_files:
   - .git
   - .svn
