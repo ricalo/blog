@@ -11,6 +11,7 @@ tags:
   - vim
   - bash
   - tmux
+  - Ubuntu
 ---
 
 Learn how to install the Powerline status plugin for vim, bash, tmux, and
