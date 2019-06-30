@@ -300,7 +300,8 @@ You can add more objects to your LDAP database using the [`ldapmodify`][5] or
 Now that you have a working OpenLDAP instance, you can use it in applications
 that provide services for your business, such as:
 
-* [Nextcloud][6], a collaboration platform that you can host on FreeNAS.
+* [Nextcloud][6], a collaboration platform that you can host on FreeNAS. For a
+  great resource on how to install Nextcloud, check [Samuel Dowling's guide][9].
 * [OpenVPN][7], an open source VPN that allows users to connect remotely to your
   network. You can host a VPN server on a firewall appliance, such as
   [pfSense][8].
@@ -314,3 +315,4 @@ that provide services for your business, such as:
 [6]: https://nextcloud.com/
 [7]: https://openvpn.net/
 [8]: https://www.pfsense.org
+[9]: https://www.samueldowling.com/2018/12/08/install-nextcloud-on-freenas-iocage-jail-with-hardened-security/
