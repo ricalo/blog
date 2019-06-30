@@ -1,9 +1,7 @@
 ---
 title: Community guidelines
 permalink: /community/
-layout: splash
 ---
-# Community guidelines
 
 We encourage open and respectful discussions on DevPro Media. Use the following
 guidelines when and your best judgment before posting:
