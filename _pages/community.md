@@ -5,35 +5,27 @@ layout: splash
 ---
 # Community guidelines
 
+We encourage open and respectful discussions on DevPro Media. Use the following
+guidelines when and your best judgment before posting:
+
 Stay on-topic
-: Be sure your topic matches the general theme of the channel. For example, all
-  discussions on Talk Shop should pertain to fashion and beauty. Not sure if
-  you’re posting to the right channel? Check the channel’s About section, or
-  recently-added discussions to get an idea of what subjects are appropriate.
+: Make sure that your comment matches the topic of the post. If the relationship
+  between your comment and your post is not evident, explain it in a few words.
 
 No self-promotion
-: A discussion or comment that contains only a link to your blog, a product, or
-  your article on another site will almost always be removed.
+: A comment that contains only a link to your blog, a product, or your article
+  on another site will be removed.
 
-Choose Your (Curse) Words Wisely
+Choose your words wisely
+: Comments that contain profanity might be removed. Profanity used to insult,
+  antagonize, or inflame will be removed.
 
-Comments that contain profanity are automatically held for moderator review
-before being posted. Depending on the context of the comment, it may be removed.
-Profanity used to insult, antagonize, or inflame will always be removed.
+Don’t be a jerk
+: Personal attacks and harassment will not be tolerated. Sexist, racist,
+  misogynist, homophobic, and broad, offensive generalizations about groups of
+  people are not allowed.
 
-Don’t Be a Jerk
+Cite your sources
+: If you didn’t write it, properly cite the article you’re quoting.
 
-Personal attacks and harassment will not be tolerated. Sexist, racist,
-misogynist, homophobic, and broad, offensive generalizations about groups of
-people are simply not allowed. Comments or discussions written intentionally to
-provoke will also be removed.
-
-Don’t Copy and Paste
-
-If you didn’t write it, or haven’t properly cited the article you’re quoting,
-don’t post it.
-
-English Only
-
-We currently only support English-only discussions on Disqus channels.
-Non-English comments and discussions will be removed.
+We continuously monitor the comments and update the guidelines accordingly.
