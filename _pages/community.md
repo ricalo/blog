@@ -4,7 +4,7 @@ permalink: /community/
 ---
 
 We encourage open and respectful discussions on DevPro Media. Use the following
-guidelines when and your best judgment before posting:
+guidelines and your best judgment before posting:
 
 Stay on-topic
 : Make sure that your comment matches the topic of the post. If the relationship
