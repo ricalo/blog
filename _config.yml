@@ -312,3 +312,10 @@ defaults:
     values:
       layout: single
       author_profile: false
+      read_time: false
+      comments: false
+      share: false
+      sidebar:
+        nav: left
+      related: false
+      adsense: false
