@@ -1,8 +1,7 @@
 ---
 title: Installing OpenLDAP in a jail on FreeNAS
 excerpt: >
-    Learn how to install an OpenLDAP server in an iocage jail on your FreeNAS
-    appliance.
+    Learn how to install OpenLDAP in an iocage jail on your FreeNAS server.
 date: 2019-06-23
 categories:
 tags:
