@@ -304,7 +304,7 @@ defaults:
       sidebar:
         nav: left
       related: false
-      adsense: false
+      adsense: true
   # _pages
   - scope:
       path: ""
