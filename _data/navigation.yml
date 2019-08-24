@@ -22,5 +22,7 @@ left:
     children:
       - title: Cert error on GitLab
         url: /fix-cert-intermediates-gitlab/
+      - title: Xbox 360 controller on Ubuntu
+        url: /fix-xbox-madcatz-ubuntu/
       - title: Powerline on Ubuntu
         url: /install-powerline-ubuntu/
