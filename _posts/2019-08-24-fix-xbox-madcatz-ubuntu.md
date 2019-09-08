@@ -26,6 +26,13 @@ Follow these steps to reproduce the error:
    error:
    > Error couldn't claim the USB interface: LIBUSB_ERROR_NOT_FOUND
 
+**Note:** With [Proton 4.11-3][1], games can access gamepads directly. You
+shouldn't need to use the solution explained below. For example, our Mad Catz
+stick works okay in [Samurai Shodown V Special][2] withouth disabling the
+autosuspend feature. However, we are still experiencing the issue with the wrong
+mapping of buttons, which is resolved by the workaround explained in [Additional
+steps](#additional-steps).
+
 ## Solution
 
 Disable the autosuspend feature of the usbcore module. For more information,
@@ -47,12 +54,15 @@ Once you restart the computer, the *Xbox button* lights stop blinking.
 ## Additional steps
 
 If the controller has the button mapping wrong—for example, the *Start button*
-doesn't work but others do—run the following command:
+doesn't work but others do—run the following commands:
 
 ```shell
+$ sudo apt install xboxdrv
 $ sudo xboxdrv --mimic-xpad --detach-kernel-driver
 ```
 
 The buttons should work appropriately.
 
 [0]: https://www.kernel.org/doc/Documentation/usb/power-management.txt
+[1]: https://github.com/ValveSoftware/Proton/releases/tag/proton-4.11-3
+[2]: https://store.steampowered.com/app/1076550/SAMURAI_SHODOWN_V_SPECIAL/
