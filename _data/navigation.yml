@@ -18,6 +18,8 @@ left:
         url: /openldap-freenas-jail/
       - title: Lightweight git server
         url: /git-server-freenas/
+      - title: AIDE configuration for jails
+        url: /aide-freenas-jail/
   - title: Misc
     children:
       - title: Cert error on GitLab
