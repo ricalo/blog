@@ -55,7 +55,7 @@ configuration file:
 ```
 
 AIDE should report differences in the files the next time it runs. This is
-expected because of to the updated configuration.
+expected because of the updated configuration.
 
 AIDE is great at helping detect intruders. However, you should have other
 security measures in place to prevent access to your systems.
