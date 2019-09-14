@@ -20,11 +20,12 @@ tags:
 Learn about a self-hosted architecture that supports the basic services that are
 usually required in a home office or small business.
 
-# Business requirements considered
+# Business requirements
 
 The architecture supports the following requirements of the business:
 
-* Register users and computers
+* Access the data from the internal and external network
+* Register users
 * File and calendar sharing
 * Manage code and other business artifacts
 
@@ -33,6 +34,15 @@ The architecture supports the following requirements of the business:
 > free of spam.
 
 # Architecture overview
+
+The architecture consists of two servers:
+
+* A perimeter server that provides the network services that allows users to
+  access the data.
+* An application server that hosts the services required to register users, work
+  with files and calendars, and manage business artifacts.
+
+The follow diagram shows a view of the servers and the services they support:
 
 ![Architecture diagram](/assets/images/architecture_overview.svg)
 
@@ -46,8 +56,9 @@ The physical architecture consists of the following servers:
 ## Perimeter server
 
 The perimeter server allows users to access services from outside of your
-network by using a feature called _reverse proxy_. The server also provides
-other network services such as DNS, firewall, and even a VPN service.
+network by using features such as _reverse proxy_ and _dynamic DNS_. The server
+also provides other network services such as an internal DNS, firewall, and even
+a VPN service.
 
 The server requires multiple network interface cards, which allows it to route
 the traffic from outside and inside your network. As you can imagine, the
@@ -147,15 +158,47 @@ Check our guide on how to [install a lightweight git server on FreeNAS][5].
 
 # Additional considerations
 
+Consider the following items when planning your self-hosted environment:
 
-* Backups
-* Internet provider
-* Certificates
-* External DNS
-* VPN
-* Security keys
-* GPG/PGP
-* Raspberyy Pi
+Internet service provider
+: The architecture assumes you have an internet service provider that allows the
+  communication required to access the internal network from the internet.
+
+Domain and external DNS hosting
+: The architecture assumes that you have a domain and DNS hosting in place. The
+  host allows you to configure the DNS entries that you need to redirect the
+  users to the internal network when accessing the services from the internet.
+
+Backup strategy
+: While the application server has some resilience to errors, you should have a
+  plan that allows you to recover your data in the case of an emergency.
+  Ideally, the backups are stored in a remote location away from the physical
+  location where the servers reside.
+
+Certificates
+: Encrypting the communication between clients and servers is a must these days.
+  You can get a free certificate for this purpose from [Let's Encrypt][7].
+
+PGP and hardware keys
+: We use a combination of PGP and hardware keys to open SSH sessions to manage
+  the servers. We use the hardware keys from Yubico that support the Open PGP
+  function, check their [compare products][8] table for more information.
+
+Virtual private network
+: The perimeter server can provide a virtual private network (VPN) that you can
+  use to access your internal network without relying in the reverse proxy
+  server. This is useful for opening SSH sessions without exposing the SSH port
+  to the internet.
+
+Raspberry Pi
+: There are scenarios where the FreeNAS server needs to access an OpenLDAP
+  server. For example, when you configure storage space for a user directly in
+  FreeNAS. In this situation, the FreeNAS server tries to access the OpenLDAP
+  server whenever it boots, but fails because the OpenLDAP server is hosted in a
+  jail that has not yet started. We solved this issue by getting a Raspberry Pi
+  and configuring it as a secondary OpenLDAP server. The FreeNAS server uses the
+  secondary server at boot time. The secondary server gets changes in user data
+  thanks to the replication feature of OpenLDAP.
 
 [0]: http://bsdadventures.com/harden-freebsd/
 [1]: https://pfsense.org
@@ -164,3 +207,5 @@ Check our guide on how to [install a lightweight git server on FreeNAS][5].
 [4]: https://www.samueldowling.com/2018/12/08/install-nextcloud-on-freenas-iocage-jail-with-hardened-security/
 [5]: /git-server-freenas/
 [6]: https://about.gitlab.com/install/
+[7]: https://letsencrypt.org/
+[8]: https://www.yubico.com/products/yubikey-hardware/compare-products-series/
