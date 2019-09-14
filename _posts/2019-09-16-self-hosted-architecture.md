@@ -34,6 +34,7 @@ The architecture supports the following requirements of the business:
 
 # Architecture overview
 
+![Architecture diagram](/assets/images/architecture_overview.svg)
 
 # Physical architecture
 
@@ -145,6 +146,7 @@ collaboration and a central source of truth for the state of our artifacts.
 Check our guide on how to [install a lightweight git server on FreeNAS][5].
 
 # Additional considerations
+
 
 * Backups
 * Internet provider
