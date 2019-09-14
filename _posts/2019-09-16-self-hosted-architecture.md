@@ -4,6 +4,8 @@ excerpt: >
     Learn about a self-hosted architecture that supports the basic services that
     are usually required in a home office or small business.
 date: 2019-09-13
+teaser: /assets/images/architecture_overview.svg
+toc: true
 categories:
 tags:
   - freenas
@@ -15,6 +17,7 @@ tags:
   - openldap
   - mariadb
   - git
+  - raspberry pi
 ---
 
 Learn about a self-hosted architecture that supports the basic services that are
