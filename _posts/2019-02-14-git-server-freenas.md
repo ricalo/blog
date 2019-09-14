@@ -12,6 +12,7 @@ tags:
   - iocage
   - jails
   - ssh
+toc: true
 ---
 
 Hosting Git repositories (repos) on a server allows you to keep track of and
