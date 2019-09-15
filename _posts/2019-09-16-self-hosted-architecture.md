@@ -89,7 +89,7 @@ applications in *jails*, which is a container technology supported on BSD
 systems. FreeNAS also uses ZFS as the file system, which is popular for its
 redundancy, integrity checking, and snapshot features.
 
-# Network layer
+# Network services
 
 The perimeter server hosts the network services we need in this architecture.
 The software, pfSense, is an open source network security solution that provides
