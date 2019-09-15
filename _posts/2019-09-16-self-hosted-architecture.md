@@ -89,10 +89,45 @@ applications in *jails*, which is a container technology supported on BSD
 systems. FreeNAS also uses ZFS as the file system, which is popular for its
 redundancy, integrity checking, and snapshot features.
 
+# Network layer
+
+The perimeter server hosts the network services we need in this architecture.
+The software, pfSense, is an open source network security solution that provides
+the features that we need. pfSense has great documentation that allows you to
+configure the system to suit your needs.
+
+## Dynamic DNS
+
+If your internet service provider (ISP) doesn't assign a static IP address,
+you require a mechanism to update the entry of your internal domain in your
+external DNS. This allows clients accessing from the internet to find the IP
+address if your internal network.
+
+For example, if your top domain is `example.com` and your internal domain is
+`home.example.com`, you can configure pfSense to update the `home` entry in your
+external DNS every time your ISP assigns a new IP address.
+
+## Internal DNS
+
+The internal DNS allows your clients to find services in your network. For
+example, if your internal domain is `home.example.com` you could configure the
+following entries in your internal DNS:
+
+* `ldap.home.example.com` for your directory services
+* `sql.home.example.com` for your database
+* `vcs.home.example.com` for your version control system
+
+## Reverse proxy
+
+A reverse proxy allows clients in the internet to use web services in your
+internal network. The external DNS resolves all requests to your internal
+network as the same address. The reverse proxy catches these requests from the
+internet and sends them to the right server in your internal network.
+
 # Application layer
 
-The software applications that support the business services are hosted in jails
-in the application server. We only use open source software (OSS) because of its
+The software that support the business services is hosted in jails in the
+application server. We only use open source software (OSS) because of its
 transparency—OSS is much less likely to use tracking and surveillance tactics on
 you. The OSS community is also great at providing guidance on how to install the
 software and providing solutions to the issues that you might run into.
@@ -173,6 +208,10 @@ Domain and external DNS hosting
 : The architecture assumes that you have a domain and DNS hosting in place. The
   host allows you to configure the DNS entries that you need to redirect the
   users to the internal network when accessing the services from the internet.
+  If you don't have a static IP address assigned, your external DNS should
+  provide a mechanism to automatically update a DNS entry. This is useful to
+  update the DNS of your internal network each time your ISP provides a new IP
+  address.
 
 Backup strategy
 : While the application server has some resilience to errors, you should have a
