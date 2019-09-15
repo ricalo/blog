@@ -1,8 +1,9 @@
 ---
-title: A minimal architecture for a self-hosted home office or small business
+title: An architecture for a self-hosted business
 excerpt: >
-    Learn about a self-hosted architecture that supports the basic services that
-    are usually required in a home office or small business.
+    Learn about a self-hosted architecture that supports services usually
+    required in a small business. Use OSS—such as pfSense, FreeNAS, and
+    Nextcloud—to stay in control of your data.
 date: 2019-09-13
 teaser: /assets/images/architecture_overview.svg
 toc: true
@@ -20,8 +21,9 @@ tags:
   - raspberry pi
 ---
 
-Learn about a self-hosted architecture that supports the basic services that are
-usually required in a home office or small business.
+Learn about a self-hosted architecture that supports services usually required
+in a home office or small business. Use open source software (OSS)—such as
+pfSense, FreeNAS, and Nextcloud—to stay in control of your data.
 
 # Business requirements
 
@@ -203,6 +205,11 @@ Raspberry Pi
   secondary server at boot time. The secondary server gets changes in user data
   thanks to the replication feature of OpenLDAP.
 
+Intruder detection
+: You can configure the Advanced Intrusion Detection Environment (AIDE) system,
+  which helps identify when an intruder accesses your jails. Check [our AIDE
+  configuration for jails hosted on FreeNAS][9] guide.
+
 [0]: http://bsdadventures.com/harden-freebsd/
 [1]: https://pfsense.org
 [2]: https://freenas.org
@@ -212,3 +219,4 @@ Raspberry Pi
 [6]: https://about.gitlab.com/install/
 [7]: https://letsencrypt.org/
 [8]: https://www.yubico.com/products/yubikey-hardware/compare-products-series/
+[9]: /aide-freenas-jail/
