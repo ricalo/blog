@@ -25,7 +25,7 @@ Learn about a self-hosted architecture that supports services usually required
 in a home office or small business. Use open source software (OSS)—such as
 pfSense, FreeNAS, and Nextcloud—to stay in control of your data.
 
-# Business requirements
+## Business requirements
 
 The architecture supports the following requirements of the business:
 
@@ -38,7 +38,7 @@ The architecture supports the following requirements of the business:
 > Managing an email server is complicated, particularly keeping it secure and
 > free of spam.
 
-# Architecture overview
+## Architecture overview
 
 The architecture consists of two servers:
 
@@ -51,14 +51,14 @@ The follow diagram shows a view of the servers and the services they support:
 
 ![Architecture diagram](/assets/images/architecture_overview.svg)
 
-# Physical architecture
+## Physical architecture
 
 The physical architecture consists of the following servers:
 
 * A perimeter server
 * An application server
 
-## Perimeter server
+### Perimeter server
 
 The perimeter server allows users to access services from outside of your
 network by using features such as _reverse proxy_ and _dynamic DNS_. The server
@@ -74,7 +74,7 @@ We use [pfSense][1] as the software of our perimeter server. You can buy an
 appliance from Netgate—the developer of pfSense—or you can download the software
 and install it on your own device.
 
-## Application server
+### Application server
 
 The application server provides the majority of the user-facing services. This
 should be your most powerful server in terms of processing power. It should also
@@ -89,14 +89,14 @@ applications in *jails*, which is a container technology supported on BSD
 systems. FreeNAS also uses ZFS as the file system, which is popular for its
 redundancy, integrity checking, and snapshot features.
 
-# Network services
+## Network services
 
 The perimeter server hosts the network services we need in this architecture.
 The software, pfSense, is an open source network security solution that provides
 the features that we need. pfSense has great documentation that allows you to
 configure the system to suit your needs.
 
-## Dynamic DNS
+### Dynamic DNS
 
 If your internet service provider (ISP) doesn't assign a static IP address,
 you require a mechanism to update the entry of your internal domain in your
@@ -107,7 +107,7 @@ For example, if your top domain is `example.com` and your internal domain is
 `home.example.com`, you can configure pfSense to update the `home` entry in your
 external DNS every time your ISP assigns a new IP address.
 
-## Internal DNS
+### Internal DNS
 
 The internal DNS allows your clients to find services in your network. For
 example, if your internal domain is `home.example.com` you could configure the
@@ -117,14 +117,14 @@ following entries in your internal DNS:
 * `sql.home.example.com` for your database
 * `vcs.home.example.com` for your version control system
 
-## Reverse proxy
+### Reverse proxy
 
 A reverse proxy allows clients in the internet to use web services in your
 internal network. The external DNS resolves all requests to your internal
 network as the same address. The reverse proxy catches these requests from the
 internet and sends them to the right server in your internal network.
 
-# Application layer
+## Application layer
 
 The software that support the business services is hosted in jails in the
 application server. We only use open source software (OSS) because of its
@@ -132,7 +132,7 @@ transparency—OSS is much less likely to use tracking and surveillance tactics 
 you. The OSS community is also great at providing guidance on how to install the
 software and providing solutions to the issues that you might run into.
 
-## Directory services
+### Directory services
 
 The directory services software allows the business to register users and
 computers. Other applications can use the information in the directory for
@@ -141,7 +141,7 @@ authentication and authorization purposes.
 We recommend **OpenLDAP** as the directory services software. Check our guide
 on how to [install OpenLDAP in a jail on your FreeNAS server][3].
 
-## Database
+### Database
 
 The database software supports other applications that need to store structured
 data. For example, the productivity software below requires a database. Your end
@@ -161,7 +161,7 @@ its services.
 The productivity and collaboration section lists resources that explain how to
 install MariaDB in a jail on your FreeNAS server.
 
-## Productivity and collaboration
+### Productivity and collaboration
 
 The productivity software supports collaboration scenarios for your users. The
 most basic scenarios are file and calendar sharing. However, productivity
@@ -178,7 +178,7 @@ For more information about how to install the software, check Samuel Dowling's
 excellent guide on [how to install Nextcloud in a jail][4], which covers how to
 install the database server.
 
-## Version control system
+### Version control system
 
 A version control system (VCS) is useful in managing changes to the core
 artifacts of your business. The software industry largely uses it to manage
@@ -194,7 +194,7 @@ We chose to install a simple git server because we just needed basic
 collaboration and a central source of truth for the state of our artifacts.
 Check our guide on how to [install a lightweight git server on FreeNAS][5].
 
-# Additional considerations
+## Additional considerations
 
 Consider the following items when planning your self-hosted environment:
 
