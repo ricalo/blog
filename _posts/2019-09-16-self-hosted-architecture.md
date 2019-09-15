@@ -78,7 +78,7 @@ and install it on your own device.
 
 The application server provides the majority of the user-facing services. This
 should be your most powerful server in terms of processing power. It should also
-have multiple hard drives to provide some level of resistance to failure.
+have multiple hard drives to provide some level of resilience.
 
 The server allows you to host applications using a virtualization or container
 technology. The server also provides storage for the applications hosted on top
@@ -131,8 +131,6 @@ application server. We only use open source software (OSS) because of its
 transparency—OSS is much less likely to use tracking and surveillance tactics on
 you. The OSS community is also great at providing guidance on how to install the
 software and providing solutions to the issues that you might run into.
-
-The architecture considers the following software:
 
 ## Directory services
 
@@ -190,7 +188,7 @@ they publish.
 
 **Git** is the most commonly used VCS system. If you have to learn a VCS system,
 it's a good idea to choose git. It's used in small projects and large
-organizations alike.
+organizations around the world.
 
 We chose to install a simple git server because we just needed basic
 collaboration and a central source of truth for the state of our artifacts.
@@ -201,17 +199,18 @@ Check our guide on how to [install a lightweight git server on FreeNAS][5].
 Consider the following items when planning your self-hosted environment:
 
 Internet service provider
-: The architecture assumes you have an internet service provider that allows the
-  communication required to access the internal network from the internet.
+: The architecture assumes you have an ISP that allows the communication
+  required to access the internal network from the internet. Some ISPs actively
+  block this communication.
 
 Domain and external DNS hosting
-: The architecture assumes that you have a domain and DNS hosting in place. The
-  host allows you to configure the DNS entries that you need to redirect the
-  users to the internal network when accessing the services from the internet.
-  If you don't have a static IP address assigned, your external DNS should
-  provide a mechanism to automatically update a DNS entry. This is useful to
-  update the DNS of your internal network each time your ISP provides a new IP
-  address.
+: The architecture assumes that you have a provider that hosts your domain and
+  external DNS. The hosting service allows you to configure the DNS entries that
+  you need to redirect the users to the internal network when accessing the
+  services from the internet. If you don't have a static IP address assigned,
+  your external DNS should provide a mechanism to automatically update a DNS
+  entry. Such mechanism makes it easy to update the DNS entry of your internal
+  network each time your ISP assigns a new IP address.
 
 Backup strategy
 : While the application server has some resilience to errors, you should have a
@@ -230,9 +229,10 @@ PGP and hardware keys
 
 Virtual private network
 : The perimeter server can provide a virtual private network (VPN) that you can
-  use to access your internal network without relying in the reverse proxy
-  server. This is useful for opening SSH sessions without exposing the SSH port
-  to the internet.
+  use to access your internal network. This is useful for opening SSH sessions
+  without exposing the SSH port to the internet. It usually only takes a few
+  minutes after you expose the SSH ports of your servers to the internet before
+  someone tries to get unauthorized access.
 
 Raspberry Pi
 : There are scenarios where the FreeNAS server needs to access an OpenLDAP
@@ -242,11 +242,12 @@ Raspberry Pi
   jail that has not yet started. We solved this issue by getting a Raspberry Pi
   and configuring it as a secondary OpenLDAP server. The FreeNAS server uses the
   secondary server at boot time. The secondary server gets changes in user data
-  thanks to the replication feature of OpenLDAP.
+  thanks to the replication feature of OpenLDAP. All the other LDAP clients in
+  the network use the more reliable primary server hosted as a jail on FreeNAS.
 
 Intruder detection
 : You can configure the Advanced Intrusion Detection Environment (AIDE) system,
-  which helps identify when an intruder accesses your jails. Check [our AIDE
+  which helps identify when an intruder accesses your servers. Check [our AIDE
   configuration for jails hosted on FreeNAS][9] guide.
 
 [0]: http://bsdadventures.com/harden-freebsd/
