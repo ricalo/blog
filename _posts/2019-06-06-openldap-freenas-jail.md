@@ -29,23 +29,45 @@ To complete this tutorial, you need:
 
 ## Preparing the jail
 
-1. To start, create a jail using the [Jails page][3] on the FreeNAS web UI. Make
-   sure to configure the jail with the IP address of the ldap server.
-1. Open a session on the jail from a terminal. You can use the
-   [FreeNAS shell][2] for this purpose.
-    ```
-    iocage console JAIL_NAME
+Run the following procedure from a session in your FreeNAS server. You can use
+the [FreeNAS shell][2] for this purpose.
+
+1. Fetch or update your release of FreeBSD for jail usage:
+   ```sh
+   iocage fetch --release 11.2-RELEASE
+   ```
+   You can check your current release with the `freebsd-version` command.
+1. Create the jail. The following example sets the name to `ldapserver`:
+   ```sh
+   iocage create --name ldapserver --release 11.2-RELEASE
+   ```
+1. Configure the IP address. The following example sets the IP address to
+   `192.168.1.123` using a subnet mask of `255.255.255.0` on the `re0`
+   interface. The command uses the [CIDR notation][10], which translates to
+   `192.168.1.123/24`:
+   ```sh
+   iocage set ip4_addr="re0|192.168.1.123/24" ldapserver
+   ```
+1. Configure the default router. The following example sets the default router
+   to `192.168.1.1`:
+   ```sh
+   iocage set defaultrouter=192.168.1.1 ldapserver
+   ```
+1. Start the jail and open a session:
+    ```sh
+    iocage console ldapserver
     ```
 1. Once in the jail session, install the required packages:
-   ```
-   pkg install openldap-server
-   pkg install openssl
-   pkg install perl5
-   pkg install ca_root_nss
+   ```sh
+   pkg install --yes openldap-server
+   pkg install --yes openssl
+   pkg install --yes perl5
+   pkg install --yes ca_root_nss
    ```
 1. Copy the your certificate files to the jail, including the files with the
-   `crt`, `key`, and `fullchain` extensions. Register the certificate:
-   ```
+   `crt`, `key`, and `fullchain` extensions. Register the certificate with the
+   following command:
+   ```sh
    c_rehash PATH_TO_CERTIFICATE_FILES
    ```
 
@@ -65,7 +87,7 @@ To create the `slapd.ldif` file:
 
 1. Create a hashed password for the LDAP administrator account using the
    `slappasswd` command. Save the original password and take note of the hashed
-   password, which is in the following form:
+   password, which uses the following notation:
    ```
    {SSHA}hashed_password
    ```
@@ -84,7 +106,7 @@ To create the `slapd.ldif` file:
    * Instances of `dc=example,dc=org`, which you should replace with your own
      domain components.
 
-   ```
+   ```yaml
    # See slapd-config(5) for details on configuration options.
    # This file should NOT be world readable.
    dn: cn=config
@@ -166,7 +188,7 @@ To create the `domain.ldif` file:
 
 1. Create a hashed password for the example user account using the `slappasswd`
    command. Save the original password and take note of the hashed password,
-   which is in the following form:
+   which uses the following notation:
    ```
    {SSHA}hashed_password
    ```
@@ -179,7 +201,7 @@ To create the `domain.ldif` file:
    * The `userPassword` attribute, which contains the hashed password of the
      example user account.
 
-   ```
+   ```yaml
    dn: dc=example,dc=org
    objectClass: dcObject
    objectClass: organization
@@ -216,30 +238,30 @@ To create the `domain.ldif` file:
 ## Loading the database definition files
 
 1. Stop the sladp service:
-   ```
+   ```sh
    service slapd stop
    ```
 1. Delete current configuration database:
-   ```
+   ```sh
    rm -rf /usr/local/etc/openldap/slapd.d
    mkdir /usr/local/etc/openldap/slapd.d
    ```
 1. Delete current data folder:
-   ```
+   ```sh
    rm -rf /usr/local/etc/openldap/data
    mkdir /usr/local/etc/openldap/data
    ```
 1. Import the `slapd.ldif` file:
-   ```
+   ```sh
    /usr/local/sbin/slapadd -n0 -F /usr/local/etc/openldap/slapd.d/ -l slapd.ldif
    ```
 1. Start the service:
-   ```
+   ```sh
    /usr/local/libexec/slapd -F /usr/local/etc/openldap/slapd.d/
    ```
 1. Load the base objects of the domain. Replace `cn=admin,dc=example,dc=org`
    with the user ID of your LDAP administrator account.
-   ```
+   ```sh
    ldapadd -W -D "cn=admin,dc=example,dc=org" -f domain.ldif
    ```
 
@@ -248,7 +270,7 @@ To create the `domain.ldif` file:
 Use the `sysrc` command to start the LDAP service when the jail boots. Replace
 `ldap.example.org` with the hostname of your LDAP server.
 
-```
+```sh
 sysrc slapd_enable="YES"
 sysrc slapd_flags='-h "ldapi://%2fvar%2frun%2fopenldap%2fldapi/ ldap://ldap.example.org/"'
 sysrc slapd_sockets="/var/run/openldap/ldapi"
@@ -259,8 +281,8 @@ This is a good time to restart the jail. Exit the session and restart the jail
 from the [Jails][3] page or running the following command on the [Shell][2]
 page:
 
-```
-iocage restart JAIL_NAME
+```sh
+iocage restart ldapserver
 ```
 
 ## Querying the OpenLDAP service
@@ -269,42 +291,29 @@ To check that the service is running, you can use a query from a host that has
 the LDAP tools installed. In Debian-based distributions of Linux, such as
 Ubuntu, you can install the LDAP tools with the following command:
 
-```
+```sh
 apt install ldap-utils
 ```
 
 The following queries test different aspects of the service:
 * To query the service anonymously:
-  ```
+  ```sh
   ldapwhoami -H ldap://ldap.example.org -x
   ```
   Expected output: `anonymous`
 * To query the service in the context of a user:
-  ```
-  ldapwhoami -H ldap://ldap.example.org -x \
-      -D "uid=admin@example.org,dc=example,dc=org" -W
+  ```sh
+  ldapwhoami -H ldap://ldap.example.org -x -D "uid=admin@example.org,dc=example,dc=org" -W
   ```
   Expected output: `dn:uid=admin@example.org,dc=example,dc=org`
 * To query the service using TLS:
-  ```
-  ldapwhoami -H ldap://ldap.example.org -x -ZZ \
-      -D "uid=admin@example.org,dc=example,dc=org" -W
+  ```sh
+  ldapwhoami -H ldap://ldap.example.org -x -ZZ -D "uid=admin@example.org,dc=example,dc=org" -W
   ```
   Expected output: `dn:uid=admin@example.org,dc=example,dc=org`
 
 You can add more objects to your LDAP database using the [`ldapmodify`][5] or
 `ldapadd` commands.
-
-## Next steps
-
-Now that you have a working OpenLDAP instance, you can use it in applications
-that provide services for your business, such as:
-
-* [Nextcloud][6], a collaboration platform that you can host on FreeNAS. For a
-  great resource on how to install Nextcloud, check [Samuel Dowling's guide][9].
-* [OpenVPN][7], an open source VPN that allows users to connect remotely to your
-  network. You can host a VPN server on a firewall appliance, such as
-  [pfSense][8].
 
 [0]: https://www.openldap.org/
 [1]: https://letsencrypt.org/
@@ -316,3 +325,4 @@ that provide services for your business, such as:
 [7]: https://openvpn.net/
 [8]: https://www.pfsense.org
 [9]: https://www.samueldowling.com/2018/12/08/install-nextcloud-on-freenas-iocage-jail-with-hardened-security/
+[10]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
