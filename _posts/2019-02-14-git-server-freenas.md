@@ -6,13 +6,13 @@ excerpt: >
     authorized certificate to establish an SSH connection.
 date: 2019-02-14
 categories:
-  - tools
 tags:
   - git
   - freenas
   - iocage
   - jails
   - ssh
+toc: true
 ---
 
 Hosting Git repositories (repos) on a server allows you to keep track of and
@@ -34,13 +34,14 @@ git operations. Run the commands in a shell on the FreeNAS server:
 
 1. This post uses FreeBSD version `11.2-RELEASE` to create the jail. Run the
    following command to fetch or update the version of FreeBSD for jail usage:
+   ```shell
+   $ iocage fetch --release 11.2-RELEASE
    ```
-   iocage fetch --release 11.2-RELEASE
-   ```
-1. Run the following command to create a `gitserver` jail using the version of
-   FreeBSD fetched in the previous step:
-   ```
-   iocage create --name gitserver --release 11.2-RELEASE \
+1. Run the following command to create a jail named `gitserver` using the
+   version of FreeBSD fetched in the previous step:
+   ```shell
+   $ iocage create \
+       --name gitserver --release 11.2-RELEASE \
        dhcp="on" vnet="on" bpf="yes"
    ```
 
@@ -48,14 +49,14 @@ git operations. Run the commands in a shell on the FreeNAS server:
    settings on a virtual network.
 1. The following commands create a new user, configure the folder to store the
    repos, and prompts for a new password:
-   ```
-   iocage exec --host_user root gitserver \
+   ```shell
+   $ iocage exec --host_user root gitserver \
        mkdir -p /git/repos
-   iocage exec --host_user root gitserver \
+   $ iocage exec --host_user root gitserver \
        pw useradd -n git -d /git
-   iocage exec --host_user root gitserver \
+   $ iocage exec --host_user root gitserver \
        chown -R git /git
-   iocage exec --host_user root gitserver \
+   $ iocage exec --host_user root gitserver \
        passwd git
    ```
 
@@ -72,17 +73,17 @@ To store the repos in a dataset, run the following commands in a shell on the
 FreeNAS server:
 
 1. Create a dataset named `repos` in the `scraps` pool:
-   ```
-   zfs create scraps/repos
+   ```shell
+   $ zfs create scraps/repos
    ```
 1. Use the following command to stop the jail:
-   ```
-   iocage stop gitserver
+   ```shell
+   $ iocage stop gitserver
    ```
 1. Mount the `repos` dataset on the `repos` folder created in the previous
    section:
-   ```
-   iocage fstab gitserver --add \
+   ```shell
+   $ iocage fstab gitserver --add \
        /mnt/scraps/repos /git/repos nullfs rw 0 0
    ```
 
@@ -93,17 +94,15 @@ procedure shows how to install Git on the server.
 
 Run the following commands in a shell on the FreeNAS server:
 
-1. Log to the console on the jail.
-   ```
-   iocage console gitserver
-   ```
 1. Update the `pkg` repo.
-   ```
-   pkg update
+   ```shell
+   $ iocage exec --host_user root gitserver \
+       pkg update
    ```
 1. Install the `git` package.
-   ```
-   pkg install -y git
+   ```shell
+   $ iocage exec --host_user root gitserver \
+       pkg install -y git
    ```
 
 ## Configuring the SSH service
@@ -115,40 +114,41 @@ On your client machine, verify that you have a certificate that you can use to
 communicate with the server, or create a new one:
 
 1. Check your existing SSH keys.
-   ```
-   ls -la ~/.ssh
+   ```shell
+   $ ls -la ~/.ssh
    ```
    Usually, you can use the key stored in the `id_rsa.pub` file. If the previous
    command lists the `id_rsa.pub` file go to step three. Otherwise continue to
    step two.
 1. Generate an SSH key. Replace *email@example.com* with your email address.
-   ```
-   ssh-keygen -t rsa -b 4096 -C "email@example.com"
+   ```shell
+   $ ssh-keygen -t rsa -b 4096 -C "email@example.com"
    ```
    The previous command prompts for the location to which to save the key.
    Accept the default value of `id_rsa`.
 1. Copy the SSH public key as an authorized key.
-   ```
-   ssh-copy-id -i ~/.ssh/id_rsa.pub git@gitserver
+   ```shell
+   $ ssh-copy-id -i ~/.ssh/id_rsa.pub git@gitserver
    ```
 
 On the FreeNAS server, configure the SSH service:
 
 1. Configure the SSH service to start on boot.
-   ```
-   iocage exec --host_user root gitserver \
+   ```shell
+   $ iocage exec --host_user root gitserver \
        sysrc sshd_enable="yes"
    ```
 1. Start (or restart) the SSH service.
-   ```
-   service sshd onerestart
+   ```shell
+   $ iocage exec --host_user root gitserver \
+       service sshd onerestart
    ```
 
 To validate the configuration, connect to the Git server by running the
 following ssh command from your client machine:
 
-```
-ssh git@gitserver
+```shell
+$ ssh git@gitserver
 ```
 Verify that you can connect to the server without using a password.
 
@@ -159,40 +159,40 @@ commits.
 
 1. Open an SSH session to the server (or reuse the connection created in the
    previous section):
-   ```
-   ssh git@gitserver
+   ```shell
+   $ ssh git@gitserver
    ```
 1. Create a new `my-repo.git` folder in the `repos` location created previously.
-   ```
-   mkdir repos/my-repo.git
-   cd repos/my-repo.git
+   ```shell
+   $ mkdir repos/my-repo.git
+   $ cd repos/my-repo.git
    ```
 1. Initialize the repo to accept commits from clients.
-   ```
-   git init --bare
+   ```shell
+   $ git init --bare
    ```
 
 On the client machine, create a repo and push a commit to the server.
 
 1. Create and initialize a repo.
-   ```
-   mkdir my-repo
-   cd my-repo
-   git init
+   ```shell
+   $ mkdir my-repo
+   $ cd my-repo
+   $ git init
    ```
 1. Add a test file and commit the changes to the repo.
-   ```
-   echo "A test file" >> test-file
-   git add test-file
-   git commit -m "A test commit"
+   ```shell
+   $ echo "A test file" >> test-file
+   $ git add test-file
+   $ git commit -m "A test commit"
    ```
 1. Register the repo on the server as a tracked repo.
-   ```
-   git remote add origin git@gitserver:repos/my-repo.git
+   ```shell
+   $ git remote add origin git@gitserver:repos/my-repo.git
    ```
 1. Push the new commit to the Git server
-   ```
-   git push origin master
+   ```shell
+   $ git push origin master
    ```
    The previous command pushes the commit to the server. You can clone, pull,
    and push additional commits from clients that have access to the server.
