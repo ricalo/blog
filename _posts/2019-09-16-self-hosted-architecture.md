@@ -103,19 +103,20 @@ you require a mechanism to update the entry of your internal domain in your
 external DNS. This allows clients accessing from the internet to find the IP
 address if your internal network.
 
-For example, if your top domain is `example.com` and your internal domain is
-`home.example.com`, you can configure pfSense to update the `home` entry in your
+For example, if your top domain is `example.org` and your internal domain is
+`home.example.org`, you can configure pfSense to update the `home` entry in your
 external DNS every time your ISP assigns a new IP address.
 
 ### Internal DNS
 
 The internal DNS allows your clients to find services in your network. For
-example, if your internal domain is `home.example.com` you could configure the
+example, if your internal domain is `home.example.org` you could configure the
 following entries in your internal DNS:
 
-* `ldap.home.example.com` for your directory services
-* `sql.home.example.com` for your database
-* `vcs.home.example.com` for your version control system
+* `ldap.home.example.org` for your directory services
+* `sql.home.example.org` for your database
+* `vcs.home.example.org` for your version control system
+* `productivity.home.example.org` for your productivity and collaboration system
 
 ### Reverse proxy
 
