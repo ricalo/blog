@@ -16,17 +16,19 @@ left:
     children:
       - title: Self-hosted architecture
         url: /self-hosted-architecture
-      - title: OpenLDAP in a jail
+      - title: Install OpenLDAP server
         url: /openldap-freenas-jail/
-      - title: Lightweight git server
+      - title: Install a Git server
         url: /git-server-freenas/
       - title: AIDE configuration for jails
         url: /aide-freenas-jail/
+  - title: Ubuntu
+    children:
+      - title: Install Powerline status line
+        url: /install-powerline-ubuntu/
+      - title: Fix Xbox game controller
+        url: /fix-xbox-madcatz-ubuntu/
   - title: Misc
     children:
-      - title: Cert error on GitLab
+      - title: Fix cert error GitLab pages
         url: /fix-cert-intermediates-gitlab/
-      - title: Xbox 360 controller on Ubuntu
-        url: /fix-xbox-madcatz-ubuntu/
-      - title: Powerline on Ubuntu
-        url: /install-powerline-ubuntu/
