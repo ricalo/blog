@@ -4,7 +4,7 @@ excerpt: >
     Learn about a self-hosted architecture that supports services usually
     required in a small business. Use OSS—such as pfSense, FreeNAS, and
     Nextcloud—to stay in control of your data.
-date: 2019-09-15
+date: 2019-09-21
 teaser: /assets/images/architecture_overview.svg
 toc: true
 categories:

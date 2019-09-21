@@ -4,7 +4,7 @@ excerpt: >
     Learn how to host a lightweight Git server on your FreeNAS server.
     Host the repositories that contain critical business data on your own
     infrastructure.
-date: 2019-02-14
+date: 2019-09-20
 categories:
 tags:
   - git
