@@ -3,7 +3,7 @@ title: Installing Powerline on Ubuntu
 excerpt: >
     Learn how to install the Powerline status plugin for vim, bash, tmux, and
     others.
-date: 2019-03-16
+date: 2019-09-21
 categories:
 tags:
   - Powerline
