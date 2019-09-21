@@ -1,7 +1,9 @@
 ---
-title: Installing OpenLDAP in a jail on FreeNAS
+title: Installing an OpenLDAP server on FreeNAS
 excerpt: >
-    Learn how to install OpenLDAP in an iocage jail on your FreeNAS server.
+    Learn how to install an OpenLDAP server in a jail on your FreeNAS server.
+    Use OpenLDAP as a central store of user information that you can use in
+    other business applications.
 date: 2019-06-23
 categories:
 tags:
@@ -13,8 +15,8 @@ toc: true
 ---
 
 An LDAP directory provides a central location to store information about the
-users and computers in your organization. Business applications can use this
-information to support services such as file sharing, collaboration and chat.
+users in your organization. Business applications can use this information to
+support services such as file sharing, collaboration, and chat.
 
 In this tutorial, learn how to install [OpenLDAP][0]{: target="external"}—an
 open source LDAP server—in a jail on your FreeNAS appliance. This tutorial also
