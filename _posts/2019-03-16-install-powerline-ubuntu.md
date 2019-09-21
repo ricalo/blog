@@ -27,29 +27,32 @@ a Git repository:
 
 To install the Powerline fonts:
 
-```sh
-git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts
-./install.sh
-cd ..
-rm -rf fonts
-```
+1. Clone the Powerline fonts repository to the `fonts` folder in your computer:
+   ```shell
+   git clone https://github.com/powerline/fonts.git --depth=1 fonts
+   ```
+1. Run the installation script:
+   ```shell
+   ./fonts/install.sh
+   ```
 
-To configure the Powerline fonts in Terminal:
+To configure the fonts in the Ubuntu Terminal app:
 
-Go to **Edit** > **Preferences**. In the **Editing Profile “Your Profile”**
-dialog, choose the **General** tab, select the Custom font checkbox, and click
-the button to select a custom font. From the **Choose a Terminal Font** dialog,
-select one of the Powerline fonts, for example **Source Code Pro for Powerline
-Regular**.
+1. Open Terminal.
+1. Go to **Edit** > **Preferences**.
+1. In the **Editing Profile** dialog, choose the **General** tab, enable
+   **Custom font**, and click the button to select a font.
+1. From the **Choose a Terminal Font** dialog, select one of the Powerline
+   fonts, such as **Source Code Pro for Powerline Regular**.
 
-You probably want to use a color scheme that works better than the standard
-white on black, but that’s a personal preference.
+While you are in the **Editing Profile** dialog, check the different color
+schemes in the **Colors** tab. You might find one that works better for you than
+the default.
 
-## Install Pip and Powerline
+## Install pip and Powerline
 
-Powerline is published in Pip, which is a package manager for Python. To install
-the Pip package manager:
+Powerline is available in pip, which is a package manager for Python. To install
+pip:
 
 ```sh
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -57,11 +60,15 @@ python get-pip.py --user
 rm get-pip.py
 ```
 
-To install Powerline to the user install directory:
+To install Powerline:
 
 ```sh
 ~/.local/bin/pip install --user powerline-status
 ```
+
+The `--user` flag indicates that pip installs the package following the _user
+scheme_. In other words, the package is installed in a location specific to the
+current user.
 
 ## Configure Bash
 
@@ -89,8 +96,8 @@ To configure Powerline for Vim, add the following lines to your `~/.vimrc` file:
 set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 ```
 
-Optionally, add the following line to `~/.vimrc` to display the status bar in Vim
-(and make the Powerline status line visible by default):
+Optionally, add the following line to `~/.vimrc` to display the status bar in
+Vim and make the Powerline status line visible by default:
 
 ```vim
 set laststatus=2
@@ -116,8 +123,8 @@ installation is the following:
    powerline-daemon --kill
    ```
 
-For more information about how to customize your Powerline installation, see the
-[Quick setup guide][0]{: target="external"} in the Powerline documentation.
+For more information about how to customize your Powerline installation, check
+the [Quick setup guide][0]{: target="external"} in the Powerline documentation.
 
 [0]: https://powerline.readthedocs.io/en/master/configuration.html#quick-guide
 [demo]: /assets/images/powerline-demo.gif
