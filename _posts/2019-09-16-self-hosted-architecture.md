@@ -183,9 +183,21 @@ which covers how to install the database server.
 
 A version control system (VCS) is useful in managing changes to the core
 artifacts of your business. The software industry largely uses it to manage
-source code.  However, businesses in other industries can use it as well. For
+source code. However, businesses in other industries can use it as well. For
 example, an online magazine or blog can use a VCS system to manage the articles
 they publish.
+
+You can host a centralized VCS on your own infrastructure, which offers the
+following benefits:
+
+* Facilitates collaboration between members of the team.
+* Keeps one version of the truth for files in the repositories, which you can
+  use to make business decisions. For example:
+  * Decide what version of the code to use to build your app.
+  * Decide what version of a post to publish on your online blog.
+* Allows you to store the data on a server computer in addition to storing the
+  data on client computers, such as laptops.
+* Keeps the information critical to your business on your own infrastructure.
 
 **Git** is the most commonly used VCS system. If you have to learn a VCS system,
 it's a good idea to choose git. It's used in small projects and large
