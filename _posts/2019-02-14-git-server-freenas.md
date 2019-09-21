@@ -1,9 +1,9 @@
 ---
-title: Hosting a lightweight Git server on FreeNAS
+title: Hosting a Git server on FreeNAS
 excerpt: >
-    Learn how to host a lightweight Git server in an iocage jail on your FreeNAS
-    appliance. Access the Git server from clients that have an authorized
-    certificate to establish an SSH connection.
+    Learn how to host a lightweight Git server on your FreeNAS server.
+    Host the repositories that contain critical business data on your own
+    infrastructure.
 date: 2019-02-14
 categories:
 tags:
@@ -15,18 +15,24 @@ tags:
 toc: true
 ---
 
-Hosting Git repositories on a server allows you to keep track of and store files
-used in your projects, even those files that contain sensitive data. You can use
-a hosting service like GitHub to manage your repos. However, you should not use
-such services for repos that contain sensitive information. For repos that store
-sensitive data, use a Git server hosted by a trusted party. This post shows how
-to set up a lightweight Git server on your FreeNAS appliance.
+Learn how to host a lightweight Git server on your FreeNAS server.
+Host the repositories that contain critical business data on your own
+infrastructure.
+
+A centralized Git server provides multiple benefits, which we explain in the
+[version control system][2] section of our architecture for a self-hosted
+business guide.
+
+You can use a hosting service, such as GitHub, to manage your repositories.
+However, if you're concerned about who has access to your critical business
+data, you should not use such services. Instead, you can host the Git server on
+your own FreeNAS server yourself.
 
 ## Creating an iocage jail
 
-FreeNAS uses [iocage][1] to create independent environments isolated from the
-operating system. Such environments are called jails. This post uses a jail to
-host the Git server.
+FreeNAS uses the [iocage][1]{: target="external"} container manager to create
+independent environments isolated from the operating system. Such environments
+are called _jails_. This post uses a jail to host the Git server.
 
 The following steps show how to create an iocage jail and configure an user for
 git operations. Run the following procedure from a session in your FreeNAS
@@ -43,25 +49,35 @@ server. You can use the [FreeNAS shell][0] for this purpose.
    ```
    The previous command creates a jail that uses DHCP to configure the IP
    settings on a virtual network.
-1. Create a new _git_ user, configure the folder to store the repos, and prompt for a
-   new password:
+1. Start the jail and open a session:
    ```shell
-   iocage exec --host_user root gitserver mkdir -p /git/repos
-   iocage exec --host_user root gitserver pw useradd -n git -d /git
-   iocage exec --host_user root gitserver chown -R git /git
-   iocage exec --host_user root gitserver passwd git
+   iocage console gitserver
+   ```
+1. Create a new user named `git`, configure the folder to store the repos, and
+   prompt for a new password:
+   ```shell
+   mkdir -p /git/repos
+   pw useradd -n git -d /git
+   chown -R git /git
+   passwd git
    ```
    The last command changes the password for the user. Type and make a note of
    the new password.
 
-## (Optional) Storing the repos in a ZFS dataset
+## (Optional) Storing the repositories on a ZFS dataset
 
-One of the advantages of hosting your Git server is that you can decide the
-location where to store the repos. The following procedure shows how to
-configure a ZFS dataset to store the repos.
+FreeNAS supports the ZFS filesystem, which offers multiple features—such as redundancy, integrity
+checking, and snapshots—that help ensure that the data stays consistent and
+available.
 
-To store the repos in a dataset, run the following commands in a shell on the
-FreeNAS server:
+You can enable the ZFS features on a particular dataset on the filesystem. By
+specifying on which dataset to store the repositories, you have more control
+over what features to use for the data on your Git server.
+
+To store the repos in a dataset, run the following commands in a [FreeNAS
+shell][0]{: target="external"} or an SSH session on the FreeNAS server. Make
+sure that you're not in the jail session from the previous section. If you are
+in the jail session, use the `exit` command to go to the FreeNAS shell.
 
 1. Create a dataset named `repos` in the `tank` pool:
    ```shell
@@ -82,15 +98,19 @@ FreeNAS server:
 The server requires the Git binaries to manage the repos. The following
 procedure shows how to install Git on the server.
 
-Run the following commands in a shell on the FreeNAS server:
+Run the following commands in a session on the FreeNAS server:
 
-1. Update the `pkg` repo.
+1. If you're not already in a session on the jail, open one:
    ```shell
-   iocage exec --host_user root gitserver pkg update
+   iocage console gitserver
    ```
-1. Install the `git` package.
+1. Update the packages in the jail:
    ```shell
-   iocage exec --host_user root gitserver pkg install --yes git
+   pkg update
+   ```
+1. Install the `git` package:
+   ```shell
+   pkg install --yes git
    ```
 
 ## Configuring the SSH service
@@ -98,10 +118,10 @@ Run the following commands in a shell on the FreeNAS server:
 Git clients use an SSH connection to communicate with the server. This section
 shows how to configure the SSH service to accept connections from clients.
 
-On your client machine, verify that you have a certificate that you can use to
+On your client computer, verify that you have a certificate that you can use to
 communicate with the server, or create a new one:
 
-1. Check your existing SSH keys.
+1. Check your existing SSH keys:
    ```shell
    ls -la ~/.ssh
    ```
@@ -114,25 +134,29 @@ communicate with the server, or create a new one:
    ```
    The previous command prompts for the location to which to save the key.
    Accept the default value of `id_rsa`.
-1. Copy the SSH public key as an authorized key.
+1. Copy the SSH public key as an authorized key:
    ```shell
    ssh-copy-id -i ~/.ssh/id_rsa.pub git@gitserver
    ```
 
-On the FreeNAS server, configure the SSH service:
+To configure the SSH service on the jail, run the following commands in a
+session on the FreeNAS server:
 
-1. Configure the SSH service to start on boot.
+1. If you’re not already in a session on the jail, open one:
    ```shell
-   iocage exec --host_user root gitserver sysrc sshd_enable="yes"
+   iocage console gitserver
    ```
-1. Start (or restart) the SSH service.
+1. Configure the SSH service to start on boot:
    ```shell
-   iocage exec --host_user root gitserver service sshd onerestart
+   sysrc sshd_enable="yes"
+   ```
+1. Start (or restart) the SSH service:
+   ```shell
+   service sshd onerestart
    ```
 
 To validate the configuration, connect to the Git server by running the
-following ssh command from your client machine:
-
+following ssh command from your client computer:
 ```shell
 ssh git@gitserver
 ```
@@ -140,50 +164,54 @@ Verify that you can connect to the server without using a password.
 
 ## Testing the Git server
 
-To test the Git server, create an empty repo that clients can use to push
+To test the Git server, create an empty repository that clients can use to push
 commits.
 
-1. Open an SSH session to the server (or reuse the connection created in the
-   previous section):
+1. Open an SSH session to the server:
    ```shell
    ssh git@gitserver
    ```
-1. Create a new `my-repo.git` folder in the `repos` location created previously.
+1. Create a new `my-repo.git` folder in `/git/repos/`:
    ```shell
-   mkdir repos/my-repo.git
-   cd repos/my-repo.git
+   mkdir /git/repos/my-repo.git
+   cd /git/repos/my-repo.git
    ```
-1. Initialize the repo to accept commits from clients.
+   The `.git` extension is a convention for the _bare repository_ used in the
+   next step. The extension is not strictly required, but recommended.
+1. Initialize the repository as a bare repository. A bare repository doesn't
+   contain a working directory which is not required in the server because files
+   are not edited directly.
    ```shell
    git init --bare
    ```
 
-On the client machine, create a repo and push a commit to the server.
+On the client computer, create a repository and push a commit to the server.
 
-1. Create and initialize a repo.
+1. Create and initialize a repository:
    ```shell
    mkdir my-repo
    cd my-repo
    git init
    ```
-1. Add a test file and commit the changes to the repo.
+1. Add a test file and commit the changes to the repository:
    ```shell
    echo "A test file" >> test-file
    git add test-file
    git commit -m "A test commit"
    ```
-1. Register the repo on the server as a tracked repo.
+1. Register the remote repository, which is hosted on the Git server:
    ```shell
    git remote add origin git@gitserver:repos/my-repo.git
    ```
-1. Push the new commit to the Git server
+1. Push the new commit to the Git server:
    ```shell
    git push origin master
    ```
    The previous command pushes the commit to the server. You can clone, pull,
    and push additional commits from clients that have access to the server.
 
-This post showed how to host a Git server in an iocage jail on FreeNAS.
+This post showed how to host a Git server in jail on FreeNAS.
 
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
 [1]: https://iocage.readthedocs.io/en/latest/
+[2]: /self-hosted-architecture/#version-control-system
