@@ -117,7 +117,7 @@ installation is the following:
    ```
 
 For more information about how to customize your Powerline installation, see the
-[Quick setup guide][0] in the Powerline documentation.
+[Quick setup guide][0]{: target="external"} in the Powerline documentation.
 
-[0]:https://powerline.readthedocs.io/en/master/configuration.html#quick-guide
-[demo]:/assets/images/powerline-demo.gif
+[0]: https://powerline.readthedocs.io/en/master/configuration.html#quick-guide
+[demo]: /assets/images/powerline-demo.gif

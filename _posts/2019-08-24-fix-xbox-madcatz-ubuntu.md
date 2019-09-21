@@ -26,17 +26,18 @@ Follow these steps to reproduce the error:
    error:
    > Error couldn't claim the USB interface: LIBUSB_ERROR_NOT_FOUND
 
-**Note:** With [Proton 4.11-3][1], games can access gamepads directly. You
-shouldn't need to use the solution explained below. For example, our Mad Catz
-stick works okay in [Samurai Shodown V Special][2] withouth disabling the
+**Note:** With [Proton 4.11-3][1]{: target="external"}, games can access
+gamepads directly. You shouldn't need to use the solution explained below. For
+example, our Mad Catz stick works okay in
+[Samurai Shodown V Special][2]{: target="external"} withouth disabling the
 autosuspend feature. However, we are still experiencing the issue with the wrong
-mapping of buttons, which is resolved by the workaround explained in [Additional
-steps](#additional-steps).
+mapping of buttons, which is resolved by the workaround explained in
+[Additional steps](#additional-steps).
 
 ## Solution
 
 Disable the autosuspend feature of the usbcore module. For more information,
-check [Power Management for USB][0]:
+check [Power Management for USB][0]{: target="external"}:
 
 1. Set the `usbcore.autosuspend` option to `-1` in the `GRUB_COMDLINE_LINUX`
    line in the Grub configuration file `/etc/default/grub`:

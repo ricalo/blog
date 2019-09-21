@@ -49,7 +49,7 @@ The architecture consists of two servers:
 
 The follow diagram shows a view of the servers and the services they support:
 
-![Architecture diagram](/assets/images/architecture_overview.svg)
+![Architecture diagram][overview]
 
 ## Physical architecture
 
@@ -70,9 +70,9 @@ the traffic from outside and inside your network. As you can imagine, the
 perimeter server sits between your internal network and your internet service
 provider.
 
-We use [pfSense][1] as the software of our perimeter server. You can buy an
-appliance from Netgate—the developer of pfSense—or you can download the software
-and install it on your own device.
+We use [pfSense][1]{: target="external"} as the software of our perimeter
+server. You can buy an appliance from Netgate—the developer of pfSense—or you
+can download the software and install it on your own device.
 
 ### Application server
 
@@ -84,10 +84,10 @@ The server allows you to host applications using a virtualization or container
 technology. The server also provides storage for the applications hosted on top
 of it.
 
-We use [FreeNAS][2] as the software of our application server. FreeNAS can host
-applications in *jails*, which is a container technology supported on BSD
-systems. FreeNAS also uses ZFS as the file system, which is popular for its
-redundancy, integrity checking, and snapshot features.
+We use [FreeNAS][2]{: target="external"} as the software of our application
+server. FreeNAS can host applications in *jails*, which is a container
+technology supported on BSD systems. FreeNAS also uses ZFS as the file system,
+which is popular for its redundancy, integrity checking, and snapshot features.
 
 ## Network services
 
@@ -176,8 +176,8 @@ Thunderbird, to access them. There are also apps for more advanced scenarios,
 such as password management and online meetings.
 
 For more information about how to install the software, check Samuel Dowling's
-excellent guide on [how to install Nextcloud in a jail][4], which covers how to
-install the database server.
+excellent guide on [how to install Nextcloud in a jail][4]{: target="external"},
+which covers how to install the database server.
 
 ### Version control system
 
@@ -221,12 +221,14 @@ Backup strategy
 
 Certificates
 : Encrypting the communication between clients and servers is a must these days.
-  You can get a free certificate for this purpose from [Let's Encrypt][7].
+  You can get a free certificate for this purpose from
+  [Let's Encrypt][7]{: target="external"}.
 
 PGP and hardware keys
 : We use a combination of PGP and hardware keys to open SSH sessions to manage
   the servers. We use the hardware keys from Yubico that support the Open PGP
-  function, check their [compare products][8] table for more information.
+  function, check their [compare products][8]{: target="external"} table for
+  more information.
 
 Virtual private network
 : The perimeter server can provide a virtual private network (VPN) that you can
@@ -251,6 +253,7 @@ Intruder detection
   which helps identify when an intruder accesses your servers. Check [our AIDE
   configuration for jails hosted on FreeNAS][9] guide.
 
+[overview]: /assets/images/architecture_overview.svg
 [0]: http://bsdadventures.com/harden-freebsd/
 [1]: https://pfsense.org
 [2]: https://freenas.org

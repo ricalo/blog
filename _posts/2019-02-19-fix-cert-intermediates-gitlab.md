@@ -38,11 +38,13 @@ chain of trust.
 ## Solution
 
 Download and provide the Let's Encrypt intermediate certificate. According to
-[Intermediate Certificates][1], Let's Encrypt uses an intermediate that is
-cross-signed by another authority, IdenTrust. Use this cross-signed certificate
-as the intermediate in your GitLab Pages domain registration:
+[Intermediate Certificates][1]{: target="external"}, Let's Encrypt uses an
+intermediate that is cross-signed by another authority, IdenTrust. Use this
+cross-signed certificate as the intermediate in your GitLab Pages domain
+registration:
 
-1. Copy the [cross-signed certificate][2] text from the Let's Encrypt site.
+1. Copy the [cross-signed certificate][2]{: target="external"} text from the
+   Let's Encrypt site.
 1. In the **Certificate (PEM)** field, enter your certificate, followed by a new
    line, and the cross-signed certificate afterwards, as shown in the following
    example:

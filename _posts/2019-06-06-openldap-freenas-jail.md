@@ -16,21 +16,22 @@ An LDAP directory provides a central location to store information about the
 users and computers in your organization. Business applications can use this
 information to support services such as file sharing, collaboration and chat.
 
-In this tutorial, learn how to install [OpenLDAP][0]—an open source LDAP
-server—in a jail on your FreeNAS appliance. This tutorial also shows how to
-configure transport layer security (TLS) using a [Let's Encrypt][1] certificate.
+In this tutorial, learn how to install [OpenLDAP][0]{: target="external"}—an
+open source LDAP server—in a jail on your FreeNAS appliance. This tutorial also
+shows how to configure transport layer security (TLS) using a
+[Let's Encrypt][1]{: target="external"} certificate.
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
 * Name resolution for the ldap server
-* [Let's Encrypt][4] certificate
+* [Let's Encrypt][4]{: target="external"} certificate
 
 ## Preparing the jail
 
 Run the following procedure from a session in your FreeNAS server. You can use
-the [FreeNAS shell][2] for this purpose.
+the [FreeNAS shell][2]{: target="external"} for this purpose.
 
 1. Fetch or update your release of FreeBSD for jail usage:
    ```sh
@@ -43,8 +44,8 @@ the [FreeNAS shell][2] for this purpose.
    ```
 1. Configure the IP address. The following example sets the IP address to
    `192.168.1.123` using a subnet mask of `255.255.255.0` on the `re0`
-   interface. The command uses the [CIDR notation][10], which translates to
-   `192.168.1.123/24`:
+   interface. The command uses the [CIDR notation][10]{: target="external"},
+   which translates to `192.168.1.123/24`:
    ```sh
    iocage set ip4_addr="re0|192.168.1.123/24" ldapserver
    ```
@@ -278,8 +279,8 @@ sysrc slapd_cn_config="YES"
 ```
 
 This is a good time to restart the jail. Exit the session and restart the jail
-from the [Jails][3] page or running the following command on the [Shell][2]
-page:
+from the [Jails][3]{: target="external"} page or running the following command
+on the [Shell][2]{: target="external"} page:
 
 ```sh
 iocage restart ldapserver
@@ -312,8 +313,8 @@ The following queries test different aspects of the service:
   ```
   Expected output: `dn:uid=admin@example.org,dc=example,dc=org`
 
-You can add more objects to your LDAP database using the [`ldapmodify`][5] or
-`ldapadd` commands.
+You can add more objects to your LDAP database using the
+[`ldapmodify`][5]{: target="external"} or `ldapadd` commands.
 
 [0]: https://www.openldap.org/
 [1]: https://letsencrypt.org/

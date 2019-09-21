@@ -30,7 +30,8 @@ session.
 > should validate that your configuration is adequate for your purposes.
 
 To start get AIDE up and running, you can use the Tamper Detection section of
-the [How to harden FreeBSD guide][0] on the BSD Adventures site.
+the [How to harden FreeBSD guide][0]{: target="external"} on the BSD Adventures
+site.
 
 Then, configure the following entries in the `/usr/local/etc/aide.conf`
 configuration file:
@@ -54,8 +55,8 @@ configuration file:
 !/usr/share/openssl/man/mandoc.db
 ```
 
-Check the [file comparison page][1] on GitHub to identify the changes to the
-default configuration.
+Check the [file comparison page][1]{: target="external"} on GitHub to identify
+the changes to the default configuration.
 
 AIDE should report differences in the files the next time it runs. This is
 expected because of the updated configuration.

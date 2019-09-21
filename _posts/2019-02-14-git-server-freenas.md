@@ -24,13 +24,14 @@ to set up a lightweight Git server on your FreeNAS appliance.
 
 ## Creating an iocage jail
 
-FreeNAS uses [iocage][1] to create independent environments isolated from the
-operating system. Such environments are called jails. This post uses a jail to
-host the Git server.
+FreeNAS uses [iocage][1]{: target="external"} to create independent environments
+isolated from the operating system. Such environments are called jails. This
+post uses a jail to host the Git server.
 
 The following steps show how to create an iocage jail and configure an user for
 git operations. Run the following procedure from a session in your FreeNAS
-server. You can use the [FreeNAS shell][0] for this purpose.
+server. You can use the [FreeNAS shell][0]{: target="external"} for this
+purpose.
 
 1. Fetch or update your version of FreeBSD for jail usage:
    ```shell
