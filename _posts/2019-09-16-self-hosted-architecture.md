@@ -78,16 +78,22 @@ can download the software and install it on your own device.
 
 The application server provides the majority of the user-facing services. This
 should be your most powerful server in terms of processing power. It should also
-have multiple hard drives to provide some level of resilience.
+have multiple hard drives to provide plenty of storage for your applications and
+some level of resilience.
 
-The server allows you to host applications using a virtualization or container
-technology. The server also provides storage for the applications hosted on top
-of it.
+The server hosts applications using a virtualization or container technology,
+which allows you to create independent environments isolated from the operating
+system. Hosting the applications in these independent environments improves the
+security of your infrastructure as a whole because it's more difficult that a
+single application has access to the other environments or the operating system.
 
-We use [FreeNAS][2]{: target="external"} as the software of our application
-server. FreeNAS can host applications in *jails*, which is a container
-technology supported on BSD systems. FreeNAS also uses ZFS as the file system,
-which is popular for its redundancy, integrity checking, and snapshot features.
+We chose [FreeNAS][2]{: target="external"} as the software of the application
+server. FreeNAS uses the [iocage][10]{: target="external"} container manager to
+create independent environments isolated from the operating system. Such
+environments are called _jails_.
+
+FreeNAS also uses the [ZFS][11]{: target="external"} file system, which is
+popular for its redundancy, integrity checking, and snapshot features.
 
 ## Network services
 
@@ -276,3 +282,5 @@ Intruder detection
 [7]: https://letsencrypt.org/
 [8]: https://www.yubico.com/products/yubikey-hardware/compare-products-series/
 [9]: /aide-freenas-jail/
+[10]: https://iocage.readthedocs.io/en/latest/
+[11]: https://www.freenas.org/zfs/
