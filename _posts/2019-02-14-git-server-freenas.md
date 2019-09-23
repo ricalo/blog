@@ -22,16 +22,11 @@ A centralized Git server provides multiple benefits, which we explain in the
 [version control system][2] section of our architecture for a self-hosted
 business guide.
 
-You can use a hosting service, such as GitHub, to manage your repositories.
-However, if you're concerned about who has access to your critical business
-data, you should not use such services. Instead, you can host the Git server on
-your own FreeNAS server yourself.
-
 ## Creating an iocage jail
 
 This post hosts the Git server in a jail on the FreeNAS server. To learn more
 about why we use jails to host the applications, check the [Application
-server][3] section in our self-hosted architecture post.
+server][3] section of our self-hosted architecture post.
 
 The following steps show how to create a jail and configure a user for git
 operations. Run the following procedure from a session in your FreeNAS server.
@@ -65,13 +60,9 @@ You can use the [FreeNAS shell][0]{: target="external"} for this purpose.
 
 ## (Optional) Storing the repositories on a ZFS dataset
 
-FreeNAS supports the ZFS filesystem, which offers multiple features—such as redundancy, integrity
-checking, and snapshots—that help ensure that the data stays consistent and
-available.
-
-You can enable the ZFS features on a particular dataset on the filesystem. By
-specifying on which dataset to store the repositories, you have more control
-over what features to use for the data on your Git server.
+You can store the repositories in a specific ZFS dataset on your FreeNAS server.
+To learn about the benefits, check the [Application server][3] section of our
+self-hosted architecture post.
 
 To store the repos in a dataset, run the following commands in a [FreeNAS
 shell][0]{: target="external"} or an SSH session on the FreeNAS server. Make

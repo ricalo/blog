@@ -92,8 +92,12 @@ server. FreeNAS uses the [iocage][10]{: target="external"} container manager to
 create independent environments isolated from the operating system. Such
 environments are called _jails_.
 
-FreeNAS also uses the [ZFS][11]{: target="external"} file system, which is
-popular for its redundancy, integrity checking, and snapshot features.
+FreeNAS supports the [ZFS][11]{: target="external"} filesystem, which offers
+multiple features—such as redundancy, integrity checking, and snapshots—that
+help ensure that the data stays consistent and available. You can enable the ZFS
+features on a particular dataset on the filesystem. By specifying on which
+dataset to store the data, you have more control over what ZFS features to
+use for your applications.
 
 ## Network services
 
@@ -196,22 +200,24 @@ they publish.
 You can host a centralized VCS on your own infrastructure, which offers the
 following benefits:
 
-* Facilitates collaboration between members of the team.
+* Facilitates collaboration between members of the team. They can compare and
+  review different versions of the business artifacts using familiar tools.
 * Keeps one version of the truth for files in the repositories, which you can
   use to make business decisions. For example:
   * Decide what version of the code to use to build your app.
   * Decide what version of a post to publish on your online blog.
 * Allows you to store the data on a server computer in addition to storing the
   data on client computers, such as laptops.
-* Keeps the information critical to your business on your own infrastructure.
+* Keeps the information critical to your business on your own infrastructure, as
+  opposed to the infrastructure of a third-party company, such as GitHub.
 
 **Git** is the most commonly used VCS system. If you have to learn a VCS system,
-it's a good idea to choose git. It's used in small projects and large
+it's a good idea to choose Git. It's used in small projects and large
 organizations around the world.
 
-We chose to install a simple git server because we just needed basic
+We chose to install a simple Git server because we just needed basic
 collaboration and a central source of truth for the state of our artifacts.
-Check our guide on how to [install a lightweight git server on FreeNAS][5].
+Check our guide on how to [install a lightweight Git server on FreeNAS][5].
 
 ## Additional considerations
 
