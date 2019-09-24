@@ -24,9 +24,9 @@ business guide.
 
 ## Preparing the jail
 
-This post hosts the Git server in a jail on the FreeNAS server. To learn more
-about why we use jails to host the applications, check the [Application
-server][3] section of our self-hosted architecture post.
+This instructions in this post host the Git server in a jail on the FreeNAS
+server. To learn more about why we use jails to host the applications, check the
+[Application server][3] section of our self-hosted architecture post.
 
 In this section, you'll perform the following tasks:
 
@@ -35,7 +35,7 @@ In this section, you'll perform the following tasks:
 * Configure a user for Git operations.
 * Install the Git package.
 
-Run the procedures from a session in your FreeNAS server. You can use the
+Run the commands from a session in your FreeNAS server. You can use the
 [FreeNAS shell][0]{: target="external"} for this purpose.
 
 To create a jail:
@@ -99,7 +99,7 @@ package:
    ```shell
    pkg update
    ```
-1. Install the `git` package:
+1. Install the package:
    ```shell
    pkg install --yes git
    ```
