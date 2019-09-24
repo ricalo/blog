@@ -24,7 +24,7 @@ business guide.
 
 ## Preparing the jail
 
-This instructions in this post host the Git server in a jail on the FreeNAS
+The instructions in this post host the Git server in a jail on the FreeNAS
 server. To learn more about why we use jails to host the applications, check the
 [Application server][3] section of our self-hosted architecture post.
 
