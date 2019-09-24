@@ -6,6 +6,7 @@
 .jekyll-metadata
 .~lock.*
 .sass-cache
+.site
 _asset_bundler_cache
 _site
 codekit-config.json
