@@ -33,7 +33,7 @@ In this section, you'll perform the following tasks:
 
 * Create a jail.
 * Configure networking on the jail.
-* Install the Git package.
+* Install the software packages.
 * Register the certificate.
 
 Run the commands from a session in your FreeNAS server. You can use the
@@ -68,11 +68,13 @@ To configure networking on the jail:
 
 Start the jail and open a session to complete the rest of the tasks in this
 section:
+
 ```sh
 iocage console ldapserver
 ```
 
-Once in the jail session, install the required packages:
+Once in the jail session, install the software packages:
+
 ```sh
 pkg install --yes openldap-server
 pkg install --yes openssl
