@@ -23,17 +23,23 @@ open source LDAP server—in a jail on your FreeNAS appliance. This tutorial als
 shows how to configure transport layer security (TLS) using a
 [Let's Encrypt][1]{: target="external"} certificate.
 
-## Prerequisites
-
-To complete this tutorial, you need:
-
-* Name resolution for the ldap server
-* [Let's Encrypt][4]{: target="external"} certificate
-
 ## Preparing the jail
 
-Run the following procedure from a session in your FreeNAS server. You can use
-the [FreeNAS shell][2]{: target="external"} for this purpose.
+The instructions in this post host the OpenLDAP server in a jail on the FreeNAS
+server. To learn more about why we use jails to host the applications, check the
+[Application server][3] section of our self-hosted architecture post.
+
+In this section, you'll perform the following tasks:
+
+* Create a jail.
+* Configure networking on the jail.
+* Install the Git package.
+* Register the certificate.
+
+Run the commands from a session in your FreeNAS server. You can use the
+[FreeNAS shell][2]{: target="external"} for this purpose.
+
+To create a jail:
 
 1. Fetch or update your release of FreeBSD for jail usage:
    ```sh
@@ -44,6 +50,9 @@ the [FreeNAS shell][2]{: target="external"} for this purpose.
    ```sh
    iocage create --name ldapserver --release 11.2-RELEASE
    ```
+
+To configure networking on the jail:
+
 1. Configure the IP address. The following example sets the IP address to
    `192.168.1.123` using a subnet mask of `255.255.255.0` on the `re0`
    interface. The command uses the [CIDR notation][10]{: target="external"},
@@ -56,23 +65,28 @@ the [FreeNAS shell][2]{: target="external"} for this purpose.
    ```sh
    iocage set defaultrouter=192.168.1.1 ldapserver
    ```
-1. Start the jail and open a session:
-    ```sh
-    iocage console ldapserver
-    ```
-1. Once in the jail session, install the required packages:
-   ```sh
-   pkg install --yes openldap-server
-   pkg install --yes openssl
-   pkg install --yes perl5
-   pkg install --yes ca_root_nss
-   ```
-1. Copy the your certificate files to the jail, including the files with the
-   `crt`, `key`, and `fullchain` extensions. Register the certificate with the
-   following command:
-   ```sh
-   c_rehash PATH_TO_CERTIFICATE_FILES
-   ```
+
+Start the jail and open a session to complete the rest of the tasks in this
+section:
+```sh
+iocage console ldapserver
+```
+
+Once in the jail session, install the required packages:
+```sh
+pkg install --yes openldap-server
+pkg install --yes openssl
+pkg install --yes perl5
+pkg install --yes ca_root_nss
+```
+
+Copy the certificate files to the jail, including the files with the `crt`,
+`key`, and `fullchain` extensions. Then, register the certificate with the
+following command:
+
+```sh
+c_rehash PATH_TO_CERTIFICATE_FILES
+```
 
 ## Creating the database definition files
 
