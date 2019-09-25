@@ -169,9 +169,6 @@ of productivity software recommends using it over other alternatives. As you can
 see, your selection of database depends on the application software that uses
 its services.
 
-The productivity and collaboration section lists resources that explain how to
-install MariaDB in a jail on your FreeNAS server.
-
 ### Productivity and collaboration
 
 The productivity software supports collaboration scenarios for your users. The
@@ -179,15 +176,11 @@ most basic scenarios are file and calendar sharing. However, productivity
 software also provides services that the community uses to build other types of
 apps.
 
-We have chosen **Nextcloud** as our productivity and collaboration software. It
-offers synchronization of files across mobile and desktop clients. Your users
-can also keep their calendars on the server and use familiar clients, such as
-Thunderbird, to access them. There are also apps for more advanced scenarios,
-such as password management and online meetings.
-
-For more information about how to install the software, check Samuel Dowling's
-excellent guide on [how to install Nextcloud in a jail][4]{: target="external"},
-which covers how to install the database server.
+We have chosen [Nextcloud][4]{: target="external"} as our productivity and
+collaboration software. It offers synchronization of files across mobile and
+desktop clients. Your users can also keep their calendars on the server and use
+familiar clients, such as Thunderbird, to access them. There are also apps for
+more advanced scenarios, such as password management and online meetings.
 
 ### Version control system
 
@@ -278,11 +271,10 @@ Intruder detection
   configuration for jails hosted on FreeNAS][9] guide.
 
 [overview]: /assets/images/architecture_overview.svg
-[0]: http://bsdadventures.com/harden-freebsd/
 [1]: https://pfsense.org
 [2]: https://freenas.org
 [3]: /ldap-server-freenas/
-[4]: https://www.samueldowling.com/2018/12/08/install-nextcloud-on-freenas-iocage-jail-with-hardened-security/
+[4]: https://nextcloud.com/
 [5]: /git-server-freenas/
 [6]: https://about.gitlab.com/install/
 [7]: https://letsencrypt.org/
