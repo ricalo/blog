@@ -16,6 +16,8 @@ left:
     children:
       - title: Self-hosted architecture
         url: /self-hosted-architecture
+      - title: Install a Minecraft server
+        url: /minecraft-server-freenas/
       - title: Install OpenLDAP server
         url: /openldap-freenas-jail/
       - title: Install a Git server
