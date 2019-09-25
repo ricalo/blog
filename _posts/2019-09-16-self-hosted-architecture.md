@@ -281,7 +281,7 @@ Intruder detection
 [0]: http://bsdadventures.com/harden-freebsd/
 [1]: https://pfsense.org
 [2]: https://freenas.org
-[3]: /openldap-freenas-jail/
+[3]: /openldap-server-freenas/
 [4]: https://www.samueldowling.com/2018/12/08/install-nextcloud-on-freenas-iocage-jail-with-hardened-security/
 [5]: /git-server-freenas/
 [6]: https://about.gitlab.com/install/
