@@ -19,7 +19,7 @@ left:
       - title: Install a Minecraft server
         url: /minecraft-server-freenas/
       - title: Install OpenLDAP server
-        url: /openldap-server-freenas/
+        url: /ldap-server-freenas/
       - title: Install a Git server
         url: /git-server-freenas/
       - title: AIDE configuration for jails
