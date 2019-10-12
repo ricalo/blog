@@ -82,9 +82,9 @@ curl package:
    ```shell
    pkg update
    ```
-1. Install the Open JDK 8 and cURL:
+1. Install the Open JDK 8 and cURL packages:
    ```shell
-   pkg install -y openjdk8 curl
+   pkg install --yes openjdk8 curl
    ```
 
 ## Running the server for the first time

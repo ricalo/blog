@@ -77,10 +77,7 @@ iocage console ldapserver
 Once in the jail session, install the software packages:
 
 ```sh
-pkg install --yes openldap-server
-pkg install --yes openssl
-pkg install --yes perl5
-pkg install --yes ca_root_nss
+pkg install --yes openldap-server openssl perl5 ca_root_nss
 ```
 
 Copy the certificate files to the jail, including the files with the `crt`,
