@@ -229,8 +229,17 @@ On the client computer, create a repository and push a commit to the server:
 You can clone, pull, and push additional commits from clients that have access
 to the server.
 
+If you want a simple dashboard to browse the repositories, check our post on
+[how to install GitWeb on FreeNAS][4]. The following screenshot shows the
+GitWeb interface:
+
+![GitWeb screenshot][screenshot]
+
+
+[screenshot]: /assets/images/gitweb-screenshot.png
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
 [1]: https://iocage.readthedocs.io/en/latest/
 [2]: /self-hosted-architecture/#version-control-system
 [3]: /self-hosted-architecture/#application-server
+[4]: /gitweb-server-frenas/
 [10]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

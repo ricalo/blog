@@ -22,6 +22,8 @@ left:
         url: /ldap-server-freenas/
       - title: Install a Git server
         url: /git-server-freenas/
+      - title: Install GitWeb
+        url: /gitweb-ports-freenas/
       - title: AIDE configuration for jails
         url: /aide-freenas-jail/
   - title: Ubuntu
