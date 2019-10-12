@@ -42,11 +42,12 @@ Run the commands from a session in your FreeNAS server. You can use the
 
 To create a jail:
 
-1. Fetch or update your version of FreeBSD for jail usage:
-   ```shell
+1. Fetch or update the release version of FreeBSD for jail usage:
+   ```sh
    iocage fetch --release 11.2-RELEASE
    ```
-   You can check your current release with the `freebsd-version` command.
+   If the release version of FreeBSD on your system isn't `11.2`, you can check
+   the current version with the `freebsd-version` command and use that instead.
 1. Create a jail named `minecraft`:
    ```shell
    iocage create --name minecraft --release 11.2-RELEASE
