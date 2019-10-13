@@ -65,7 +65,7 @@ rm get-pip.py
 To install Powerline:
 
 ```sh
-~/.local/bin/pip install --user powerline-status
+$HOME/.local/bin/pip install --user powerline-status
 ```
 
 The `--user` flag indicates that pip installs the package following the _user
@@ -74,7 +74,7 @@ current user.
 
 ## Configure Bash
 
-To configure Powerline for bash, add the following lines to your `~/.bashrc`
+To configure Powerline for bash, add the following lines to your `$HOME/.bashrc`
 file:
 
 ```sh
@@ -82,23 +82,23 @@ file:
 export PATH=$PATH:$HOME/.local/bin
 
 # Powerline configuration
-if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
-    ~/.local/bin/powerline-daemon -q
+if [ -f $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
+    $HOME/.local/bin/powerline-daemon -q
     POWERLINE_BASH_CONTINUATION=1
     POWERLINE_BASH_SELECT=1
-    source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+    source $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 fi
 ```
 
 ## (Optional) Configure Vim
 
-To configure Powerline for Vim, add the following lines to your `~/.vimrc` file:
+To configure Powerline for Vim, add the following lines to your `$HOME/.vimrc` file:
 
 ```vim
 set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 ```
 
-Optionally, add the following line to `~/.vimrc` to display the status bar in
+Optionally, add the following line to `$HOME/.vimrc` to display the status bar in
 Vim and make the Powerline status line visible by default:
 
 ```vim
@@ -111,22 +111,23 @@ You can customize what segments appear in Powerline, or even the behavior of
 specific segments. The summarized instructions to customize your Powerline
 installation is the following:
 
-1. Copy the `~/.local/lib/python2.7/site-packages/powerline/config_files/`
-   folder to `~/.config/powerline`:
+1. Copy the `$HOME/.local/lib/python2.7/site-packages/powerline/config_files/`
+   folder to `$HOME/.config/powerline`:
    ```sh
-   mkdir -p ~/.config/powerline
-   cp -R ~/.local/lib/python2.7/site-packages/powerline/config_files/* \
-         ~/.config/powerline/
+   mkdir -p $HOME/.config/powerline
+   cp -R $HOME/.local/lib/python2.7/site-packages/powerline/config_files/* \
+         $HOME/.config/powerline/
    ```
 1. Edit the files there according to your needs. A good starting point is the
-   `~/.config/powerline/config.json` file.
+   `$HOME/.config/powerline/config.json` file.
 1. Reload the Powerline daemon:
    ```sh
    powerline-daemon --kill
    ```
 
-For more information about how to customize your Powerline installation, check
-the [Quick setup guide][0]{: target="external"} in the Powerline documentation.
+You can also create custom Powerline segments that display information tailored
+to your workflow. For more information, check [Creating a custom Powerline
+segment][0].
 
-[0]: https://powerline.readthedocs.io/en/master/configuration.html#quick-guide
 [demo]: /assets/images/powerline-demo.gif
+[0]: /custom-powerline-segment/

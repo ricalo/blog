@@ -30,6 +30,8 @@ left:
     children:
       - title: Install Powerline status line
         url: /install-powerline-ubuntu/
+      - title: Custom Powerline segment
+        url: /custom-powerline-segment/
       - title: Fix Xbox game controller
         url: /fix-xbox-madcatz-ubuntu/
   - title: Misc
