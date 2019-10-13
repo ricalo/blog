@@ -7,12 +7,12 @@ excerpt: >
 date: 2019-10-13
 categories:
 tags:
-  - Powerline
+  - powerline
   - vim
   - bash
   - tmux
-  - Ubuntu
-  - Python
+  - ubuntu
+  - python
 toc: true
 ---
 

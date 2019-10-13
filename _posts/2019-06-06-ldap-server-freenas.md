@@ -7,7 +7,7 @@ excerpt: >
 date: 2019-06-23
 categories:
 tags:
-  - OpenLDAP
+  - openldap
   - iocage
   - jails
   - certificates

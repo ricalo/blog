@@ -10,7 +10,7 @@ categories:
 tags:
   - aide
   - freenas
-  - jail
+  - jails
   - iocage
 ---
 
