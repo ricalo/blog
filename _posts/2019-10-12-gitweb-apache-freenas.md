@@ -1,9 +1,9 @@
 ---
 title: Installing GitWeb on FreeNAS
 excerpt: >
-    Learn how to install the GitWeb interface to browse the repositories in your
-    Git server. Build the Git package from the Ports Collection to install the
-    GitWeb frontend.
+    Learn how to install GitWeb to browse the repositories on your server. Build
+    the Git package from the Ports Collection to install GitWeb on an Apache
+    server.
 date: 2019-10-12
 categories:
 tags:
@@ -16,12 +16,11 @@ tags:
 toc: true
 ---
 
-Learn how to install the [GitWeb][2]{: target="external"} interface to browse
-the repositories in your Git server. Build the Git package from the Ports
-Collection to install the GitWeb frontend.
+Learn how to install [GitWeb][2]{: target="external"} to browse the repositories
+on your server. Build the Git package from the Ports Collection to install
+GitWeb on an Apache server.
 
-The following screenshot shows the GitWeb interface displaying a couple
-repositories:
+The following screenshot shows the GitWeb interface displaying two repositories:
 
 ![GitWeb screenshot][screenshot]
 
@@ -147,9 +146,9 @@ binaries, you need to install Git from the Ports Collection.
    service apache24 onerestart
    ```
 
-## Create the repository root
+## Create the common root directory
 
-The repositories must be stored in a common repository root, which by default is
+The repositories must be stored in a common root directory, which by default is
 located in the `/pub/git` directory. To create the `/pub/git` directory:
 ```shell
 mkdir -p /pub/git
