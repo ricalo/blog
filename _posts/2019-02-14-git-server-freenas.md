@@ -241,5 +241,5 @@ GitWeb interface:
 [1]: https://iocage.readthedocs.io/en/latest/
 [2]: /self-hosted-architecture/#version-control-system
 [3]: /self-hosted-architecture/#application-server
-[4]: /gitweb-server-frenas/
+[4]: /gitweb-apache-frenas/
 [10]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

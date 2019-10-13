@@ -23,7 +23,7 @@ left:
       - title: Install a Git server
         url: /git-server-freenas/
       - title: Install GitWeb
-        url: /gitweb-ports-freenas/
+        url: /gitweb-apache-freenas/
       - title: AIDE configuration for jails
         url: /aide-freenas-jail/
   - title: Ubuntu
