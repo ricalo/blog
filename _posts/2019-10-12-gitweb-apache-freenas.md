@@ -111,9 +111,12 @@ binaries, you need to install Git from the Ports Collection.
    cp -R /usr/local/share/examples/git/gitweb /usr/local/www/gitweb
    ```
 1. In the `/usr/local/etc/apache24/httpd.conf` file:
-   1. Enable the CGI module by uncommenting the `LoadModule` directive in the
-      following snippet:
+   1. Uncomment the `LoadModule` directives to enable the CGI modules by
+      removing the leading **#** character:
       ```xml
+      <IfModule !mpm_prefork_module>
+          #LoadModule cgid_module libexec/apache24/mod_cgid.so
+      </IfModule>
       <IfModule mpm_prefork_module>
           #LoadModule cgi_module libexec/apache24/mod_cgi.so
       </IfModule>
