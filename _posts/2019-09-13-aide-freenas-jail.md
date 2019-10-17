@@ -25,9 +25,10 @@ tasks, such as periodic scrubs. In contrast, we should be notified if the
 software in the jail was updated or if anybody—including us—opened an SSH
 session.
 
-> **Warning:** These constraints work well for our situation, but might not be
-> appropriate for yours. This example configuration is provided as is. You
-> should validate that your configuration is adequate for your purposes.
+**Warning:** These constraints work well for our situation, but might not be
+appropriate for yours. This example configuration is provided as is. You
+should validate that your configuration is adequate for your purposes.
+{: .notice--warning }
 
 To start get AIDE up and running, you can use the Tamper Detection section of
 the [How to harden FreeBSD guide][0]{: target="external"} on the BSD Adventures
