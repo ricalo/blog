@@ -34,9 +34,10 @@ The architecture supports the following requirements of the business:
 * File and calendar sharing
 * Manage code and other business artifacts
 
-> **Note:** In general, we don't recommend hosting your own email service.
-> Managing an email server is complicated, particularly keeping it secure and
-> free of spam.
+**Note:** In general, we don't recommend hosting your own email service.
+Managing an email server is complicated, particularly keeping it secure and free
+of spam.
+{: .notice }
 
 ## Architecture overview
 

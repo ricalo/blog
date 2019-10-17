@@ -25,10 +25,14 @@ displaying _hello_:
 
 ![Custom Powerline segment][screenshot]
 
-The instructions in this post assume that you have installed Powerline and
-copied the configuration files that allow you to customize the installation. To
-meet these prerequisites, follow the instructions in [Installing Powerline on
-Ubuntu Linux][0] including the _Edit your Powerline configuration_ section.
+
+## Prerequisites
+
+This post assumes that you have installed Powerline and copied the configuration
+files needed to customize the installation.  To meet these prerequisites, check
+[Installing Powerline on Ubuntu Linux][0] including the _Edit your Powerline
+configuration_ section.
+
 
 ## Configuring the Python path
 
@@ -99,9 +103,10 @@ Powerline themes. For the purposes of this post, we'll add the custom segment to
 the shell theme. The shell theme is declared in the
 `$HOME/.config/powerline/themes/shell/default.json` file.
 
-> **Note:** These instructions assume that you have copied the Powerline
-> configuration files that allow you to customize your installation. For more
-> information, check [Edit your Powerline configuration][1].
+**Note:** These instructions assume that you have copied the configuration files
+that allow you to customize your Powerline installation. For more information,
+check [Edit your Powerline configuration][1].
+{: .notice }
 
 To add the custom theme to the shell theme, add the following segment
 declaration to the list of segments in the `default.json` file:
