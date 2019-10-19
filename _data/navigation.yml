@@ -10,3 +10,33 @@ main:
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
+
+left:
+  - title: FreeNAS
+    children:
+      - title: 3rd Gen AMD Ryzen build
+        url: /amd-ryzen-freenas/
+      - title: Self-hosted architecture
+        url: /self-hosted-architecture/
+      - title: Install a Minecraft server
+        url: /minecraft-server-freenas/
+      - title: Install OpenLDAP server
+        url: /ldap-server-freenas/
+      - title: Install a Git server
+        url: /git-server-freenas/
+      - title: Install GitWeb
+        url: /gitweb-apache-freenas/
+      - title: AIDE configuration for jails
+        url: /aide-freenas-jail/
+  - title: Ubuntu
+    children:
+      - title: Install Powerline status line
+        url: /install-powerline-ubuntu/
+      - title: Custom Powerline segment
+        url: /custom-powerline-segment/
+      - title: Fix Xbox game controller
+        url: /fix-xbox-madcatz-ubuntu/
+  - title: Misc
+    children:
+      - title: Fix cert error GitLab pages
+        url: /fix-cert-intermediates-gitlab/

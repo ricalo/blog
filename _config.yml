@@ -24,14 +24,14 @@ url                      : "https://devpro.media"
 # baseurl                : the subpath of your site, e.g. "/blog"
 repository               : "devpromedia/site"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+logo                     : /assets/images/code_white_48px.svg
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
-  provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2", "utterances", "custom"
+  provider               : disqus
   disqus:
-    shortname            : # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
+    shortname            : devpromedia
   discourse:
     server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
   facebook:
@@ -62,8 +62,8 @@ staticman:
 reCaptcha:
   siteKey                :
   secret                 :
-atom_feed:
-  path                   : # blank (default) uses feed.xml
+# atom_feed:
+#   path                   : # blank (default) uses feed.xml
 search                   : # true, false (default)
 search_full_content      : # true, false (default)
 search_provider          : # lunr (default), algolia, google
@@ -136,7 +136,7 @@ footer:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      # url:
+      url: https://twitter.com/devpromedia
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url:
@@ -179,6 +179,7 @@ exclude:
   - log
   - node_modules
   - package.json
+  - package-lock.json
   - Rakefile
   - README
   - setenv.sh
@@ -190,6 +191,8 @@ exclude:
   - minimal-mistakes-jekyll.gemspec
   - screenshot-layouts.png
   - screenshot.png
+  - start-server.sh
+  - staticman.yml
 keep_files:
   - .git
   - .svn
@@ -225,7 +228,7 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
+paginate: 10 # amount of posts to show
 paginate_path: /page:num/
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
@@ -295,8 +298,24 @@ defaults:
     values:
       layout: single
       author_profile: false
-      read_time: true
-      comments: false
+      read_time: false
+      comments: true
       share: false
+      sidebar:
+        nav: left
       related: false
       adsense: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: false
+      read_time: false
+      comments: false
+      share: false
+      sidebar:
+        nav: left
+      related: false
+      adsense: false
