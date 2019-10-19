@@ -80,7 +80,8 @@ can download the software and install it on your own device.
 The application server provides the majority of the user-facing services. This
 should be your most powerful server in terms of processing power. It should also
 have multiple hard drives to provide plenty of storage for your applications and
-some level of resilience.
+some level of resilience. For an example, check our [3rd Gen AMD Ryzen
+build][12].
 
 The server hosts applications using a virtualization or container technology,
 which allows you to create independent environments isolated from the operating
@@ -283,3 +284,4 @@ Intruder detection
 [9]: /aide-freenas-jail/
 [10]: https://iocage.readthedocs.io/en/latest/
 [11]: https://www.freenas.org/zfs/
+[12]: /amd-ryzen-freenas/
