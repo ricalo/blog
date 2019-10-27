@@ -111,6 +111,16 @@ and make your own calculations for your needs.
   USB 2.0 drive instead of 3.0 for better compatibility. You can find some good
   options [on Newegg for under $15][8]{: target="external"} a piece.
 
+## No CPU temperatures on FreeNAS 11.2
+
+Our FreeNAS 11.2 U6 installation doesn't report temperatures from the AMD
+processor.
+It looks like support is planned for [FreeNAS 11.3][9]{: target="external"}. For
+more details, check the [relevant issue][10]{: target="external"} on the FreeNAS 
+reporting system.
+
+
+
 [0]: https://www.newegg.com/amd-ryzen-7-3700x/p/N82E16819113567?Description=AMD%20Ryzen%207%203700X&cm_re=AMD_Ryzen_7_3700X-_-19-113-567-_-Product
 [1]: https://www.newegg.com/p/N82E16813157886?Description=ASRock%20X570%20Pro%204%20AM4&cm_re=ASRock_X570_Pro_4_AM4-_-13-157-886-_-Product
 [2]: https://www.newegg.com/kingston-16gb-288-pin-ddr4-sdram/p/1B4-00M4-000U6?Description=Kingston%20KSM26ED8%2f16ME&cm_re=Kingston_KSM26ED8%2f16ME-_-1B4-00M4-000U6-_-Product
@@ -120,3 +130,5 @@ and make your own calculations for your needs.
 [6]: https://www.newegg.com/Desktop-Graphics-Cards/SubCategory/ID-48?name=Desktop%2DGraphics%2DCards&Order=PRICE
 [7]: https://www.westerndigital.com/products/internal-drives/wd-red-hdd
 [8]: https://www.newegg.com/p/pl?d=usb+drive&N=100008022%20601113576%20600082308
+[9]: https://redmine.ixsystems.com/versions/859
+[10]: https://redmine.ixsystems.com/issues/64077
