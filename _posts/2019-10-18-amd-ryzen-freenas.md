@@ -41,6 +41,11 @@ workloads, such as hosting a Nextcloud instance or a [Git server][4]. Rating at
 consumption compared to its 3800X and 3900X siblings, which both rate at 105W
 TDP.
 
+**Note**: TDP is not an indicator of power consumption; it's an indicator of
+heat output. However, lower TDP values amount to lower power consumption in most
+cases.
+{: .notice }
+
 The AMD Ryzen 7 3700X sells for [$329.99 on Newegg][0]{: target="external"} at
 the time of writing this article. A decent cooler is included for this price, so
 you don't need to buy another one.
