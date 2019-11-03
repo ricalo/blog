@@ -4,7 +4,7 @@ excerpt: >
     The Powerline status line provides useful information in your terminal
     prompt. In this post, learn how to create your custom Powerline segment
     using Python.
-date: 2019-10-13
+date: 2019-11-03
 categories:
 tags:
   - powerline
