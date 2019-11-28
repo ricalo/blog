@@ -13,6 +13,8 @@ tags:
   - jails
   - apache
   - ports
+  - openldap
+  - letsencrypt
 toc: true
 ---
 
@@ -313,11 +315,6 @@ LDAP modules and provide your LDAP server parameters:
       LDAP directory.
    * `Require`: Provides the authorization part of the process. In this case,
      `valid-user` accepts any user in the LDAP directory.
-
-
-
-
-
 
 
 [screenshot]: /assets/images/gitweb-screenshot.png
