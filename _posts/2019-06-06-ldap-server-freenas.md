@@ -118,7 +118,7 @@ To create the `slapd.ldif` file:
        * Authenticated users can read all entries.
    * The `olcRootPW` attribute, which contains the hashed password of the
      administrator account. The `slapd.ldif` files uses this attribute twice.
-   * Instances of `ldap.example.org`, which you should replace with the host of
+   * Instances of `ldapserver.example.org`, which you should replace with the host of
      your LDAP server.
    * Instances of `dc=example,dc=org`, which you should replace with your own
      domain components.
@@ -285,11 +285,11 @@ To create the `domain.ldif` file:
 ## Configuring the service startup
 
 Use the `sysrc` command to start the LDAP service when the jail boots. Replace
-`ldap.example.org` with the hostname of your LDAP server.
+`ldapserver.example.org` with the hostname of your LDAP server.
 
 ```sh
 sysrc slapd_enable="YES"
-sysrc slapd_flags='-h "ldapi://%2fvar%2frun%2fopenldap%2fldapi/ ldap://ldap.example.org/"'
+sysrc slapd_flags='-h "ldapi://%2fvar%2frun%2fopenldap%2fldapi/ ldap://ldapserver.example.org/"'
 sysrc slapd_sockets="/var/run/openldap/ldapi"
 sysrc slapd_cn_config="YES"
 ```
@@ -315,17 +315,17 @@ apt install ldap-utils
 The following queries test different aspects of the service:
 * To query the service anonymously:
   ```sh
-  ldapwhoami -H ldap://ldap.example.org -x
+  ldapwhoami -H ldap://ldapserver.example.org -x
   ```
   Expected output: `anonymous`
 * To query the service in the context of a user:
   ```sh
-  ldapwhoami -H ldap://ldap.example.org -x -D "uid=admin@example.org,dc=example,dc=org" -W
+  ldapwhoami -H ldap://ldapserver.example.org -x -D "uid=admin@example.org,dc=example,dc=org" -W
   ```
   Expected output: `dn:uid=admin@example.org,dc=example,dc=org`
 * To query the service using TLS:
   ```sh
-  ldapwhoami -H ldap://ldap.example.org -x -ZZ -D "uid=admin@example.org,dc=example,dc=org" -W
+  ldapwhoami -H ldap://ldapserver.example.org -x -ZZ -D "uid=admin@example.org,dc=example,dc=org" -W
   ```
   Expected output: `dn:uid=admin@example.org,dc=example,dc=org`
 
