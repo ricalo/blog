@@ -189,8 +189,8 @@ the GitWeb interface.
 ## (Optional) Configure access over HTTPS
 
 To configure access over HTTPS, you need an SSL certificate, such as the ones
-provided by [Let's Encrypt][6]. Copy the `crt` and `key` files of your
-certificate to a folder in the jail.
+provided by [Let's Encrypt][6]{: target="external"}. Copy the `crt` and `key`
+files of your certificate to a folder in the jail.
 
 1. In the `/usr/local/etc/apache24/httpd.conf` file:
    * Uncomment the LoadModule directives to enable the SSL and socache_shmcb
