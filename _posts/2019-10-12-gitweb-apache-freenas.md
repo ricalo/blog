@@ -20,7 +20,8 @@ toc: true
 
 Learn how to install [GitWeb][2]{: target="external"} to browse the repositories
 on your server. Build the Git package from the Ports collection to install
-GitWeb on an Apache server.
+GitWeb on an Apache server. Optionally, configure access over HTTPS and LDAP
+authentication.
 
 The following screenshot shows the GitWeb interface displaying two repositories:
 

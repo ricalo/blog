@@ -22,7 +22,9 @@ support services such as file sharing, collaboration, and chat.
 In this tutorial, learn how to install [OpenLDAP][0]{: target="external"}—an
 open source LDAP server—in a jail on your FreeNAS appliance. This tutorial also
 shows how to configure transport layer security (TLS) using a
-[Let's Encrypt][1]{: target="external"} certificate.
+[Let's Encrypt][1]{: target="external"} certificate and how to install
+[phpLDAPadmin][12]{: target="external"} to manage the directory using a web
+browser.
 
 ## Preparing the jail
 
