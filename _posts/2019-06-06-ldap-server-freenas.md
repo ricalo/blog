@@ -11,6 +11,7 @@ tags:
   - iocage
   - jails
   - certificates
+  - apache
 toc: true
 ---
 
@@ -332,6 +333,112 @@ The following queries test different aspects of the service:
 You can add more objects to your LDAP database using the
 [`ldapmodify`][5]{: target="external"} or `ldapadd` commands.
 
+
+## (Optional) Installing phpLDAPadmin
+
+[phpLDAPadmin][11]{: target="external"} is a web-based LDAP client that you can
+use to manage your directory. To use phpLDAPadmin:
+
+Install the required packages and enable the web server:
+
+1. Install the apache24, mod_php73, and phpldapadmin-php73 packages:
+   ```shell
+   pkg install --yes apache24 mod_php73 phpldapadmin-php73
+   ```
+1. Enable the web server at startup:
+   ```
+   sysrc apache24_enable="yes"
+   ```
+
+To configure the web server, update the following entries in the
+`/usr/local/etc/apache24/httpd.conf` file:
+
+1. To configure the web server to process php files using the PHP module, add
+   the following section:
+   ```xml
+   <FilesMatch "\.php$">
+    SetHandler application/x-httpd-php
+   </FilesMatch>
+   <FilesMatch "\.phps$">
+       SetHandler application/x-httpd-php-source
+   </FilesMatch>
+   ```
+1. To configure `index.php` as the resource to look for when clients request an
+   index of the directory, add `index.php` to the `DirectoryIndex` entry:
+   ```xml
+   <IfModule dir_module>
+       DirectoryIndex index.php index.html
+   </IfModule>
+   ```
+   Note that the previous `DirectoryIndex` entry should already exist. Just add
+   `index.php` to the list of files.
+1. Replace `/usr/local/www/apache24/data` in the `DocumentRoot` and `Directory`
+   entries with `/usr/local/www/phpldapadmin/htdocs`:
+   ```xml
+   DocumentRoot "/usr/local/www/apache24/data"
+   <Directory "/usr/local/www/apache24/data">
+   ```
+
+To configure phpLDAPadmin, add the following entries to the
+`/usr/local/www/phpldapadmin/config/config.php` file:
+```php
+$servers->setValue('server','host','ldapserver.example.org');
+$servers->setValue('server','port',389);
+$servers->setValue('server','base',array('dc=example,dc=org'));
+$servers->setValue('login','auth_type','session');
+$servers->setValue('server','tls',true);
+```
+
+To configure access over HTTPS, you need an SSL certificate, such as the ones
+provided by [Let's Encrypt][12]{: target="external"}. Copy the `crt` and `key`
+files of your certificate to a folder in the jail. To configure your
+certificate:
+
+1. In the `/usr/local/etc/apache24/httpd.conf` file:
+   * Uncomment the LoadModule directives to enable the SSL and socache_shmcb
+     modules by removing the leading # character:
+     ```
+     LoadModule ssl_module libexec/apache24/mod_ssl.so
+     LoadModule socache_shmcb_module libexec/apache24/mod_socache_shmcb.so 
+     ```
+   * Uncomment the Include directive to add the SSL configuration file:
+     ```
+     Include etc/apache24/extra/httpd-ssl.conf
+     ```
+1. In the `/usr/local/etc/apache24/extra/httpd-ssl.conf` file.
+   * Replace the DocumentRoot declaration. Replace the following line:
+     ```
+     DocumentRoot "/usr/local/www/apache24/data"
+     ```
+     with
+     ```
+     DocumentRoot "/usr/local/www/phpldapadmin/htdocs"
+     ```
+   * Replace the ServerName declaration. Replace the following line:
+     ```
+     ServerName www.example.org:443
+     ```
+     with the server name that matches your host and the server on the
+     certificate:
+     ```
+     ServerName ldapserver.example.org:443
+     ```
+   * Update the `SSLCertificateFile` and `SSLCertificateKeyFile` entries with
+     the path of the `crt` and `key` files of your certificate:
+     ```
+     SSLCertificateFile "path_to_your_certificate.crt" 
+     SSLCertificateKeyFile "path_to_your_certificate.key"
+     ```
+
+Restart the web server:
+```shell
+service apache24 onerestart
+```
+
+Go to `https://ldapserver.example.org` and sign in with the
+`cn=admin,dc=example,dc=org` username.
+
+
 [0]: https://www.openldap.org/
 [1]: https://letsencrypt.org/
 [2]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
@@ -343,3 +450,5 @@ You can add more objects to your LDAP database using the
 [8]: https://www.pfsense.org
 [9]: https://www.samueldowling.com/2018/12/08/install-nextcloud-on-freenas-iocage-jail-with-hardened-security/
 [10]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+[11]: http://phpldapadmin.sourceforge.net/
+[12]: http://letsencrypt.org
