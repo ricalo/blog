@@ -22,8 +22,10 @@ A Minecraft server allows you to play with friends in the same virtual world.
 The server keeps track of the state of the environment as users join and leave
 the world.
 
-> **Note:** The instructions in this tutorial install **Minecraft: Java Edition
-> server**, which is only compatible with **Minecraft: Java Edition**.
+
+**Note:** The instructions in this tutorial install _Minecraft: Java Edition
+server_, which is only compatible with _Minecraft: Java Edition_.
+{: .notice }
 
 ## Preparing the jail
 

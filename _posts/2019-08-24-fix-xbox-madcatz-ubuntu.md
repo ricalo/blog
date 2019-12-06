@@ -33,6 +33,7 @@ example, our Mad Catz stick works okay in
 autosuspend feature. However, we are still experiencing the issue with the wrong
 mapping of buttons, which is resolved by the workaround explained in
 [Additional steps](#additional-steps).
+{: .notice }
 
 ## Solution
 

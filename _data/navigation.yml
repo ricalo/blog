@@ -14,8 +14,10 @@ main:
 left:
   - title: FreeNAS
     children:
+      - title: 3rd Gen AMD Ryzen build
+        url: /amd-ryzen-freenas/
       - title: Self-hosted architecture
-        url: /self-hosted-architecture
+        url: /self-hosted-architecture/
       - title: Install a Minecraft server
         url: /minecraft-server-freenas/
       - title: Install OpenLDAP server

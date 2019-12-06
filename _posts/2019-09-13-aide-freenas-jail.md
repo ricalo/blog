@@ -25,16 +25,14 @@ tasks, such as periodic scrubs. In contrast, we should be notified if the
 software in the jail was updated or if anybody—including us—opened an SSH
 session.
 
-> **Warning:** These constraints work well for our situation, but might not be
-> appropriate for yours. This example configuration is provided as is. You
-> should validate that your configuration is adequate for your purposes.
+**Warning:** These constraints work well for our situation, but might not be
+appropriate for yours. This example configuration is provided as is. You
+should validate that your configuration is adequate for your purposes.
+{: .notice--warning }
 
-To start get AIDE up and running, you can use the Tamper Detection section of
-the [How to harden FreeBSD guide][0]{: target="external"} on the BSD Adventures
-site.
-
-Then, configure the following entries in the `/usr/local/etc/aide.conf`
-configuration file:
+To start, install and configure AIDE. For more information, check the [project
+website][0]. Then, configure the following entries in the
+`/usr/local/etc/aide.conf` configuration file:
 
 ```
 /dev                L-n
@@ -64,5 +62,5 @@ expected because of the updated configuration.
 AIDE is great at helping detect intruders. However, you should have other
 security measures in place to prevent access to your systems.
 
-[0]: http://bsdadventures.com/harden-freebsd/
+[0]: https://aide.github.io/
 [1]: https://github.com/devpromedia/aide-jail/compare/default-conf...master#diff-f6885697f6edd342d99aa3ae58599904
