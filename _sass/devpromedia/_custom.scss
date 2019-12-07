@@ -1,0 +1,16 @@
+/* ==========================================================================
+   AdSense left navigation slot.
+   ========================================================================== */
+.sidebar {
+  div.adslot-leftnav {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    clear: both;
+    display: none;
+
+    @include breakpoint($large) {
+      display: block;
+    }
+  }
+}
