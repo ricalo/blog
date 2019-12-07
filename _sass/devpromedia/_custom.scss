@@ -1,12 +1,9 @@
 /* ==========================================================================
-   AdSense left navigation slot.
+   Custom classes for DevPro Media.
    ========================================================================== */
 .sidebar {
-  div.adslot-leftnav {
-    text-align: center;
-    width: 100%;
-    height: auto;
-    clear: both;
+  /* If the ad unit is in the left nav on a small screen, do not display it */
+  div.adslot {
     display: none;
 
     @include breakpoint($large) {
@@ -15,7 +12,7 @@
   }
 }
 
-.adslot-top {
+.adslot {
   text-align: center;
   width: 100%;
   height: auto;
