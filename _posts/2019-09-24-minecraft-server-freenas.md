@@ -27,67 +27,9 @@ the world.
 server_, which is only compatible with _Minecraft: Java Edition_.
 {: .notice }
 
-## Preparing the jail
-
-The instructions in this post host the Minecraft server in a jail on the FreeNAS
-server. To learn more about why we use jails to host the applications, check the
-[Application server][3] section of our self-hosted architecture post.
-
-In this section, you'll perform the following tasks:
-
-* Create a jail.
-* Configure networking on the jail.
-* Install the prerequisite packages.
-
-Run the commands from a session in your FreeNAS server. You can use the
-[FreeNAS shell][0]{: target="external"} for this purpose.
-
-To create a jail:
-
-1. Fetch or update the release version of FreeBSD for jail usage:
-   ```sh
-   iocage fetch --release 11.2-RELEASE
-   ```
-   If the release version of FreeBSD on your system isn't `11.2`, you can check
-   the current version with the `freebsd-version` command and use that instead.
-1. Create a jail named `minecraft`:
-   ```shell
-   iocage create --name minecraft --release 11.2-RELEASE
-   ```
-
-To configure networking on the jail:
-
-1. Configure the IP address. The following example sets the IP address to
-   `192.168.1.123` using a subnet mask of `255.255.255.0` on the `re0`
-   interface. The command uses the [CIDR notation][10]{: target="external"},
-   which translates to `192.168.1.123/24`:
-   ```shell
-   iocage set ip4_addr="re0|192.168.1.123/24" minecraft
-   ```
-1. Configure the default router. The following example sets the default router
-   to `192.168.1.1`:
-   ```shell
-   iocage set defaultrouter=192.168.1.1 minecraft
-   ```
-
-Start the jail and open a session to complete the rest of the tasks in this
-section:
-
-```shell
-iocage console minecraft
-```
-
-The instructions require the curl package later in this tutorial. To install the
-curl package:
-
-1. Update the packages in the jail:
-   ```shell
-   pkg update
-   ```
-1. Install the Open JDK 8 and cURL packages:
-   ```shell
-   pkg install --yes openjdk8 curl
-   ```
+{% include devpromedia/create-jail.md
+   jail-name="minecraft"
+   packages="openjdk8 curl" %}
 
 ## Running the server for the first time
 
