@@ -27,68 +27,9 @@ The following screenshot shows the GitWeb interface displaying two repositories:
 
 ![GitWeb screenshot][screenshot]
 
-## Preparing the jail
-
-The instructions in this post host GitWeb in a jail on the FreeNAS server. To
-learn more about why we use jails to host the applications, check the
-[Application server][3] section of our self-hosted architecture post.
-
-In this section, you'll perform the following tasks:
-
-* Create a jail.
-* Configure networking on the jail.
-* Install the prerequisite packages.
-
-Run the commands from a session in your FreeNAS server. You can use the
-[FreeNAS shell][0]{: target="external"} for this purpose.
-
-To create a jail:
-
-1. Fetch or update the release version of FreeBSD for jail usage:
-   ```sh
-   iocage fetch --release 11.2-RELEASE
-   ```
-   If the release version of FreeBSD on your system isn't `11.2`, you can check
-   the current version with the `freebsd-version` command and use that instead.
-1. Create a jail named `gitweb`:
-   ```shell
-   iocage create --name gitweb --release 11.2-RELEASE
-   ```
-
-To configure networking on the jail:
-
-1. Configure the IP address. The following example sets the IP address to
-   `192.168.1.123` using a subnet mask of `255.255.255.0` on the `re0`
-   interface. The command uses the [CIDR notation][10]{: target="external"},
-   which translates to `192.168.1.123/24`:
-   ```shell
-   iocage set ip4_addr="re0|192.168.1.123/24" gitweb
-   ```
-1. Configure the default router. The following example sets the default router
-   to `192.168.1.1`:
-   ```shell
-   iocage set defaultrouter=192.168.1.1 gitweb
-   ```
-
-Start the jail and open a session to complete the rest of the tasks in this
-section:
-
-```shell
-iocage console gitweb
-```
-
-GitWeb requires a web server to work. This post uses Apache to serve the GitWeb
-content. It also uses Portmaster to install the packages from the Ports
-collection. To install the Apache and Portmaster packages:
-
-1. Update the packages in the jail:
-   ```shell
-   pkg update
-   ```
-1. Install the Apache and Portmaster packages:
-   ```shell
-   pkg install --yes apache24 portmaster
-   ```
+{% include devpromedia/create-jail.md
+   jail-name="gitweb"
+   packages="apache24 portmaster" %}
 
 ## Installing GitWeb from Ports
 
@@ -322,9 +263,7 @@ LDAP modules and provide your LDAP server parameters:
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
 [1]: /git-server-freenas/#optional-storing-the-repositories-on-a-zfs-dataset
 [2]: https://git-scm.com/docs/gitweb
-[3]: /self-hosted-architecture/#application-server
 [4]: /git-server-freenas/
 [5]: http://192.168.1.123
 [6]: https://letsencrypt.org/
 [7]: /ldap-server-freenas/
-[10]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
