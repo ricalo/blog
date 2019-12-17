@@ -34,7 +34,7 @@ Finally, copy the certificate files to the jail, including the files with the
 `crt`, `key`, and `fullchain` extensions. Then, register the certificate with
 the following command:
 
-```sh
+```shell
 c_rehash PATH_TO_CERTIFICATE_FILES
 ```
 
@@ -205,30 +205,30 @@ To create the `domain.ldif` file:
 ## Loading the database definition files
 
 1. Stop the sladp service:
-   ```sh
+   ```shell
    service slapd stop
    ```
 1. Delete current configuration database:
-   ```sh
+   ```shell
    rm -rf /usr/local/etc/openldap/slapd.d
    mkdir /usr/local/etc/openldap/slapd.d
    ```
 1. Delete current data folder:
-   ```sh
+   ```shell
    rm -rf /usr/local/etc/openldap/data
    mkdir /usr/local/etc/openldap/data
    ```
 1. Import the `slapd.ldif` file:
-   ```sh
+   ```shell
    /usr/local/sbin/slapadd -n0 -F /usr/local/etc/openldap/slapd.d/ -l slapd.ldif
    ```
 1. Start the service:
-   ```sh
+   ```shell
    /usr/local/libexec/slapd -F /usr/local/etc/openldap/slapd.d/
    ```
 1. Load the base objects of the domain. Replace `cn=admin,dc=example,dc=org`
    with the user ID of your LDAP administrator account.
-   ```sh
+   ```shell
    ldapadd -W -D "cn=admin,dc=example,dc=org" -f domain.ldif
    ```
 
@@ -237,7 +237,7 @@ To create the `domain.ldif` file:
 Use the `sysrc` command to start the LDAP service when the jail boots. Replace
 `ldapserver.example.org` with the hostname of your LDAP server.
 
-```sh
+```shell
 sysrc slapd_enable="YES"
 sysrc slapd_flags='-h "ldapi://%2fvar%2frun%2fopenldap%2fldapi/ ldap://ldapserver.example.org/"'
 sysrc slapd_sockets="/var/run/openldap/ldapi"
@@ -248,7 +248,7 @@ This is a good time to restart the jail. Exit the session and restart the jail
 from the [Jails][3]{: target="external"} page or running the following command
 on the [Shell][2]{: target="external"} page:
 
-```sh
+```shell
 iocage restart ldapserver
 ```
 
@@ -258,23 +258,23 @@ To check that the service is running, you can use a query from a host that has
 the LDAP tools installed. In Debian-based distributions of Linux, such as
 Ubuntu, you can install the LDAP tools with the following command:
 
-```sh
+```shell
 apt install ldap-utils
 ```
 
 The following queries test different aspects of the service:
 * To query the service anonymously:
-  ```sh
+  ```shell
   ldapwhoami -H ldap://ldapserver.example.org -x
   ```
   Expected output: `anonymous`
 * To query the service in the context of a user:
-  ```sh
+  ```shell
   ldapwhoami -H ldap://ldapserver.example.org -x -D "uid=admin@example.org,dc=example,dc=org" -W
   ```
   Expected output: `dn:uid=admin@example.org,dc=example,dc=org`
 * To query the service using TLS:
-  ```sh
+  ```shell
   ldapwhoami -H ldap://ldapserver.example.org -x -ZZ -D "uid=admin@example.org,dc=example,dc=org" -W
   ```
   Expected output: `dn:uid=admin@example.org,dc=example,dc=org`

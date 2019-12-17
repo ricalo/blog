@@ -56,7 +56,7 @@ the default.
 Powerline is available in pip, which is a package manager for Python. To install
 pip:
 
-```sh
+```shell
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py --user
 rm get-pip.py
@@ -64,7 +64,7 @@ rm get-pip.py
 
 To install Powerline:
 
-```sh
+```shell
 $HOME/.local/bin/pip install --user powerline-status
 ```
 
@@ -77,7 +77,7 @@ current user.
 To configure Powerline for bash, add the following lines to your `$HOME/.bashrc`
 file:
 
-```sh
+```shell
 # Add this to your PATH if it’s not already declared
 export PATH=$PATH:$HOME/.local/bin
 
@@ -113,7 +113,7 @@ installation is the following:
 
 1. Copy the `$HOME/.local/lib/python2.7/site-packages/powerline/config_files/`
    folder to `$HOME/.config/powerline`:
-   ```sh
+   ```shell
    mkdir -p $HOME/.config/powerline
    cp -R $HOME/.local/lib/python2.7/site-packages/powerline/config_files/* \
          $HOME/.config/powerline/
@@ -121,7 +121,7 @@ installation is the following:
 1. Edit the files there according to your needs. A good starting point is the
    `$HOME/.config/powerline/config.json` file.
 1. Reload the Powerline daemon:
-   ```sh
+   ```shell
    powerline-daemon --kill
    ```
 

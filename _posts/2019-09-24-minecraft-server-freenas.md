@@ -76,7 +76,7 @@ To accept the Minecraft EULA:
    that you agree with the [Minecraft EULA][4]{: target="external"}, open
    `eula.txt`, and replace `eula=false` with `eula=true`. You can also replace
    the previous text by using the following command:
-   ```sh
+   ```shell
    sed -i .bak 's/eula=false/eula=true/g' /root/minecraft/eula.txt
    ```
 
