@@ -18,6 +18,8 @@ left:
         url: /amd-ryzen-freenas/
       - title: Self-hosted architecture
         url: /self-hosted-architecture/
+      - title: Install a MariaDB server
+        url: /mariadb-server-freenas/
       - title: Install a Minecraft server
         url: /minecraft-server-freenas/
       - title: Install OpenLDAP server
