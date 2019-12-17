@@ -169,7 +169,7 @@ applications that also need a database.
 We use **MariaDB** as the software for our database server because our selection
 of productivity software recommends using it over other alternatives. As you can
 see, your selection of database depends on the application software that uses
-its services.
+its services. Check our guide on how to [install MariaDB on FreeNAS][13].
 
 ### Productivity and collaboration
 
@@ -285,3 +285,4 @@ Intruder detection
 [10]: https://iocage.readthedocs.io/en/latest/
 [11]: https://www.freenas.org/zfs/
 [12]: /amd-ryzen-freenas/
+[13]: /mariadb-server-freenas/
