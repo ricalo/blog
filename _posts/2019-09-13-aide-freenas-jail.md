@@ -14,11 +14,6 @@ tags:
   - iocage
 ---
 
-The Advanced Intrusion Detection Environment (AIDE) system helps verify the
-integrity of files that can be compromised when a host is accessed. Configuring
-AIDE in a jail can be tricky. A configuration that is too strict can lead to
-many false positives, which limits the usefulness of the integrity check.
-
 After much trial and error, we have found a configuration that works for our
 purposes. We didn't want to be alerted by changes caused by regular automated
 tasks, such as periodic scrubs. In contrast, we should be notified if the
@@ -30,9 +25,9 @@ appropriate for yours. This example configuration is provided as is. You
 should validate that your configuration is adequate for your purposes.
 {: .notice--warning }
 
-To start, install and configure AIDE. For more information, check the [project
-website][0]. Then, configure the following entries in the
-`/usr/local/etc/aide.conf` configuration file:
+To start, install and configure Advanced Intrusion Detection Environment (AIDE).
+For more information, check the [project website][0]. Then, configure the
+following entries in the `/usr/local/etc/aide.conf` configuration file:
 
 ```
 /dev                L-n

@@ -3,7 +3,9 @@ title: Xbox 360 controller doesn't work on Ubuntu
 excerpt: >
     Learn how to fix configuration an issue on Ubuntu where the Xbox button of a
     controller keeps blinking and Ubuntu doesn't detect it. Additionally, the
-    `xboxdrv` tool throws a `LIBUSB_ERROR_NOT_FOUND` error.
+    <em>xboxdrv</em> tool throws a <em>LIBUSB_ERROR_NOT_FOUND</em> error. This
+    issue was experienced with the Mad Catz Arcade FightStick KE for the Xbox
+    360 on Ubuntu 18.04.
 date: 2019-08-24
 categories:
 tags:
@@ -11,12 +13,6 @@ tags:
   - madcatz
   - ubuntu
 ---
-
-Learn how to fix configuration an issue on Ubuntu where the *Xbox button* of a
-controller keeps blinking and Ubuntu doesn't detect it. Additionally, the
-`xboxdrv` tool throws a `LIBUSB_ERROR_NOT_FOUND` error. This issue was
-experienced with the Mad Catz Arcade FightStick KE for the Xbox 360 on Ubuntu
-18.04.
 
 Follow these steps to reproduce the error:
 

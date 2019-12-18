@@ -15,9 +15,6 @@ tags:
 toc: true
 ---
 
-Learn how to install a Minecraft server on your FreeNAS server. Configure your
-installation as a service that starts every time the jail starts.
-
 A Minecraft server allows you to play with friends in the same virtual world.
 The server keeps track of the state of the environment as users join and leave
 the world.

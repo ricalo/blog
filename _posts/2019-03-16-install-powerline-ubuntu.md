@@ -15,10 +15,6 @@ tags:
 toc: true
 ---
 
-Learn how to install the Powerline status plugin for Vim, Bash, and tmux on
-Ubuntu Linux. Get useful information on your shell prompt and make your terminal
-look beautiful.
-
 Powerline is a text-based tool that provides useful information in a variety of
 contexts. The following screenshot shows Powerline displaying information about
 a Git repository:

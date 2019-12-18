@@ -3,6 +3,8 @@ title: Installing a MariaDB server on FreeNAS
 excerpt: >
     Learn how to install a MariaDB server on FreeNAS. Configure ZFS datasets to
     store the data and log files and optimize the throuput of your databases.
+    You can configure the server to accept connections locally or from remote
+    hosts over the network.
 date: 2019-12-17
 categories:
 tags:
@@ -12,11 +14,6 @@ tags:
   - zfs
 toc: true
 ---
-
-Learn how to install a MariaDB server on FreeNAS. Configure ZFS datasets to
-store the data and log files and optimize the throuput of your databases. You
-can configure the server to accept connections locally or from remote hosts over
-the network.
 
 
 ## Creating ZFS datasets

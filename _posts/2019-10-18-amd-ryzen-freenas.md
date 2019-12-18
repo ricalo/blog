@@ -14,11 +14,6 @@ tags:
 toc: true
 ---
 
-Check our build based on the AMD Ryzen 7 3700X processor and support for error
-correction code (ECC) memory. We spent $683.96 + tax and shipping for the key
-components. We also have guidelines and suggestions for the additional
-components you'll need to complete your build.
-
 Key components:
 
 * Processor: AMD Ryzen 7 3700X

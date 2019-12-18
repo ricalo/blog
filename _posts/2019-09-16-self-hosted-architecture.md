@@ -21,10 +21,6 @@ tags:
   - raspberry pi
 ---
 
-Learn about a self-hosted architecture that supports services usually required
-in a small business. Use OSS—such as pfSense, FreeNAS, and Nextcloud—to stay in
-control of your data.
-
 ## Business requirements
 
 The architecture supports the following requirements of the business:

@@ -1,8 +1,9 @@
 ---
 title: Certificate misses intermediates error on GitLab Pages
 excerpt: >
-    Learn how to fix the *Certificates misses intermediates* error when you
-    register a Let's Encrypt certificate for your site hosted on GitLab Pages.
+    Learn how to fix the <em>Certificates misses intermediates</em> error when
+    you register a Let's Encrypt certificate for your site hosted on GitLab
+    Pages.
 date: 2019-02-19
 categories:
 tags:
@@ -11,9 +12,6 @@ tags:
   - ssl
   - https
 ---
-
-Learn how to fix the *Certificates misses intermediates* error when you register
-a Let's Encrypt certificate for your site hosted on GitLab Pages.
 
 Follow these steps to reproduce the error:
 

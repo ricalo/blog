@@ -16,9 +16,6 @@ tags:
 toc: true
 ---
 
-The Powerline status line provides useful information in your terminal prompt.
-In this post, learn how to create your custom Powerline segment using Python.
-
 You can create your own Powerline segments that display information tailored to
 your workflow. The following screenshot shows a custom Powerline segment
 displaying _hello_:

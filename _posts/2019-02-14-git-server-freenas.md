@@ -15,9 +15,6 @@ tags:
 toc: true
 ---
 
-Learn how to install a lightweight Git server on your FreeNAS server. Host the
-repositories that contain critical business data on your own infrastructure.
-
 A centralized Git server provides multiple benefits, which we explain in the
 [version control system][2] section of our architecture for a self-hosted
 business guide.
