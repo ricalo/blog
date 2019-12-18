@@ -1,7 +1,7 @@
 /* ==========================================================================
    Custom classes for DevPro Media.
    ========================================================================== */
-.sidebar {
+.sidebar, .sidebar__right {
   /* If the ad unit is in the left nav on a small screen, do not display it */
   div.adslot {
     display: none;
