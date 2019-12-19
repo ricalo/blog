@@ -181,7 +181,7 @@ To create the `domain.ldif` file:
    objectClass: organizationalunit
    ou: users
 
-   dn: uid=user@example.org,ou=users,dc=example,dc=org
+   dn: uid=username,ou=users,dc=example,dc=org
    objectClass: top
    objectClass: posixAccount
    objectClass: shadowAccount
@@ -189,8 +189,8 @@ To create the `domain.ldif` file:
    cn: Example User
    givenName: Example
    sn: User
-   mail: user@example.org
-   uid: user@example.org
+   mail: username@example.org
+   uid: username
    uidNumber: 10001
    gidNumber: 10001
    homeDirectory: /home/user/
@@ -266,14 +266,14 @@ The following queries test different aspects of the service:
   Expected output: `anonymous`
 * To query the service in the context of a user:
   ```shell
-  ldapwhoami -H ldap://ldapserver.example.org -x -D "uid=admin@example.org,dc=example,dc=org" -W
+  ldapwhoami -H ldap://ldapserver.example.org -x -D "uid=username,ou=users,dc=example,dc=org" -W
   ```
-  Expected output: `dn:uid=admin@example.org,dc=example,dc=org`
+  Expected output: `dn:uid=username,ou=users,dc=example,dc=org`
 * To query the service using TLS:
   ```shell
-  ldapwhoami -H ldap://ldapserver.example.org -x -ZZ -D "uid=admin@example.org,dc=example,dc=org" -W
+  ldapwhoami -H ldap://ldapserver.example.org -x -ZZ -D "uid=username,ou=users,dc=example,dc=org" -W
   ```
-  Expected output: `dn:uid=admin@example.org,dc=example,dc=org`
+  Expected output: `dn:uid=username,ou=users,dc=example,dc=org`
 
 You can add more objects to your LDAP database using the
 [`ldapmodify`][5]{: target="external"} or `ldapadd` commands.
