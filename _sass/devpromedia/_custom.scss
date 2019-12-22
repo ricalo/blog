@@ -12,6 +12,15 @@
   }
 }
 
+/* On mobile, adds a top margin to the page navigation to separate it from the
+   ad unit. */
+.sidebar__right {
+  margin-top: 1em;
+  @include breakpoint($large) {
+    margin-top: 0;
+  }
+}
+
 .adslot {
   text-align: center;
   width: 100%;
