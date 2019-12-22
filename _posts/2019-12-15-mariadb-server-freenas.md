@@ -86,8 +86,7 @@ Mount the datasets on the jail:
    ```shell
    iocage stop {{ jail-name }}
    ```
-1. Mount the `repos` dataset on the `repos` folder created in the previous
-   section:
+1. Mount the `data` and `log` datasets on the corresponding folders in the jail:
    ```shell
    iocage fstab {{ jail-name }} --add /tank/data /var/db/mysql/engine/data nullfs rw 0 0
    iocage fstab {{ jail-name }} --add /tank/log  /var/db/mysql/engine/log  nullfs rw 0 0
