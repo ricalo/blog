@@ -13,6 +13,17 @@ tags:
 toc: true
 ---
 
+Use the values in this guide as an example to tune your system. You might need
+to do some research to find your optimal configuration.
+{: .notice--warning }
+
+## Prerequisites
+
+* A MariaDB server, which can be the same as your Nextcloud server or a separate
+  host.
+* To configure access over HTTPS, you need an SSL certificate, such as the ones
+  provided by [Let's Encrypt](https://letsencrypt.org/){: target="external"}.
+
 
 ## Creating ZFS datasets
 
@@ -30,7 +41,7 @@ The previous command creates a dataset named `files` in the `tank` pool.
 {% assign jail-name = "nextcloud" %}
 {% include devpromedia/create-jail.md
    jail-name=jail-name
-   packages="apache24 nextcloud-php73 mod_php73" %}
+   packages="apache24 nextcloud-php73 php73-pecl-imagick" %}
 
 
 Create the folder in the jail where you are going to mount the dataset. Assign
@@ -38,6 +49,7 @@ the `www` user as the owner:
 ```shell
 mkdir -p /usr/local/www/files
 chown -R www:www /usr/local/www/files
+chown -R www:www /usr/local/www/nextcloud
 ```
 
 Close the session in the jail so you can mount the datasets from your FreeNAS
@@ -79,20 +91,25 @@ Once you have the MariaDB server installed, create a user and database:
    ```shell
    mysql -u root -p
    ```
-1. Create a database user named `nextcloud`. Make sure to replace
-   `db-user-password` with a strong password:
+1. Create a database user named `nextcloud`. Make sure to replace `localhost`
+   with the hostname of the Nextcloud server and `db-user-password` with a
+   strong password:
    ```sql
-   CREATE USER 'nextcloud' IDENTIFIED BY 'db-user-password';
+   CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'db-user-password';
    ```
+   If your MariaDB server is [configured with access over TLS][8] you can append
+   `REQUIRE SSL` to the previous command to make sure that the communication
+   between the servers is encrypted.
 1. Create the database:
    ```sql
    CREATE DATABASE nextcloud;
    ```
 1. Grant permissions on the database to the nextcloud user:
    ```sql
-   GRANT ALL ON nextcloud.* TO 'nextcloud';
+   GRANT ALL ON nextcloud.* TO 'nextcloud'@'localhost';
    FLUSH PRIVILEGES;
    ```
+   Make sure to replace `localhost` with the hostname of the Nextcloud server.
 1. Close the database connection:
    ```sql
    exit
@@ -105,176 +122,195 @@ Open a session on the {{ jail-name }} jail:
 iocage console {{ jail-name }}
 ```
 
-Add the following to the `/usr/local/etc/apache24/httpd.conf` file:
-```
-<FilesMatch "\.php$">
-    SetHandler application/x-httpd-php
-</FilesMatch>
-```
 
-```shell
-sysrc apache24_enable=yes
-```
-
-### Configure SSL
-
-Copy the ca, crt and key files of your certificate to a folder in the jail.
-
-Create a file `/usr/local/etc/apache24/Includes/nextcloud.conf`:
-
-```xml
-LoadModule ssl_module libexec/apache24/mod_ssl.so
-LoadModule socache_shmcb_module libexec/apache24/mod_socache_shmcb.so
-Listen 443
-<VirtualHost *:443>
-  DocumentRoot "/usr/local/www/nextcloud"
-  ServerName nextcloud.example.org
-  DirectoryIndex /index.php index.php
-  SSLEngine on
-  SSLCertificateFile      /path/to/certificate.crt
-  SSLCertificateKeyFile   /path/to/certificate.key
-  SSLCertificateChainFile /path/to/certificate.ca
-</VirtualHost>
-```
-
-## Run the wizard
-
-## Configure proxy_fcgi and php-fpm
-
-https://cwiki.apache.org/confluence/display/httpd/php
-
-
-## Follow Nextcloud guidance
-
-The Nextcloud documentation provides great advice on further improving your
-server installation. The following resources are particularly useful at this
-point:
-
-* [Hardening and security guidance][2]{: target="external"}
-* [Server tuning][3]{: target="external"}
-
-
-
-Create the `/var/db/mysql/my.cnf` file with the following contents:
-```yaml
-[mysqld]
-# Uncomment the following line to enable access from remote hosts.
-# bind-address    = 0.0.0.0
-innodb_data_home_dir      = /var/db/mysql/engine/data
-innodb_log_group_home_dir = /var/db/mysql/engine/log
-```
-Uncomment the `bind-address` option to enable access from other hosts in the
-network. Otherwise, connections are only accepted from the jail. If you decide
-to accept connections from other hosts, you should [configure access over
-TLS](#enable-tls).
+1. Copy the `php.ini-production` example file to the `php.ini` file:
+   ```shell
+   cp /usr/local/etc/php.ini-production /usr/local/etc/php.ini
+   ```
+1. Copy the `ca`, `crt`, and `key` files of your certificate to a folder in the
+   jail.
+1. By default, any `.conf` file in the `Includes` folder is added to the Apache
+   configuration. Create the `/usr/local/etc/apache24/Includes/my-conf.conf`
+   with the following contents:
+   ```xml
+   LoadModule proxy_module libexec/apache24/mod_proxy.so
+   LoadModule proxy_fcgi_module libexec/apache24/mod_proxy_fcgi.so
+   LoadModule rewrite_module libexec/apache24/mod_rewrite.so
+   LoadModule socache_shmcb_module libexec/apache24/mod_socache_shmcb.so
+   LoadModule ssl_module libexec/apache24/mod_ssl.so
+   DocumentRoot "/usr/local/www/nextcloud"
+   <Directory "/usr/local/www/nextcloud">
+       Options Indexes FollowSymLinks
+       AllowOverride all
+       Require all granted
+   </Directory>
+   Listen 443
+   <VirtualHost *:80>
+     ServerName nextcloud.example.org
+     Redirect permanent / https://nextcloud.example.org/
+   </VirtualHost>
+   <VirtualHost *:443>
+     DirectoryIndex index.php
+     DocumentRoot "/usr/local/www/nextcloud"
+     Protocols h2 http/1.1
+     ServerName nextcloud.example.org:443
+     SSLEngine on
+     SSLCertificateFile      /path/to/certificate.crt
+     SSLCertificateKeyFile   /path/to/certificate.key
+     SSLCertificateChainFile /path/to/certificate.ca
+     <FilesMatch "\.php$">
+       SetHandler "proxy:fcgi://127.0.0.1:9000/"
+     </FilesMatch>
+     <IfModule mod_headers.c>
+       Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
+     </IfModule>
+   </VirtualHost>
+   ```
+1. Configure the web service startup and restart the web server:
+   ```shell
+   sysrc apache24_enable=yes
+   sysrc php_fpm_enable=yes
+   service php-fpm onestart
+   service apache24 onestart
+   ```
 
 
-Configure the service startup and start the service:
+## Run the installation wizard
 
-```shell
-sysrc mysql_enable=yes
-service mysql-server start
-```
+This is a good time to run the installation wizard since you already configured
+access over HTTPS. Running the installation wizard includes providing a
+password for an admin account, which is transmitted over the network.
 
-Run the script to improve the security of the installation:
-```
-mysql_secure_installation
-```
+To run the wizard, open a browser and go to your server's URL, for example
+`https://nextcloud.example.org`. The following screenshot shows the installation
+wizard:
+
+![nextcloud-setup][screenshot-wizard]
+
+Provide the following information to the wizard and click __Finish setup__.
+
+* Username: The username of the new admin account
+* Password: The password of the new admin account
+* Data folder: `/usr/local/www/files`
+* Database user: `nextcloud`
+* Database password: `db-user-password`
+* Database name: `nextcloud`
+* Database host: The MariaDB server, including the port. For example:
+  `localhost:3306`.
+
+After a few seconds, your browser displays the welcome screen.
+![nextcloud-welcome][screenshot-welcome]
+
+At this time, you should go to __Settings__ > __Administration__ > __Overview__
+to update Nextcloud to the latest version. You might see some warnings about
+further configuration of your server. We cover some of them in the following
+section.
+
+## Further improvements
+
+In this section, we show how to implement some of the improvements described in
+the [Hardening and security guidance][2]{: target="external"} and
+[Server tuning][3]{: target="external"} sections of the Nextcloud documentation.
+
+### Increase PHP memory limit
+
+You might see the following warning in the __Settings__ > __Administration__ >
+__Overview__ page of your server:
+
+> The PHP memory limit is below the recommended value of 512MB.
+
+To increase the memory limit:
+
+1. Update the following line in the `/usr/local/etc/php.ini` file:
+   ```
+   memory_limit = 512M
+   ```
+1. Restart the php-fpm service:
+   ```shell
+   service php-fpm restart
+   ```
+
+After restarting the php-fpm service, the message should disappear from the
+__Overview__ page.
+
+### Give PHP read access to /dev/urandom
+
+Nextcloud uses _urandom_ along with other sources to generate random numbers. To
+provide access to _urandom_:
+
+1. Update the following line in the `/usr/local/etc/php.ini` file:
+   ```
+   open_basedir = /dev/urandom:/usr/local/www/nextcloud/:/usr/local/www/files/:/var/log/nextcloud/:/tmp/
+   ```
+1. Restart the php-fpm and web service:
+   ```shell
+   service php-fpm restart
+   service apache24 restart
+   ```
+
+### Tune PHP-FPM
+
+Per Nextcloud's documentation:
+
+> Each simultaneous request of an element is handled by a separate PHP-FPM
+> process. So even on a small installation you should allow more processes to
+> run.
+
+1. To tune php-fpm, update the following settings in
+   `/usr/local/etc/php-fpm.d/www.conf`:
+   ```
+   pm = dynamic
+   pm.max_children = 120
+   pm.start_servers = 12
+   pm.min_spare_servers = 6
+   pm.max_spare_servers = 18
+   ```
+1. Restart the php-fpm and web service:
+   ```shell
+   service php-fpm restart
+   service apache24 restart
+   ```
+
+Use the values in the previous example as a starting point to tune your system.
+
+### Enable PHP OPcache
+
+The OPcache improves the performance of PHP applications by caching precompiled
+bytecode. To enable the OPcache:
+
+1. Update the following settings in `/usr/local/etc/php.ini`:
+   ```
+   opcache.enable=1
+   opcache.interned_strings_buffer=8
+   opcache.max_accelerated_files=10000
+   opcache.memory_consumption=128
+   opcache.save_comments=1
+   opcache.revalidate_freq=1
+   ```
+1. Restart the php-fpm and web service:
+   ```shell
+   service php-fpm restart
+   service apache24 restart
+   ```
+
+### Using cron to perform background jobs
+
+Nextcloud requires to run background jobs on a regular basis. The jobs can run
+using AJAX, Webcron, or cron. The recommended method is cron. To configure cron
+to run the background jobs:
+
+1. Run the following command to edit the cron jobs for the __www__ user:
+   ```
+   crontab -u www -e
+   ```
+1. In the editor, enter the following line:
+   ```
+   */5  *  *  *  * /usr/local/bin/php -f /var/www/nextcloud/cron.php
+   ```
 
 
-## Testing the installation
-
-To test the installation, open a connection using the following command from
-within the jail:
-```shell
-mysql --user=root --password
-```
-After entering the password of the root user, you should see a message similar
-to the following:
-```
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 12
-Server version: 10.4.10-MariaDB FreeBSD Ports
-
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-```
-
-From the MariaDB prompt, you can list the existing databases:
-```sql
-show databases;
-```
-
-
-## Configuring access over TLS
-{: #enable-tls }
-
-To configure access over TLS, you need an SSL certificate, such as the ones
-provided by [Let’s Encrypt][6]{: target="external"}. Copy the `crt` and `key`
-files of your certificate to a folder in the jail.
-
-Then, configure MariaDB to use the certificate by adding the following entries
-to the `[mysqld]` section of the `/var/db/mysql/my.cnf` file:
-
-```yaml
-[mysqld]
-...
-ssl_cert        = /path/to/certificate.crt
-ssl_key         = /path/to/certificate.key
-tls_version     = TLSv1.2,TLSv1.3
-```
-
-MariaDB provides support for TLS version 1.1 by default. However, it's
-recommended to use TLS version 1.2 and above according to the [PCI Security
-Standards Council][7]{: target="external"}. The `tls_version` option specified
-in the previous example removes support for TLS version 1.1.
-
-
-## Move the ZIL to a low-latency device
-{: #move-zil }
-
-For better write performance, consider moving the ZIL to a low-latency device,
-such as an NVMe drive. If you have a pair of devices, you can use the following
-command to add the devices to the **tank** pool as a mirrored log devices:
-
-```shell
-zpool add tank log mirror nvd0 nvd1
-```
-
-Where `nvd0` and `nvd1` are the low-latency devices.
-
-If you only have one drive, you can add it as a log device with the following
-command:
-```shell
-zpool add tank log nvd0
-```
-
-To confirm that the pool is using the devices, run `zpool status tank` and check
-that the devices are listed in the logs section, as shown in the following
-example:
-
-```shell
-$ zpool status tank
-  pool: tank
- state: ONLINE
-  scan: scrub repaired 0 in 0 days ...
-config:
-
-        NAME        STATE     READ WRITE CKSUM
-        tank        ONLINE       0     0     0
-          mirror-0  ONLINE       0     0     0
-            ada0    ONLINE       0     0     0
-            ada1    ONLINE       0     0     0
-        logs
-          mirror-1  ONLINE       0     0     0
-            nvd0    ONLINE       0     0     0
-            nvd1    ONLINE       0     0     0
-
-errors: No known data errors
-```
-
-
+[screenshot-wizard]: /assets/images/nextcloud-wizard.png
+[screenshot-welcome]: /assets/images/nextcloud-welcome.png
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
 [5]: https://mariadb.com/kb/en/library/innodb-system-variables/#innodb_page_size
 [6]: https://letsencrypt.org/
@@ -282,3 +318,5 @@ errors: No known data errors
 [1]: /mariadb-server-freenas/
 [2]: https://docs.nextcloud.com/server/17/admin_manual/installation/harden_server.html
 [3]: https://docs.nextcloud.com/server/17/admin_manual/installation/server_tuning.html
+[4]: https://cwiki.apache.org/confluence/display/httpd/php
+[8]: /mariadb-server-freenas/#enable-tls
