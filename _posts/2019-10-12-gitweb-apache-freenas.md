@@ -25,7 +25,7 @@ repositories:
 
 {% include devpromedia/create-jail.md
    jail-name="gitweb"
-   packages="apache24 portmaster" %}
+   packages="apache24 mod_php73 portmaster" %}
 
 ## Installing GitWeb from Ports
 
@@ -40,7 +40,7 @@ binaries, you need to install Git from the Ports collection.
    ```shell
    portmaster -m GITWEB="on" /usr/ports/devel/git
    ```
-   Make shows the configuration prompts for the Git package and its
+   The build system shows the configuration prompts for the Git package and its
    dependencies, but the GitWeb option is preselected. Accepting the default
    options work well for most installations.
 
@@ -124,53 +124,13 @@ Otherwise, create a repository to test the installation:
 Open a browser and go to [http://192.168.1.123][5]{: target="external"} to check
 the GitWeb interface.
 
-## (Optional) Configure access over HTTPS
 
-To configure access over HTTPS, you need an SSL certificate, such as the ones
-provided by [Let's Encrypt][6]{: target="external"}. Copy the `crt` and `key`
-files of your certificate to a folder in the jail.
+{% include devpromedia/configure-ssl-apache.md
+   documentroot = "/usr/local/www/gitweb"
+   servername = "gitweb.example.org" %}
 
-1. In the `/usr/local/etc/apache24/httpd.conf` file:
-   * Uncomment the LoadModule directives to enable the SSL and socache_shmcb
-     modules by removing the leading # character:
-     ```
-     LoadModule ssl_module libexec/apache24/mod_ssl.so
-     LoadModule socache_shmcb_module libexec/apache24/mod_socache_shmcb.so 
-     ```
-   * Uncomment the Include directive to add the SSL configuration file:
-     ```
-     Include etc/apache24/extra/httpd-ssl.conf
-     ```
-1. In the `/usr/local/etc/apache24/extra/httpd-ssl.conf` file.
-   * Replace the DocumentRoot declaration. Replace the following line:
-     ```
-     DocumentRoot "/usr/local/www/apache24/data"
-     ```
-     with
-     ```
-     DocumentRoot "/usr/local/www/gitweb"
-     ```
-   * Replace the ServerName declaration. Replace the following line:
-     ```
-     ServerName www.example.org:443
-     ```
-     with the server name that matches your host and the server on the
-     certificate:
-     ```
-     ServerName gitweb.example.org:443
-     ```
-   * Update the `SSLCertificateFile` and `SSLCertificateKeyFile` entries with
-     the path of the `crt` and `key` files of your certificate:
-     ```
-     SSLCertificateFile "path_to_your_certificate.crt" 
-     SSLCertificateKeyFile "path_to_your_certificate.key"
-     ```
-1. Restart the web server:
-   ```shell
-   service apache24 onerestart
-   ```
 
-## (Optional) Configure LDAP authentication
+## Configure LDAP authentication
 
 You can configure Apache to validate the users against an LDAP directory, such
 as OpenLDAP. If you configure authentication using this method, make sure to
@@ -261,5 +221,4 @@ LDAP modules and provide your LDAP server parameters:
 [2]: https://git-scm.com/docs/gitweb
 [4]: /git-server-freenas/
 [5]: http://192.168.1.123
-[6]: https://letsencrypt.org/
 [7]: /ldap-server-freenas/
