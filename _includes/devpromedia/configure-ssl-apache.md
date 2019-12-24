@@ -10,7 +10,7 @@ provided by [Let's Encrypt](https://letsencrypt.org/){: target="external"}.
    jail.
 1. By default, any `.conf` file in the `Includes` folder is added to the Apache
    configuration. Create the `/usr/local/etc/apache24/Includes/my-conf.conf`
-   with the following contents:
+   file with the following contents:
    ```xml
    LoadModule ssl_module libexec/apache24/mod_ssl.so
    LoadModule socache_shmcb_module libexec/apache24/mod_socache_shmcb.so
