@@ -174,11 +174,13 @@ most basic scenarios are file and calendar sharing. However, productivity
 software also provides services that the community uses to build other types of
 apps.
 
-We have chosen [Nextcloud][4]{: target="external"} as our productivity and
-collaboration software. It offers synchronization of files across mobile and
-desktop clients. Your users can also keep their calendars on the server and use
-familiar clients, such as Thunderbird, to access them. There are also apps for
-more advanced scenarios, such as password management and online meetings.
+We have chosen **Nextcloud** as our productivity and collaboration software. It
+offers synchronization of files across mobile and desktop clients. Your users
+can also keep their calendars on the server and use familiar clients, such as
+Thunderbird, to access them. There are also apps for more advanced scenarios,
+such as password management and online meetings.
+
+Check our guide on how to [install Nextcloud on FreeNAS][14].
 
 ### Version control system
 
@@ -282,3 +284,4 @@ Intruder detection
 [11]: https://www.freenas.org/zfs/
 [12]: /amd-ryzen-freenas/
 [13]: /mariadb-server-freenas/
+[14]: /nextcloud-server-freenas/

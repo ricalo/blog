@@ -3,7 +3,7 @@ title: Installing a Nextcloud server on FreeNAS
 excerpt: >
     Learn how to install a Nextcloud server on FreeNAS. Configure ZFS datasets
     to store the files of your users.
-date: 2019-12-21
+date: 2019-12-27
 categories:
 tags:
   - nextcloud
