@@ -18,6 +18,8 @@ left:
         url: /amd-ryzen-freenas/
       - title: Self-hosted architecture
         url: /self-hosted-architecture/
+      - title: Install a Nextcloud server
+        url: /nextcloud-server-freenas/
       - title: Install a MariaDB server
         url: /mariadb-server-freenas/
       - title: Install a Minecraft server
