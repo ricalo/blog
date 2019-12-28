@@ -154,7 +154,7 @@ You must restart the Powerline daemon to apply the changes in the previous
 sections:
 
 ```shell
-powerline-daemon --kill
+powerline-daemon --replace
 ```
 
 After you restart the daemon, the custom Powerline segment appears in your shell

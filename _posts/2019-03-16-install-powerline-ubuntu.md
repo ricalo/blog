@@ -164,7 +164,7 @@ installation is the following:
    `$HOME/.config/powerline/config.json` file.
 1. Reload the Powerline daemon:
    ```shell
-   powerline-daemon --kill
+   powerline-daemon --replace
    ```
 
 The following example shows how to configure Powerline on the shell to behave as
