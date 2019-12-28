@@ -110,12 +110,12 @@ without having to reinstall the package to see the changes.
 To install the package in editable mode:
 
 ```shell
-pip install --editable ./
+pip3 install --editable ./
 ```
 
 To check that the package is installed:
 ```shell
-pip list
+pip3 list
 ```
 
 You should see an entry similar to the following:
