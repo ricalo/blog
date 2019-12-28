@@ -4,7 +4,7 @@ excerpt: >
     Learn how to install the Powerline status plugin for Vim, Bash, and tmux on
     Ubuntu Linux. Get useful information on your shell prompt and make your
     terminal look beautiful.
-date: 2019-09-21
+date: 2019-12-28
 categories:
 tags:
   - powerline
@@ -86,7 +86,7 @@ if [ -f $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerli
 fi
 ```
 
-## (Optional) Configure Vim
+## Configure Vim
 
 To configure Powerline for Vim, add the following lines to your `$HOME/.vimrc` file:
 
@@ -101,7 +101,7 @@ Vim and make the Powerline status line visible by default:
 set laststatus=2
 ```
 
-## (Optional) Edit your Powerline configuration
+## Edit your Powerline configuration
 
 You can customize what segments appear in Powerline, or even the behavior of
 specific segments. The summarized instructions to customize your Powerline
@@ -119,6 +119,37 @@ installation is the following:
 1. Reload the Powerline daemon:
    ```shell
    powerline-daemon --kill
+   ```
+
+The following example shows how to configure Powerline on the shell to behave as
+the animation shown in the introduction of this guide:
+
+1. To show the vcs segment—which displays information about git repositories—on
+   the left side of the shell, replace the **default** theme with the
+   **default_leftonly** theme in the `$HOME/.config/powerline/config.json` file:
+   ```json
+   ···
+   "shell": {
+     "colorscheme": "default",
+     "theme": "default_leftonly",
+     "local_themes": {
+       "continuation": "continuation",
+       "select": "select"
+     }
+   },
+   ···
+   ```
+1. To make the vcs segment display in a different color when the git repository
+   is dirty, add the `status_colors` attribute to the vcs segment in the
+   `$HOME/.config/powerline/themes/shell/default_leftonly.json` file:
+   ```json
+   ···
+   {
+     "function": "powerline.segments.common.vcs.branch",
+     "priority": 40,
+     "args": { "status_colors": true }
+   }
+   ···
    ```
 
 You can also create custom Powerline segments that display information tailored
