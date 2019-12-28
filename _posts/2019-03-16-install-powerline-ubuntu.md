@@ -21,10 +21,16 @@ a Git repository:
 
 ![Powerline demo][demo]
 
+
 ## Install and configure Powerline fonts
 
 To install the Powerline fonts:
 
+1. Install git:
+   ```shell
+   sudo apt update
+   sudo apt install --yes git
+   ```
 1. Clone the Powerline fonts repository to the `fonts` folder in your computer:
    ```shell
    git clone https://github.com/powerline/fonts.git --depth=1 fonts
@@ -33,40 +39,58 @@ To install the Powerline fonts:
    ```shell
    ./fonts/install.sh
    ```
+1. Optionally, you can remove your copy of the fonts repository. This guide
+   doesn't need it anymore:
+   ```shell
+   rm -rf fonts/
+   ```
 
 To configure the fonts in the Ubuntu Terminal app:
 
 1. Open Terminal.
 1. Go to **Edit** > **Preferences**.
-1. In the **Editing Profile** dialog, choose the **General** tab, enable
-   **Custom font**, and click the button to select a font.
+1. In the **Preferences - Profile** dialog, choose the **Text** tab, enable
+   **Custom font**, and click the button right next to it to select a font.
 1. From the **Choose a Terminal Font** dialog, select one of the Powerline
-   fonts, such as **Source Code Pro for Powerline Regular**.
+   fonts, such as _Source Code Pro for Powerline Regular_.
 
-While you are in the **Editing Profile** dialog, check the different color
-schemes in the **Colors** tab. You might find one that works better for you than
-the default.
 
 ## Install pip and Powerline
 
 Powerline is available in pip, which is a package manager for Python. To install
-pip:
+pip and Powerline:
 
+1. Install the curl and distutils packages:
+   ```shell
+   sudo apt update
+   sudo apt install --yes curl python3-distutils
+   ```
+1. Get the pip installer:
 ```shell
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python get-pip.py --user
-rm get-pip.py
 ```
+1. Install pip:
+   ```shell
+   python3 get-pip.py --user
+   ```
+1. Optionally, remove the pip installer:
+   ```shell
+   rm get-pip.py
+   ```
+1. To install Powerline:
+   ```shell
+   ~/.local/bin/pip3 install --user powerline-status
+   ```
+   The `--user` flag indicates that pip installs the package following the _user
+   scheme_. In other words, the package is installed in a location specific to the
+   current user.
 
-To install Powerline:
 
-```shell
-$HOME/.local/bin/pip install --user powerline-status
-```
+You might see the following message in the output of the previous command:
+> ERROR: launchpadlib 1.10.6 requires testresources, which is not installed.
 
-The `--user` flag indicates that pip installs the package following the _user
-scheme_. In other words, the package is installed in a location specific to the
-current user.
+The installation can continue without further issues.
+
 
 ## Configure Bash
 
@@ -78,28 +102,50 @@ file:
 export PATH=$PATH:$HOME/.local/bin
 
 # Powerline configuration
-if [ -f $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
-    $HOME/.local/bin/powerline-daemon -q
-    POWERLINE_BASH_CONTINUATION=1
-    POWERLINE_BASH_SELECT=1
-    source $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+if [ -f $HOME/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh ]; then
+  $HOME/.local/bin/powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  source $HOME/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 fi
 ```
 
+To apply the changes to your current terminal:
+```shell
+source ~/.bashrc
+```
+
+After running the previous command or restarting your terminal, the Powerline
+segments appear in your prompt.
+
+
 ## Configure Vim
 
-To configure Powerline for Vim, add the following lines to your `$HOME/.vimrc` file:
-
-```vim
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+To use Powerline, Vim requires support for Python 3. You can check the features
+included in your installation with the following command:
+```
+vim --version
+```
+Look for the **python3** entry, which must have a plus sign (`+`) next to it to
+indicate that the feature is available. If your version of vim doesn't include
+support for Python 3, you can install the latest vim package, which at the time
+of this writing includes support for Python 3:
+```shell
+sudo apt update
+sudo apt install --yes vim
 ```
 
-Optionally, add the following line to `$HOME/.vimrc` to display the status bar in
-Vim and make the Powerline status line visible by default:
+To configure Powerline for Vim, add the following lines to your `$HOME/.vimrc`
+file:
 
 ```vim
+set rtp+=$HOME/.local/lib/python3.6/site-packages/powerline/bindings/vim/
 set laststatus=2
 ```
+
+The `laststatus` setting displays the status bar in Vim and makes Powerline
+visible by default.
+
 
 ## Edit your Powerline configuration
 
@@ -107,11 +153,11 @@ You can customize what segments appear in Powerline, or even the behavior of
 specific segments. The summarized instructions to customize your Powerline
 installation is the following:
 
-1. Copy the `$HOME/.local/lib/python2.7/site-packages/powerline/config_files/`
+1. Copy the `$HOME/.local/lib/python3.6/site-packages/powerline/config_files/`
    folder to `$HOME/.config/powerline`:
    ```shell
    mkdir -p $HOME/.config/powerline
-   cp -R $HOME/.local/lib/python2.7/site-packages/powerline/config_files/* \
+   cp -R $HOME/.local/lib/python3.6/site-packages/powerline/config_files/* \
          $HOME/.config/powerline/
    ```
 1. Edit the files there according to your needs. A good starting point is the
