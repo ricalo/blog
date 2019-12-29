@@ -1,6 +1,6 @@
 {% assign jail-name = include.jail-name %}
 {% assign freebsd-release = include.freebsd-release | default: "11.3-RELEASE" %}
-{% assign ip4_addr = include.ip4_addr | default: "re0|192.168.1.123/24" %}
+{% assign ip4_addr = include.ip4_addr | default: "em0|192.168.1.123/24" %}
 {% assign defaultrouter = include.defaultrouter | default: "192.168.1.1" %}
 {% assign packages = include.packages %}
 
