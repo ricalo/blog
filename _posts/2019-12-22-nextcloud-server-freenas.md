@@ -127,6 +127,8 @@ iocage console {{ jail-name }}
    ```shell
    cp /usr/local/etc/php.ini-production /usr/local/etc/php.ini
    ```
+   Update the `date.timezone` setting in the php.ini file to an appropriate
+   value from the [List of supported timezones][9]{: target="external"}.
 1. Copy the `ca`, `crt`, and `key` files of your certificate to a folder in the
    jail.
 1. By default, any `.conf` file in the `Includes` folder is added to the Apache
@@ -140,9 +142,9 @@ iocage console {{ jail-name }}
    LoadModule ssl_module libexec/apache24/mod_ssl.so
    DocumentRoot "/usr/local/www/nextcloud"
    <Directory "/usr/local/www/nextcloud">
-       Options Indexes FollowSymLinks
-       AllowOverride all
-       Require all granted
+     Options Indexes FollowSymLinks
+     AllowOverride all
+     Require all granted
    </Directory>
    Listen 443
    <VirtualHost *:80>
@@ -166,6 +168,20 @@ iocage console {{ jail-name }}
      </IfModule>
    </VirtualHost>
    ```
+1. Add environment variables for php-fpm by uncommenting the following lines in
+   the `/usr/local/etc/php-fpm.d/www.conf` file:
+   ```php
+   env[HOSTNAME] = $HOST
+   env[HOST] = $HOST
+   env[PATH] = /usr/local/bin:/usr/bin:/bin
+   env[TMP] = /tmp
+   env[TMPDIR] = /tmp
+   env[TEMP] = /tmp
+   ```
+   Verify that you're using the right variable for the `HOSTNAME` entry. In our
+   environment, the `HOSTNAME` variable doesn't exist by default. For this
+   reason, we assigned the `HOSTNAME` variable in the file to the `HOST`
+   environment variable.
 1. Configure the web service startup and restart the web server:
    ```shell
    sysrc apache24_enable=yes
@@ -232,6 +248,20 @@ To increase the memory limit:
 
 After restarting the php-fpm service, the message should disappear from the
 __Overview__ page.
+
+### Increase maximum upload size
+
+To increase the maximum upload size:
+
+1. Update the following lines in the `/usr/local/etc/php.ini` file:
+   ```
+   post_max_size       = 2G
+   upload_max_filesize = 2G
+   ```
+1. Restart the php-fpm service:
+   ```shell
+   service php-fpm restart
+   ```
 
 ### Give PHP read access to /dev/urandom
 
@@ -320,3 +350,4 @@ to run the background jobs:
 [3]: https://docs.nextcloud.com/server/17/admin_manual/installation/server_tuning.html
 [4]: https://cwiki.apache.org/confluence/display/httpd/php
 [8]: /mariadb-server-freenas/#enable-tls
+[9]: https://www.php.net/manual/en/timezones.php
