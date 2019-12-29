@@ -21,6 +21,10 @@ a Git repository:
 
 ![Powerline demo][demo]
 
+**Note:** We also have a guide that shows how to install Powerline on
+[Windows 10][1].
+{: .notice }
+
 
 ## Install and configure Powerline fonts
 
@@ -65,3 +69,4 @@ To configure the fonts in the Ubuntu Terminal app:
 
 
 [demo]: /assets/images/powerline-demo.gif
+[1]: /install-powerline-windows/
