@@ -34,8 +34,10 @@ left:
         url: /aide-freenas-jail/
   - title: Ubuntu
     children:
-      - title: Install Powerline status line
+      - title: Install Powerline on Linux
         url: /install-powerline-ubuntu/
+      - title: Install Powerline on WSL
+        url: /install-powerline-windows/
       - title: Custom Powerline segment
         url: /custom-powerline-segment/
       - title: Fix Xbox game controller
