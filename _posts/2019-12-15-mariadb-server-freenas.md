@@ -23,49 +23,29 @@ server, which can provide some performance benefits. For example, you can create
 a dataset with a record size of 16 kilobytes, which matches the [default page
 size][5]{: target="external"} used in MariaDB.
 
-In this guide, you create datasets for the corresponding `datadir`,
-`innodb_data_home_dir`, and `innodb_log_group_home_dir` properties of MariaDB.
-To create the datasets, run the following commands in a [FreeNAS
-shell][0]{: target="external"}:
+In this guide, you create datasets for the corresponding `innodb_data_home_dir`,
+`innodb_log_group_home_dir`, and `datadir` properties of MariaDB.  To create the
+datasets, run the following commands in a
+[FreeNAS shell][0]{: target="external"}:
 
-1. Create a dataset named `innodb_data` in the `tank` pool:
+1. Create the `tank/innodb_data` dataset:
    ```shell
    zfs create tank/innodb_data
-   ```
-1. Set the following properties on the `innodb_data` dataset:
-   * atime: `off`
-   * compression: `off`
-   * primarycache: `metadata`
-   * recordsize: `16K`
-   ```shell
    zfs set atime=off tank/innodb_data
    zfs set compression=off tank/innodb_data
    zfs set primarycache=metadata tank/innodb_data
    zfs set recordsize=16K tank/innodb_data
    ```
-1. Create a dataset named `innodb_log` in the `tank` pool:
+1. Create the `tank/innodb_log` dataset:
    ```shell
    zfs create tank/innodb_log
-   ```
-1. Set the following properties on the `innodb_log` dataset:
-   * atime: `off`
-   * compression: `off`
-   * primarycache: `metadata`
-   ```shell
    zfs set atime=off tank/innodb_log
    zfs set compression=off tank/innodb_log
    zfs set primarycache=metadata tank/innodb_log
    ```
-1. Create a dataset named `datadir` in the `tank` pool:
+1. Create the `tank/datadir` dataset:
    ```shell
    zfs create tank/datadir
-   ```
-1. Set the following properties on the `datadir` dataset:
-   * atime: `off`
-   * compression: `off`
-   * primarycache: `metadata`
-   * recordsize: `16K`
-   ```shell
    zfs set atime=off tank/datadir
    zfs set compression=off tank/datadir
    zfs set primarycache=metadata tank/datadir
@@ -111,7 +91,7 @@ Mount the datasets on the jail:
    ```shell
    iocage fstab {{ jail-name }} --add /tank/innodb_data /var/db/mysql/innodb_data nullfs rw 0 0
    iocage fstab {{ jail-name }} --add /tank/innodb_log  /var/db/mysql/innodb_log  nullfs rw 0 0
-   iocage fstab {{ jail-name }} --add /tank/datadir  /var/db/mysql/datadir  nullfs rw 0 0
+   iocage fstab {{ jail-name }} --add /tank/datadir     /var/db/mysql/datadir     nullfs rw 0 0
    ```
 1. Restart the jail:
    ```shell
@@ -191,10 +171,11 @@ to the `[mysqld]` section of the `/var/db/mysql/my.cnf` file:
 
 ```yaml
 [mysqld]
-...
+···
 ssl_cert        = /path/to/certificate.crt
 ssl_key         = /path/to/certificate.key
 tls_version     = TLSv1.2,TLSv1.3
+···
 ```
 
 MariaDB provides support for TLS version 1.1 by default. However, it's
