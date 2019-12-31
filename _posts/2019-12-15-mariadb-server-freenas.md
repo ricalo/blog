@@ -18,17 +18,19 @@ toc: true
 
 ## Creating ZFS datasets
 
-You can store the data and log files in specific ZFS datasets on your FreeNAS
+You can store the database files in specific ZFS datasets on your FreeNAS
 server, which can provide some performance benefits. For example, you can create
 a dataset with a record size of 16 kilobytes, which matches the [default page
 size][5]{: target="external"} used in MariaDB.
 
+In this guide, you create datasets for the corresponding `datadir`,
+`innodb_data_home_dir`, and `innodb_log_group_home_dir` properties of MariaDB.
 To create the datasets, run the following commands in a [FreeNAS
 shell][0]{: target="external"}:
 
-1. Create a dataset named `data` in the `tank` pool:
+1. Create a dataset named `innodb_data` in the `tank` pool:
    ```shell
-   zfs create tank/data
+   zfs create tank/innodb_data
    ```
 1. Set the following properties on the data dataset:
    * atime: `off`
@@ -36,23 +38,38 @@ shell][0]{: target="external"}:
    * primarycache: `metadata`
    * recordsize: `16K`
    ```shell
-   zfs set atime=off tank/data
-   zfs set compression=off tank/data
-   zfs set primarycache=metadata tank/data
-   zfs set recordsize=16K tank/data
+   zfs set atime=off tank/innodb_data
+   zfs set compression=off tank/innodb_data
+   zfs set primarycache=metadata tank/innodb_data
+   zfs set recordsize=16K tank/innodb_data
    ```
-1. Create a dataset named `logs` in the `tank` pool:
+1. Create a dataset named `innodb_log` in the `tank` pool:
    ```shell
-   zfs create tank/log
+   zfs create tank/innodb_log
    ```
 1. Set the following properties on the data dataset:
    * atime: `off`
    * compression: `off`
    * primarycache: `metadata`
    ```shell
-   zfs set atime=off tank/log
-   zfs set compression=off tank/log
-   zfs set primarycache=metadata tank/log
+   zfs set atime=off tank/innodb_log
+   zfs set compression=off tank/innodb_log
+   zfs set primarycache=metadata tank/innodb_log
+   ```
+1. Create a dataset named `datadir` in the `tank` pool:
+   ```shell
+   zfs create tank/datadir
+   ```
+1. Set the following properties on the data dataset:
+   * atime: `off`
+   * compression: `off`
+   * primarycache: `metadata`
+   * recordsize: `16K`
+   ```shell
+   zfs set atime=off tank/datadir
+   zfs set compression=off tank/datadir
+   zfs set primarycache=metadata tank/datadir
+   zfs set recordsize=16K tank/datadir
    ```
 
 Note that these are the settings that we recommend for good balance of
@@ -66,12 +83,16 @@ a low-latency SSD.
    jail-name=jail-name
    packages="mariadb104-server" %}
 
-Create folders in the jail where you are going to mount the data and log
-datasets. Assign the `mysql` user as the owner:
+Create folders in the jail where you are going to mount the datasets. Assign the
+`mysql` user as the owner:
 ```shell
-mkdir -p /var/db/mysql/engine/data
-mkdir -p /var/db/mysql/engine/log
-chown -R mysql:mysql /var/db/mysql/engine
+mkdir -p /var/db/mysql/innodb_data
+mkdir -p /var/db/mysql/innodb_log
+mkdir -p /var/db/mysql/datadir
+
+chown -R mysql:mysql /var/db/mysql/innodb_data
+chown -R mysql:mysql /var/db/mysql/innodb_log
+chown -R mysql:mysql /var/db/mysql/datadir
 ```
 
 Close the session in the jail so you can mount the datasets from your FreeNAS
@@ -88,8 +109,9 @@ Mount the datasets on the jail:
    ```
 1. Mount the `data` and `log` datasets on the corresponding folders in the jail:
    ```shell
-   iocage fstab {{ jail-name }} --add /tank/data /var/db/mysql/engine/data nullfs rw 0 0
-   iocage fstab {{ jail-name }} --add /tank/log  /var/db/mysql/engine/log  nullfs rw 0 0
+   iocage fstab {{ jail-name }} --add /tank/innodb_data /var/db/mysql/innodb_data nullfs rw 0 0
+   iocage fstab {{ jail-name }} --add /tank/innodb_log  /var/db/mysql/innodb_log  nullfs rw 0 0
+   iocage fstab {{ jail-name }} --add /tank/datadir  /var/db/mysql/datadir  nullfs rw 0 0
    ```
 1. Restart the jail:
    ```shell
@@ -109,8 +131,9 @@ Create the `/var/db/mysql/my.cnf` file with the following contents:
 [mysqld]
 # Uncomment the following line to enable access from remote hosts.
 # bind-address    = 0.0.0.0
-innodb_data_home_dir      = /var/db/mysql/engine/data
-innodb_log_group_home_dir = /var/db/mysql/engine/log
+innodb_data_home_dir      = /var/db/mysql/innodb_data
+innodb_log_group_home_dir = /var/db/mysql/innodb_log
+datadir                   = /var/db/mysql/datadir
 ```
 Uncomment the `bind-address` option to enable access from other hosts in the
 network. Otherwise, connections are only accepted from the jail. If you decide
