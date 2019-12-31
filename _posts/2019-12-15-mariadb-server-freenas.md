@@ -32,7 +32,7 @@ shell][0]{: target="external"}:
    ```shell
    zfs create tank/innodb_data
    ```
-1. Set the following properties on the data dataset:
+1. Set the following properties on the `innodb_data` dataset:
    * atime: `off`
    * compression: `off`
    * primarycache: `metadata`
@@ -47,7 +47,7 @@ shell][0]{: target="external"}:
    ```shell
    zfs create tank/innodb_log
    ```
-1. Set the following properties on the data dataset:
+1. Set the following properties on the `innodb_log` dataset:
    * atime: `off`
    * compression: `off`
    * primarycache: `metadata`
@@ -60,7 +60,7 @@ shell][0]{: target="external"}:
    ```shell
    zfs create tank/datadir
    ```
-1. Set the following properties on the data dataset:
+1. Set the following properties on the `datadir` dataset:
    * atime: `off`
    * compression: `off`
    * primarycache: `metadata`
