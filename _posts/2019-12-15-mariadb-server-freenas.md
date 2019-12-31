@@ -114,6 +114,7 @@ Create the `/var/db/mysql/my.cnf` file with the following contents:
 innodb_data_home_dir      = /var/db/mysql/innodb_data
 innodb_log_group_home_dir = /var/db/mysql/innodb_log
 datadir                   = /var/db/mysql/datadir
+skip-innodb_doublewrite
 ```
 Uncomment the `bind-address` option to enable access from other hosts in the
 network. Otherwise, connections are only accepted from the jail. If you decide
