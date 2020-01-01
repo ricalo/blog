@@ -106,7 +106,8 @@ Open a session on the jail:
 iocage console {{ jail-name }}
 ```
 
-Create the `/var/db/mysql/my.cnf` file with the following contents:
+Create the `/var/db/mysql/my.cnf` file, which should at least declare the
+following options:
 ```yaml
 [mysqld]
 # Uncomment the following line to enable access from remote hosts.
