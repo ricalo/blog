@@ -4,11 +4,11 @@ You can customize what segments appear in Powerline, or even the behavior of
 specific segments. The summarized instructions to customize your Powerline
 installation is the following:
 
-1. Copy the `$HOME/.local/lib/python3.6/site-packages/powerline/config_files/`
-   folder to `$HOME/.config/powerline`:
+1. Copy the `/usr/share/powerline/config_files/` folder to
+   `$HOME/.config/powerline`:
    ```shell
    mkdir -p $HOME/.config/powerline
-   cp -R $HOME/.local/lib/python3.6/site-packages/powerline/config_files/* \
+   cp -R /usr/share/powerline/config_files/* \
          $HOME/.config/powerline/
    ```
 1. Edit the files there according to your needs. A good starting point is the
@@ -19,7 +19,7 @@ installation is the following:
    ```
 
 The following example shows how to configure Powerline on the shell to behave as
-the animation shown in the introduction of this guide:
+the image shown in the introduction of this guide:
 
 1. To show the vcs segment—which displays information about git repositories—on
    the left side of the shell, replace the **default** theme with the
