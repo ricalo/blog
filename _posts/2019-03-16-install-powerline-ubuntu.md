@@ -26,7 +26,18 @@ a Git repository:
 {: .notice }
 
 
-## Install and configure Powerline fonts
+{% include devpromedia/install-apt-powerline.md %}
+
+{% include devpromedia/configure-powerline-bash.md %}
+
+{% include devpromedia/configure-powerline-vim.md %}
+
+{% include devpromedia/configure-powerline-tmux.md %}
+
+{% include devpromedia/edit-powerline-configuration.md %}
+
+
+## Manually install Powerline fonts
 
 To install the Powerline fonts:
 
@@ -60,12 +71,6 @@ To configure the fonts in the Ubuntu Terminal app:
 
 
 {% include devpromedia/install-pip-powerline.md %}
-
-{% include devpromedia/configure-powerline-bash.md %}
-
-{% include devpromedia/configure-powerline-vim.md %}
-
-{% include devpromedia/edit-powerline-configuration.md %}
 
 
 [demo]: /assets/images/powerline-demo.gif

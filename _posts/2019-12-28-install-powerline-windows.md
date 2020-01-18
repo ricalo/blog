@@ -61,14 +61,19 @@ To configure the fonts:
    for Powerline_.
 1. Click **OK**.
 
+Run the rest of this tutorial from within the Ubuntu app.
 
-{% include devpromedia/install-pip-powerline.md %}
+{% include devpromedia/install-apt-powerline.md %}
 
 {% include devpromedia/configure-powerline-bash.md %}
 
 {% include devpromedia/configure-powerline-vim.md %}
 
+{% include devpromedia/configure-powerline-tmux.md %}
+
 {% include devpromedia/edit-powerline-configuration.md %}
+
+{% include devpromedia/install-pip-powerline.md %}
 
 
 [demo]: /assets/images/powerline-wsl.png
