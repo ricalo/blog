@@ -69,6 +69,8 @@ Run the rest of this tutorial from within the Ubuntu app.
 
 {% include devpromedia/configure-powerline-vim.md %}
 
+{% include devpromedia/configure-powerline-tmux.md %}
+
 {% include devpromedia/edit-powerline-configuration.md %}
 
 {% include devpromedia/install-pip-powerline.md %}

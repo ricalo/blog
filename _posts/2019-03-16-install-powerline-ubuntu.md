@@ -32,6 +32,8 @@ a Git repository:
 
 {% include devpromedia/configure-powerline-vim.md %}
 
+{% include devpromedia/configure-powerline-tmux.md %}
+
 {% include devpromedia/edit-powerline-configuration.md %}
 
 
