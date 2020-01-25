@@ -16,10 +16,18 @@ toc: true
 ---
 
 Powerline is a text-based tool that provides useful information in a variety of
-contexts. The following screenshot shows Powerline displaying information about
+contexts. The following screencast shows Powerline displaying information about
 a Git repository:
 
-![Powerline demo][demo]
+<asciinema-player
+    src="/assets/powerline-demo.cast"
+    rows="11"
+    font-size="medium"
+    idle-time-limit="1"
+    speed="1.5"
+    title="Powerline demo"
+    autoplay="true" >
+</asciinema-player>
 
 **Note:** We also have a guide that shows how to install Powerline on
 [Windows 10][1].
