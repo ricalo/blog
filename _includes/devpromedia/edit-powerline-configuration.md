@@ -19,7 +19,7 @@ installation is the following:
    ```
 
 The following example shows how to configure Powerline on the shell to behave as
-the image shown in the introduction of this guide:
+the demo shown in the introduction of this guide:
 
 1. To show the vcs segment—which displays information about git repositories—on
    the left side of the shell, replace the **default** theme with the

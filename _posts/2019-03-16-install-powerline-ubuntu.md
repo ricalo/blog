@@ -16,7 +16,7 @@ toc: true
 ---
 
 Powerline is a text-based tool that provides useful information in a variety of
-contexts. The following screencast shows Powerline displaying information about
+contexts. The following demo shows Powerline displaying information about
 a Git repository:
 
 <asciinema-player
