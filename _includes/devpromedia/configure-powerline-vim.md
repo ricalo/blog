@@ -20,11 +20,13 @@ To configure Powerline for Vim, add the following lines to your `$HOME/.vimrc`
 file:
 
 ```vim
-{% if powerline-root %}
+{% if powerline-root -%}
 set rtp+={{ powerline-root }}/bindings/vim/
-{% else %}python3 from powerline.vim import setup as powerline_setup
+{%- else -%}
+python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
-python3 del powerline_setup{% endif %}
+python3 del powerline_setup
+{%- endif %}
 
 set laststatus=2
 ```
