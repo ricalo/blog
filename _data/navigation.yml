@@ -36,6 +36,8 @@ left:
     children:
       - title: Install Powerline on Linux
         url: /install-powerline-ubuntu/
+      - title: Install Powerline on venv
+        url: /install-powerline-virtualenv/
       - title: Install Powerline on WSL
         url: /install-powerline-windows/
       - title: Custom Powerline segment

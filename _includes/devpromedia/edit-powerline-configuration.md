@@ -1,14 +1,16 @@
+{% assign powerline-root = include.powerline-root | default: "/usr/share/powerline" %}
+
 ## Edit your Powerline configuration
 
 You can customize what segments appear in Powerline, or even the behavior of
 specific segments. The summarized instructions to customize your Powerline
 installation is the following:
 
-1. Copy the `/usr/share/powerline/config_files/` folder to
+1. Copy the `{{ powerline-root }}/config_files/` folder to
    `$HOME/.config/powerline`:
    ```shell
    mkdir -p $HOME/.config/powerline
-   cp -R /usr/share/powerline/config_files/* \
+   cp -R {{ powerline-root }}/config_files/* \
          $HOME/.config/powerline/
    ```
 1. Edit the files there according to your needs. A good starting point is the
