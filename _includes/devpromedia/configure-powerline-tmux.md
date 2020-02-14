@@ -1,10 +1,12 @@
+{% assign powerline-root = include.powerline-root | default: "/usr/share/powerline" %}
+
 ## Configure tmux
 
 To configure Powerline in tmux, add the following to your `~/.tmux.conf` file:
 
 ```shell
 set -g default-terminal "screen-256color"
-source "/usr/share/powerline/bindings/tmux/powerline.conf"
+source "{{ powerline-root }}/bindings/tmux/powerline.conf"
 ```
 
 You must set the correct value for your terminal using the `default-terminal`

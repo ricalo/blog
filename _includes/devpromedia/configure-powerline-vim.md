@@ -1,3 +1,5 @@
+{% assign powerline-root = include.powerline-root %}
+
 ## Configure Vim
 
 To use Powerline, Vim requires support for Python 3. You can check the features
@@ -18,10 +20,11 @@ To configure Powerline for Vim, add the following lines to your `$HOME/.vimrc`
 file:
 
 ```vim
-set rtp+=/usr/share/vim/addons/plugin/
-python3 from powerline.vim import setup as powerline_setup
+{% if powerline-root %}
+set rtp+={{ powerline-root }}/bindings/vim/
+{% else %}python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
-python3 del powerline_setup
+python3 del powerline_setup{% endif %}
 
 set laststatus=2
 ```

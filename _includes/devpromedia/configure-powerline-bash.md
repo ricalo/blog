@@ -1,3 +1,5 @@
+{% assign powerline-root = include.powerline-root | default: "/usr/share/powerline" %}
+
 ## Configure Bash
 
 To configure Powerline for bash, add the following lines to your `$HOME/.bashrc`
@@ -5,11 +7,11 @@ file:
 
 ```shell
 # Powerline configuration
-if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
+if [ -f {{ powerline-root }}/bindings/bash/powerline.sh ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
-  source /usr/share/powerline/bindings/bash/powerline.sh
+  source {{ powerline-root }}/binding/bash/powerline.sh
 fi
 ```
 
