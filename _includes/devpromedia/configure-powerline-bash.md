@@ -11,7 +11,7 @@ if [ -f {{ powerline-root }}/bindings/bash/powerline.sh ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
-  source {{ powerline-root }}/binding/bash/powerline.sh
+  source {{ powerline-root }}/bindings/bash/powerline.sh
 fi
 ```
 
