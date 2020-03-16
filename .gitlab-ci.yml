@@ -24,9 +24,7 @@ sanitize:
   stage: test
   script:
     - "! grep -rnw ./_test -e $NO_BUNNY_ALLOWED || exit 1"
-    - "! grep -rnw ./_test -e $NO_CHINO_ALLOWED || exit 1"
     - "! git log | grep -e $NO_BUNNY_ALLOWED || exit 1"
-    - "! git log | grep -e $NO_CHINO_ALLOWED || exit 1"
   dependencies:
     - jekyll_build
 
