@@ -1,9 +1,9 @@
 ---
 title: Installing a Git server on FreeNAS
 excerpt: >
-    Learn how to install a lightweight Git server on your FreeNAS server.  Host
-    the repositories that contain critical business data on your own
-    infrastructure.
+    Learn how to install a lightweight Git server on your FreeNAS server. Use
+    the Git server to keep track of changes to important business artifacts and
+    collaborate with others.
 date: 2019-09-20
 categories:
 tags:

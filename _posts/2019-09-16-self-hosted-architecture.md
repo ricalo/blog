@@ -2,8 +2,7 @@
 title: An architecture for a self-hosted business
 excerpt: >
     Learn about a self-hosted architecture that supports services usually
-    required in a small business. Use OSS—such as pfSense, FreeNAS, and
-    Nextcloud—to stay in control of your data.
+    required in a small business or home office.
 date: 2019-09-21
 teaser: /assets/images/architecture_overview.svg
 toc: true
@@ -14,7 +13,6 @@ tags:
   - architecture
   - home office
   - small business
-  - nextcloud
   - openldap
   - mariadb
   - git
@@ -27,7 +25,6 @@ The architecture supports the following requirements of the business:
 
 * Access the data from the internal and external network
 * Register users
-* File and calendar sharing
 * Manage code and other business artifacts
 
 **Note:** In general, we don't recommend hosting your own email service.
@@ -124,7 +121,6 @@ following entries in your internal DNS:
 * `ldap.home.example.org` for your directory services
 * `sql.home.example.org` for your database
 * `vcs.home.example.org` for your version control system
-* `productivity.home.example.org` for your productivity and collaboration system
 
 ### Reverse proxy
 
@@ -136,10 +132,9 @@ internet and sends them to the right server in your internal network.
 ## Application layer
 
 The software that support the business services is hosted in jails in the
-application server. We only use open source software (OSS) because of its
-transparency—OSS is much less likely to use tracking and surveillance tactics on
-you. The OSS community is also great at providing guidance on how to install the
-software and providing solutions to the issues that you might run into.
+application server. We use open source software (OSS) because of its community.
+The OSS community is great at providing guidance on how to install the software
+and suggesting solutions to the issues that you might run into.
 
 ### Directory services
 
@@ -153,9 +148,9 @@ on how to [install OpenLDAP in a jail on your FreeNAS server][3].
 ### Database
 
 The database software supports other applications that need to store structured
-data. For example, the productivity software below requires a database. Your end
-users most likely won't use the database server directly, unless they are
-developing apps that need a database themselves.
+data. For example, the VCS software below requires a database. Your end users
+most likely won't use the database server directly, unless they are developing
+apps that need a database themselves.
 
 Some applications come with a prepackaged database server. In this case, you
 don't need to consider a separate server. However, installing a separate
@@ -163,24 +158,9 @@ database server allows you to fine tune your configuration and plan for future
 applications that also need a database.
 
 We use **MariaDB** as the software for our database server because our selection
-of productivity software recommends using it over other alternatives. As you can
-see, your selection of database depends on the application software that uses
-its services. Check our guide on how to [install MariaDB on FreeNAS][13].
-
-### Productivity and collaboration
-
-The productivity software supports collaboration scenarios for your users. The
-most basic scenarios are file and calendar sharing. However, productivity
-software also provides services that the community uses to build other types of
-apps.
-
-We have chosen **Nextcloud** as our productivity and collaboration software. It
-offers synchronization of files across mobile and desktop clients. Your users
-can also keep their calendars on the server and use familiar clients, such as
-Thunderbird, to access them. There are also apps for more advanced scenarios,
-such as password management and online meetings.
-
-Check our guide on how to [install Nextcloud on FreeNAS][14].
+of VCS software works well with it. As you can see, your selection of database
+depends on the application software that uses its services. Check our guide on
+how to [install MariaDB on FreeNAS][13].
 
 ### Version control system
 
@@ -190,8 +170,7 @@ source code. However, businesses in other industries can use it as well. For
 example, an online magazine or blog can use a VCS system to manage the articles
 they publish.
 
-You can host a centralized VCS on your own infrastructure, which offers the
-following benefits:
+You can host a centralized VCS, which offers the following benefits:
 
 * Facilitates collaboration between members of the team. They can compare and
   review different versions of the business artifacts using familiar tools.
@@ -201,20 +180,21 @@ following benefits:
   * Decide what version of a post to publish on your online blog.
 * Allows you to store the data on a server computer in addition to storing the
   data on client computers, such as laptops.
-* Keeps the information critical to your business on your own infrastructure, as
-  opposed to the infrastructure of a third-party company, such as GitHub.
 
 **Git** is the most commonly used VCS system. If you have to learn a VCS system,
 it's a good idea to choose Git. It's used in small projects and large
 organizations around the world.
 
-We chose to install a simple Git server because we just needed basic
+Initially, we chose to install a simple Git server because we just needed basic
 collaboration and a central source of truth for the state of our artifacts.
 Check our guide on how to [install a lightweight Git server on FreeNAS][5].
+However, as our requirements evolve, we're looking into other solutions that
+provide better collaboration features, such as [Gitea][15]{: target="external"}.
 
 ## Additional considerations
 
-Consider the following items when planning your self-hosted environment:
+Consider the following additional items when planning your self-hosted
+environment:
 
 Internet service provider
 : The architecture assumes you have an ISP that allows the communication
@@ -285,3 +265,4 @@ Intruder detection
 [12]: /amd-ryzen-freenas/
 [13]: /mariadb-server-freenas/
 [14]: /nextcloud-server-freenas/
+[15]: https://gitea.io/
