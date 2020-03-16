@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "dark" # "default", "air", "aqua", "contrast", "dark"
 locale                   : "en-US"
 title                    : "DevPro Media"
 title_separator          : "-"
-name                     : "DevPro Media"
+name                     : Ricardo Loo Foronda
 description              : "DevPro Media website."
 url                      : "https://devpro.media"
 # baseurl                : the subpath of your site, e.g. "/blog"
@@ -134,9 +134,12 @@ analytics:
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: https://twitter.com/devpromedia
+    - label: Twitter
+      icon : "fab fa-fw fa-twitter-square"
+      url  : https://twitter.com/ricalo
+    - label: Website
+      icon : "fas fa-fw fa-link"
+      url  : https://ricalo.com
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url:
@@ -304,7 +307,7 @@ defaults:
       sidebar:
         nav: left
       related: false
-      adsense: true
+      adsense: false
   # _pages
   - scope:
       path: ""
