@@ -194,7 +194,7 @@ exclude:
   - minimal-mistakes-jekyll.gemspec
   - screenshot-layouts.png
   - screenshot.png
-  - start-server.sh
+  - start-server
   - staticman.yml
 keep_files:
   - .git
