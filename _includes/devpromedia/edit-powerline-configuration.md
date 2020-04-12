@@ -1,8 +1,8 @@
 ## Edit your Powerline configuration
 
 You can customize what segments appear in Powerline, or even the behavior of
-specific segments. The summarized instructions to customize your Powerline
-installation is the following:
+specific segments. Follow these instructions to customize your Powerline
+installation:
 
 1. Copy the `/usr/share/powerline/config_files/` folder to
    `$HOME/.config/powerline`:
