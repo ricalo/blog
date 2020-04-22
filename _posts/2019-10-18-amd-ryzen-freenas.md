@@ -105,8 +105,15 @@ and make your own calculations for your needs.
   semimodular PSU gives enough flexibility to connect different cable lengths to
   reach all the hard drives in your build.
 * Hard drives: Some vendors offer drives that are best suited for NAS systems.
-  The [WD Red][7]{: target="external"} series of drives have the right
-  combination of size, features, and price for our systems.
+  ~~The WD Red series of drives have the right combination of size, features, and
+  price for our systems.~~
+
+  **Warning:** There's some controversy regarding the SMR technology used in
+  some of the hard drives mentioned in this article. For more information, see
+  the [On WD Red NAS Drives][11]{: target="external"} post and some opinions on
+  the [Reddit community][12]{: target="external"}.
+  {: .notice--warning }
+
 * USB stick: It's recommended to install FreeNAS on a 16 GiB USB drive. Use a
   USB 2.0 drive instead of 3.0 for better compatibility. You can find some good
   options [on Newegg for under $15][8]{: target="external"} a piece.
@@ -132,3 +139,5 @@ reporting system.
 [8]: https://www.newegg.com/p/pl?d=usb+drive&N=100008022%20601113576%20600082308
 [9]: https://redmine.ixsystems.com/versions/859
 [10]: https://redmine.ixsystems.com/issues/64077
+[11]: https://blog.westerndigital.com/wd-red-nas-drives/
+[12]: https://www.reddit.com/r/DataHoarder/comments/g5fs7j/on_wd_red_nas_drives_western_digital_corporate/
