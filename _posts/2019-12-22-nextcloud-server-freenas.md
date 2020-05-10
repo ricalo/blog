@@ -339,6 +339,37 @@ to run the background jobs:
    ```
 
 
+## Upgrade Nextcloud from the command line
+
+The web-based updater might fail if you have enough data to make the upgrade
+operations time out. For example, the **Create Backup** operation fails with a
+gateway timeout message.
+
+If you're running into timeout issues when upgrading your Nextcloud
+installation, you can try upgrading from the command line:
+
+1. Install PHP Phar to be able to run the command line updater:
+   ```shell
+   pkg install php73-phar
+   ```
+1. Run the command line updater:
+   ```shell
+   su -m www -c 'php /usr/local/www/nextcloud/updater/updater.phar'
+   ```
+   The updater can turns maintenance mode on at the beginning of the process and
+   asks you if you want to leave it on at the end. Keep maintenance mode on to
+   run other manual steps.
+1. Some operations—such as adding missing indices—are not executed during the
+   normal upgrade process. For more information, see
+   [Manual steps during upgrade][10]. To add missing indices:
+   ```shell
+   su -m www -c 'php /usr/local/www/nextcloud/occ db:add-missing-indices'
+   ```
+1. Disable maintenance mode:
+   ```shell
+   su -m www -c 'php /usr/local/www/nextcloud/occ maintenance:mode --off'
+   ```
+
 [screenshot-wizard]: /assets/images/nextcloud-wizard.png
 [screenshot-welcome]: /assets/images/nextcloud-welcome.png
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
@@ -351,3 +382,4 @@ to run the background jobs:
 [4]: https://cwiki.apache.org/confluence/display/httpd/php
 [8]: /mariadb-server-freenas/#enable-tls
 [9]: https://www.php.net/manual/en/timezones.php
+[10]: https://docs.nextcloud.com/server/18/admin_manual/maintenance/upgrade.html#manual-steps-during-upgrade
