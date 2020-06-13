@@ -6,7 +6,7 @@
 
 ## Preparing the jail
 
-The instructions in this post host the app server in a jail on FreeNAS. To learn
+The instructions in this post host the app server in a jail on FreeBSD. To learn
 why we use jails for this purpose, check the
 [Application server](/self-hosted-architecture/#application-server) section of
 our self-hosted architecture post.
@@ -17,8 +17,7 @@ In this section, you'll perform the following tasks:
 * Configure networking on the jail.
 * Install the prerequisite packages.
 
-Run the commands from a session in your FreeNAS server. You can use the
-[FreeNAS shell](https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html){: target="external"} for this purpose.
+Run the commands from a session in your FreeBSD host.
 
 To create a jail:
 

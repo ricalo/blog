@@ -26,10 +26,8 @@ left:
         url: /minecraft-server-freenas/
       - title: Install OpenLDAP server
         url: /ldap-server-freenas/
-      - title: Install a Git server
-        url: /git-server-freenas/
-      - title: Install GitWeb
-        url: /gitweb-apache-freenas/
+      - title: Install a Gitea server
+        url: /gitea-server-freebsd/
       - title: AIDE configuration for jails
         url: /aide-freenas-jail/
   - title: Ubuntu
