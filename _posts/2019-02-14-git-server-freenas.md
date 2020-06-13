@@ -15,6 +15,10 @@ tags:
 toc: true
 ---
 
+Note: I recently moved my Git server to Gitea. To learn how to install Gitea,
+see [Installing a Gitea server on FreeBSD][5].
+{: .notice }
+
 A centralized Git server provides multiple benefits, which we explain in the
 [version control system][2] section of our architecture for a self-hosted
 business guide.
@@ -176,4 +180,5 @@ GitWeb interface:
 [2]: /self-hosted-architecture/#version-control-system
 [3]: /self-hosted-architecture/#application-server
 [4]: /gitweb-apache-freenas/
+[5]: /gitea-server-freebsd/
 [10]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

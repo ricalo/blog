@@ -18,6 +18,10 @@ tags:
 toc: true
 ---
 
+Note: I recently moved my Git server to Gitea. To learn how to install Gitea,
+see [Installing a Gitea server on FreeBSD][6].
+{: .notice }
+
 The following screenshot shows [GitWeb][2]{: target="external"} displaying two
 repositories:
 
@@ -221,4 +225,5 @@ LDAP modules and provide your LDAP server parameters:
 [2]: https://git-scm.com/docs/gitweb
 [4]: /git-server-freenas/
 [5]: http://192.168.1.123
+[6]: /gitea-server-freebsd/
 [7]: /ldap-server-freenas/
