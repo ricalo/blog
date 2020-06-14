@@ -93,9 +93,10 @@ Once you have the MariaDB server installed, create a user and database:
    If your MariaDB server is [configured with access over TLS][8] you can append
    `REQUIRE SSL` to the previous command to make sure that the communication
    between the servers is encrypted.
-1. Create the database:
+1. Create the database with the `utf8mb4` character set and `unicode_ci`
+   collation:
    ```sql
-   CREATE DATABASE gitea;
+   CREATE DATABASE gitea CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
    ```
 1. Grant permissions to the user on the database:
    ```sql
