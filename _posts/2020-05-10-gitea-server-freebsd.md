@@ -35,7 +35,7 @@ The previous command creates a dataset named `repositories` in the `tank` pool.
 {% assign jail-name = "gitea" %}
 {% include devpromedia/create-jail.md
    jail-name=jail-name
-   packages="ca_root_nss openssl gitea" %}
+   packages="ca_root_nss git openssl gitea" %}
 
 
 Create the folder in the jail where you are going to mount the dataset. Assign
