@@ -141,8 +141,9 @@ Your client joins the game and the server displays the following output:
 ```
 
 You have successfully installed a Minecraft server on FreeNAS. However, the
-server is running in an interactive session on the jail. The next section
-explains how to run the server without an interactive session.
+server is running in an interactive session on the jail, which means that the
+server stops if you close your shell. The next section explains how to run the
+server without an interactive session.
 
 ## Configuring the server as a daemon service
 
