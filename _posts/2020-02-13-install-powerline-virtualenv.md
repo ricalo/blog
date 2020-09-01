@@ -84,7 +84,7 @@ To configure the fonts in the Ubuntu Terminal app:
    ```
 1. Install _Powerline_:
    ```shell
-   pip install powerline
+   pip install powerline-status
    ```
 
 
