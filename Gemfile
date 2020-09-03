@@ -6,3 +6,4 @@ group :jekyll_plugins do
 end
 
 gem 'faraday', '~> 0'
+gem 'kramdown-parser-gfm'
