@@ -200,9 +200,9 @@ To configure the service:
            echo "$name already running."
        else
            echo "Starting $name..."
+           cd "$minecraftd_user_dir"
            /usr/sbin/daemon -f -p $pidfile \
-               /usr/local/bin/java -Duser.dir=$minecraftd_user_dir \
-               $minecraftd_java_opts \
+               /usr/local/bin/java $minecraftd_java_opts \
                -jar $minecraftd_jar_path nogui
            echo "$name started."
        fi
