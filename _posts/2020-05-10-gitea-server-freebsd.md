@@ -11,6 +11,10 @@ tags:
   - jails
   - zfs
 toc: true
+product: myproduct2
+compress_html:
+  ignore:
+    envs: production
 ---
 
 ## Prerequisites
@@ -71,7 +75,7 @@ Mount the datasets on the jail:
 
 Gitea requires a database server, you can use MySQL / MariaDB, PostgreSQL,
 MSSQL, or SQLite. This guide uses a MariaDB server to host the database. For
-information on how to install a MariaDB server, check
+information on how to install a MariaDB server, see
 [Installing a MariaDB server on FreeNAS][1].
 
 Once you have the MariaDB server installed, create a user and database:
