@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://devpro.media/fix-cert-intermediates-gitlab/</loc>
+<lastmod>2019-02-19T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/ldap-server-freenas/</loc>
+<lastmod>2019-06-23T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/fix-xbox-madcatz-ubuntu/</loc>
+<lastmod>2019-08-24T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/aide-freenas-jail/</loc>
+<lastmod>2019-09-13T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/git-server-freenas/</loc>
+<lastmod>2019-09-20T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/self-hosted-architecture/</loc>
+<lastmod>2019-09-21T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/minecraft-server-freenas/</loc>
+<lastmod>2019-09-24T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/gitweb-apache-freenas/</loc>
+<lastmod>2019-10-12T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/amd-ryzen-freenas/</loc>
+<lastmod>2019-10-18T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/custom-powerline-segment/</loc>
+<lastmod>2019-11-03T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/mariadb-server-freenas/</loc>
+<lastmod>2019-12-17T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/nextcloud-server-freenas/</loc>
+  <PageMap xmlns="http://www.google.com/schemas/sitemap-pagemap/1.0">
+    <DataObject type="taxonomy">
+      <Attribute name="product">myproduct1</Attribute>
+    </DataObject>
+  </PageMap>
+<lastmod>2020-09-11T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/install-powerline-ubuntu/</loc>
+<lastmod>2019-12-28T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/install-powerline-windows/</loc>
+<lastmod>2019-12-28T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/install-powerline-virtualenv/</loc>
+<lastmod>2019-12-28T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/gitea-server-freebsd/</loc>
+<lastmod>2020-06-12T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://devpro.media/categories/</loc>
+</url>
+<url>
+<loc>https://devpro.media/community/</loc>
+</url>
+<url>
+<loc>https://devpro.media/</loc>
+</url>
+<url>
+<loc>https://devpro.media/tags/</loc>
+</url>
+<url>
+<loc>https://devpro.media/page2/</loc>
+</url>
+</urlset>
