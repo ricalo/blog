@@ -11,6 +11,10 @@ tags:
   - jails
   - zfs
 toc: true
+product: myproduct2
+compress_html:
+  ignore:
+    envs: production
 ---
 
 ## Prerequisites
