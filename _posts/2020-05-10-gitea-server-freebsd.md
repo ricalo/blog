@@ -22,7 +22,7 @@ compress_html:
 * A MariaDB server, which can be the same as your Gitea server or a separate
   host.
 * You need an SSL certificate—such as the ones from
-  [Let's Encrypt](https://letsencrypt.org/){: target= "external"}—to configure
+  [Let's Encrypt](https://letsencrypt.org/){: target="external"}—to configure
   access over HTTPS.
 
 ## Creating ZFS datasets
