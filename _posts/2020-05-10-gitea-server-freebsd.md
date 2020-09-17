@@ -21,9 +21,9 @@ compress_html:
 
 * A MariaDB server, which can be the same as your Gitea server or a separate
   host.
-* To configure access over HTTPS, you need an SSL certificate, such as the ones
-  provided by [Let's Encrypt](https://letsencrypt.org/){: target="external"}.
-
+* You need an SSL certificate—such as the ones from
+  [Let's Encrypt](https://letsencrypt.org/){: target= "external"}—to configure
+  access over HTTPS.
 
 ## Creating ZFS datasets
 
@@ -214,4 +214,4 @@ iocage console {{ jail-name }}
    service gitea onestart
    ```
 
-Browse to **https://your_domain** and you should see the Gitea welcome page.
+Go to **https://your_domain** to see the welcome page of your Gitea server.
