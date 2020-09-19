@@ -169,6 +169,7 @@ exclude:
   - .bundle
   - .jekyll-assets-cache
   - .sass-cache
+  - .tmuxp.yaml
   - assets/js/plugins
   - assets/js/_main.js
   - assets/js/vendor

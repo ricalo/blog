@@ -1,11 +1,11 @@
 session_name: devpro
 start_directory: ./
 windows:
-  - layout: main-vertical
-    panes:
+- layout: main-vertical
+  options:
+    other-pane-width: 80
+  panes:
+  - focus: true
+    shell_command:
     - vi
-    - shell_command:
-      - tmux setw main-pane-width 140
-      - tmux selectl main-vertical
-      - clear
-      - ./start-server
+  - ./start-server
