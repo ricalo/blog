@@ -76,6 +76,6 @@ Run the rest of this tutorial from within the Ubuntu app.
 {% include devpromedia/install-pip-powerline.md %}
 
 
-[demo]: /assets/images/powerline-wsl.png
+[demo]: /blog/assets/images/powerline-wsl.png
 [0]: https://wiki.ubuntu.com/WSL
-[1]: /install-powerline-ubuntu/
+[1]: /blog/install-powerline-ubuntu/

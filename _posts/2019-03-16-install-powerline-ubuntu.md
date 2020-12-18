@@ -20,7 +20,7 @@ contexts. The following demo shows Powerline displaying information about
 a Git repository:
 
 <asciinema-player
-    src="/assets/powerline-demo.cast"
+    src="{{ site.baseurl }}/assets/powerline-demo.cast"
     rows="11"
     font-size="medium"
     idle-time-limit="1"
@@ -45,5 +45,5 @@ a Git repository:
 {% include devpromedia/edit-powerline-configuration.md %}
 
 
-[0]: /install-powerline-virtualenv/
-[1]: /install-powerline-windows/
+[0]: /blog/install-powerline-virtualenv/
+[1]: /blog/install-powerline-windows/

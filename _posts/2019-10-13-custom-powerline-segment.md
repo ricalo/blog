@@ -162,6 +162,6 @@ when the prompt refreshed. You can keep making changes to the `CustomSegment`
 class and the changes apply immediately.
 
 
-[screenshot]: /assets/images/custom-powerline-screenshot.png
-[0]: /install-powerline-ubuntu/
-[1]: /install-powerline-ubuntu/#optional-edit-your-powerline-configuration
+[screenshot]: /blog/assets/images/custom-powerline-screenshot.png
+[0]: /blog/install-powerline-ubuntu/
+[1]: /blog/install-powerline-ubuntu/#optional-edit-your-powerline-configuration

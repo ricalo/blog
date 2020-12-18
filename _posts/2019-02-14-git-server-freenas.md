@@ -174,11 +174,11 @@ GitWeb interface:
 ![GitWeb screenshot][screenshot]
 
 
-[screenshot]: /assets/images/gitweb-screenshot.png
+[screenshot]: /blog/assets/images/gitweb-screenshot.png
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
 [1]: https://iocage.readthedocs.io/en/latest/
-[2]: /self-hosted-architecture/#version-control-system
-[3]: /self-hosted-architecture/#application-server
-[4]: /gitweb-apache-freenas/
-[5]: /gitea-server-freebsd/
+[2]: /blog/self-hosted-architecture/#version-control-system
+[3]: /blog/self-hosted-architecture/#application-server
+[4]: /blog/gitweb-apache-freenas/
+[5]: /blog/gitea-server-freebsd/
 [10]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

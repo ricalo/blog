@@ -20,7 +20,7 @@ contexts. The following demo shows Powerline displaying information about
 a Git repository:
 
 <asciinema-player
-    src="/assets/powerline-demo.cast"
+    src="{{ site.baseurl }}/assets/powerline-demo.cast"
     rows="11"
     font-size="medium"
     idle-time-limit="1"
@@ -101,5 +101,5 @@ To configure the fonts in the Ubuntu Terminal app:
    powerline-root="$HOME/.venv/lib/python3.6/site-packages/powerline" %}
 
 
-[0]: /install-powerline-ubuntu/
-[1]: /install-powerline-windows/
+[0]: /blog/install-powerline-ubuntu/
+[1]: /blog/install-powerline-windows/

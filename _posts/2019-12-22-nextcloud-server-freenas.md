@@ -370,16 +370,16 @@ installation, you can try upgrading from the command line:
    su -m www -c 'php /usr/local/www/nextcloud/occ maintenance:mode --off'
    ```
 
-[screenshot-wizard]: /assets/images/nextcloud-wizard.png
-[screenshot-welcome]: /assets/images/nextcloud-welcome.png
+[screenshot-wizard]: /blog/assets/images/nextcloud-wizard.png
+[screenshot-welcome]: /blog/assets/images/nextcloud-welcome.png
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
 [5]: https://mariadb.com/kb/en/library/innodb-system-variables/#innodb_page_size
 [6]: https://letsencrypt.org/
 [7]: https://blog.pcisecuritystandards.org/resource-guide-migrating-from-ssl-and-early-tls
-[1]: /mariadb-server-freenas/
+[1]: /blog/mariadb-server-freenas/
 [2]: https://docs.nextcloud.com/server/17/admin_manual/installation/harden_server.html
 [3]: https://docs.nextcloud.com/server/17/admin_manual/installation/server_tuning.html
 [4]: https://cwiki.apache.org/confluence/display/httpd/php
-[8]: /mariadb-server-freenas/#enable-tls
+[8]: /blog/mariadb-server-freenas/#enable-tls
 [9]: https://www.php.net/manual/en/timezones.php
 [10]: https://docs.nextcloud.com/server/18/admin_manual/maintenance/upgrade.html#manual-steps-during-upgrade

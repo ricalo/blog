@@ -252,8 +252,8 @@ section.
 
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
 [1]: https://iocage.readthedocs.io/en/latest/
-[2]: /self-hosted-architecture/#version-control-system
-[3]: /self-hosted-architecture/#application-server
+[2]: /blog/self-hosted-architecture/#version-control-system
+[3]: /blog/self-hosted-architecture/#application-server
 [4]: https://www.minecraft.net/download/server/
 [5]: https://account.mojang.com/documents/minecraft_eula
 [6]: https://www.minecraft.net/download/

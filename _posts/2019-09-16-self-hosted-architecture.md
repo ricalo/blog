@@ -250,19 +250,19 @@ Intruder detection
   which helps identify when an intruder accesses your servers. Check [our AIDE
   configuration for jails hosted on FreeNAS][9] guide.
 
-[overview]: /assets/images/architecture_overview.svg
+[overview]: /blog/assets/images/architecture_overview.svg
 [1]: https://pfsense.org
 [2]: https://freenas.org
-[3]: /ldap-server-freenas/
+[3]: /blog/ldap-server-freenas/
 [4]: https://nextcloud.com/
-[5]: /git-server-freenas/
+[5]: /blog/git-server-freenas/
 [6]: https://about.gitlab.com/install/
 [7]: https://letsencrypt.org/
 [8]: https://www.yubico.com/products/yubikey-hardware/compare-products-series/
-[9]: /aide-freenas-jail/
+[9]: /blog/aide-freenas-jail/
 [10]: https://iocage.readthedocs.io/en/latest/
 [11]: https://www.freenas.org/zfs/
-[12]: /amd-ryzen-freenas/
-[13]: /mariadb-server-freenas/
-[14]: /nextcloud-server-freenas/
+[12]: /blog/amd-ryzen-freenas/
+[13]: /blog/mariadb-server-freenas/
+[14]: /blog/nextcloud-server-freenas/
 [15]: https://gitea.io/

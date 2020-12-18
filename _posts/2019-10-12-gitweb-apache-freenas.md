@@ -219,11 +219,11 @@ LDAP modules and provide your LDAP server parameters:
      `valid-user` accepts any user in the LDAP directory.
 
 
-[screenshot]: /assets/images/gitweb-screenshot.png
+[screenshot]: /blog/assets/images/gitweb-screenshot.png
 [0]: https://www.ixsystems.com/documentation/freenas/11.2-U4.1/shell.html
-[1]: /git-server-freenas/#optional-storing-the-repositories-on-a-zfs-dataset
+[1]: /blog/git-server-freenas/#optional-storing-the-repositories-on-a-zfs-dataset
 [2]: https://git-scm.com/docs/gitweb
-[4]: /git-server-freenas/
+[4]: /blog/git-server-freenas/
 [5]: http://192.168.1.123
-[6]: /gitea-server-freebsd/
-[7]: /ldap-server-freenas/
+[6]: /blog/gitea-server-freebsd/
+[7]: /blog/ldap-server-freenas/

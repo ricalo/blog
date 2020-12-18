@@ -132,7 +132,7 @@ reporting system.
 [1]: https://www.newegg.com/p/N82E16813157886?Description=ASRock%20X570%20Pro%204%20AM4&cm_re=ASRock_X570_Pro_4_AM4-_-13-157-886-_-Product
 [2]: https://www.newegg.com/kingston-16gb-288-pin-ddr4-sdram/p/1B4-00M4-000U6?Description=Kingston%20KSM26ED8%2f16ME&cm_re=Kingston_KSM26ED8%2f16ME-_-1B4-00M4-000U6-_-Product
 [3]: https://www.newegg.com/p/N82E16813157884?Description=ASRock%20X570&cm_re=ASRock_X570-_-13-157-884-_-Product
-[4]: /git-server-freenas/
+[4]: /blog/git-server-freenas/
 [5]: https://silverstonetek.com/product.php?pid=331&area=en
 [6]: https://www.newegg.com/Desktop-Graphics-Cards/SubCategory/ID-48?name=Desktop%2DGraphics%2DCards&Order=PRICE
 [7]: https://www.westerndigital.com/products/internal-drives/wd-red-hdd

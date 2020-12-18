@@ -16,13 +16,13 @@ minimal_mistakes_skin    : "dark" # "default", "air", "aqua", "contrast", "dark"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "DevPro Media"
+title                    : "ricalo.com / blog"
 title_separator          : "-"
 name                     : Ricardo Loo Foronda
-description              : "DevPro Media website."
-url                      : "https://devpro.media"
-# baseurl                : the subpath of your site, e.g. "/blog"
-repository               : "devpromedia/site"
+description              : "ricalo's blog"
+url                      : "https://www.ricalo.com"
+baseurl                  : "/blog"
+repository               : "ricalo/blog"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : /assets/images/code_white_48px.svg
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
