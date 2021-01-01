@@ -48,9 +48,6 @@ following entries in the `/usr/local/etc/aide.conf` configuration file:
 !/usr/share/openssl/man/mandoc.db
 ```
 
-Check the [file comparison page][1]{: target="external"} on GitHub to identify
-the changes to the default configuration.
-
 AIDE should report differences in the files the next time it runs. This is
 expected because of the updated configuration.
 
@@ -58,4 +55,3 @@ AIDE is great at helping detect intruders. However, you should have other
 security measures in place to prevent access to your systems.
 
 [0]: https://aide.github.io/
-[1]: https://github.com/devpromedia/aide-jail/compare/default-conf...master#diff-f6885697f6edd342d99aa3ae58599904
